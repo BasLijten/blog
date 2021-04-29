@@ -54,7 +54,7 @@ class BlogIndex extends React.Component {
           })}
           <div className="container">
             <nav className="pagination" role="navigation">
-              <ul>
+              {/* <ul> */}
                 {!isFirst && (
                   <p>                    
                     <Link to={prevPage} rel="prev" className="newer-posts">
@@ -74,7 +74,7 @@ class BlogIndex extends React.Component {
                     </Link>
                   </p>
                 )}
-              </ul>
+              {/* </ul> */}
             </nav>
           </div>
         </div>

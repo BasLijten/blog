@@ -30,7 +30,7 @@ class BlogIndex extends React.Component {
                   node.frontmatter.img.childImageSharp &&
                   node.frontmatter.img.childImageSharp.gatsbyImageData && (
                     <Link
-                      to={node.fields.slug}
+                      to={node.fields.slug} aria-label={node.frontmatter.title}
                       className="post-thumbnail"
                       style={{
                         backgroundImage: `url(${node.frontmatter.img.childImageSharp.gatsbyImageData.images.fallback.src})`,
@@ -39,7 +39,7 @@ class BlogIndex extends React.Component {
                   )}
                 <div className="post-content">
                   <h2 className="post-title">
-                    <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
+                    <Link to={node.fields.slug} aria-label={node.frontmatter.title}>{node.frontmatter.title}</Link>
                   </h2>
                   <p>{node.excerpt}</p>
                   <span className="post-date">

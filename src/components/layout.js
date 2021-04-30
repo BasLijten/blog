@@ -28,12 +28,12 @@ const DefaultLayout = ({ children }) => (
     `}
     render={data => (
       <div className="wrapper">
-        <Helmet>
+        {/* <Helmet>
           <link
             href="https://fonts.googleapis.com/css?family=Lato|PT+Serif&display=swap"
             rel="stylesheet"
           />
-        </Helmet>
+        </Helmet> */}
         <Sidebar siteMetadata={data.site.siteMetadata} />
         {children}
       </div>

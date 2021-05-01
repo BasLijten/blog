@@ -2,7 +2,7 @@
 title: Docker challenge - how to copy assets from windows containers to linux containers 
 description: copying files, as part of a multi stage docker build strategy, is a common practice. However, whenever copying files from a windows based container to a linux based container, things get complicated
 date: 2021-05-01
-img: .\images\Container-boxes3-1.jpg
+img: "./images/Container-boxes3-1.jpg"
 tags: 
 - docker
 ---

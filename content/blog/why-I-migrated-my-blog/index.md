@@ -6,7 +6,9 @@ img: ./images/2021-04-26_14-51-47.png
 tags: []
 ---
 
-Finally, my new blog is live. For months, I had the idea to migrate my blog to a new CMS, but every single day that I decided to start, there was a reason not to start. Speaking on conferences, work, days off, speding time with family, you name it. But, the last week, there was no reason not to do it. I was on holiday leave with my family and every day, I woke up early, having a few choices: gaming, running or developing. I chose for a mix of these activities and in just two short mornings, I was able to export my old blogposts, setup gatsby _and_ fix the theme that I am using. My final thought: why didn't I do this much sooner?
+Finally, my new blog is live. For months, I had the idea to migrate my blog to a new CMS, but every single day that I decided to start, there was a reason not to start. Speaking on conferences, work, days off, speding time with family, you name it. But, the last week, there was no reason not to do it. I was on holiday leave with my family and every day, I woke up early, having a few choices: gaming, running or developing. I chose for a mix of these activities and in just two short mornings, I was able to export my old blogposts, setup gatsby _and_ fix the theme that I am using. My final thought: why didn't I do this before? 
+
+![Lighthouse score of my blog, build with gatsby](.\images\performance.jpg)
 
 ## The reasons behind the migration
 

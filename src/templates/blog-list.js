@@ -26,7 +26,7 @@ class BlogIndex extends React.Component {
           {posts.map(({ node }) => {
             return (
               <article className="post" key={node.fields.slug}>
-                {node.frontmatter.img &&
+                {/* {node.frontmatter.img &&
                   node.frontmatter.img.childImageSharp &&
                   node.frontmatter.img.childImageSharp.gatsbyImageData && (
                     <Link
@@ -36,7 +36,7 @@ class BlogIndex extends React.Component {
                         backgroundImage: `url(${node.frontmatter.img.childImageSharp.gatsbyImageData.images.fallback.src})`,
                       }}
                     />
-                  )}
+                  )} */}
                 <div className="post-content">
                   <h2 className="post-title">
                     <Link to={node.fields.slug} aria-label={node.frontmatter.title}>{node.frontmatter.title}</Link>

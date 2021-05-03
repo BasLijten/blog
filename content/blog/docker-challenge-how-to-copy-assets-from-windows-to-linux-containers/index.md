@@ -30,7 +30,7 @@ RUN example.ps1
 
 But when mixing up OS-types, things 'get complicated': Trying to copy from a Windows image to a linux image, the line ```COPY --from=solution \artifacts\ .\``` throws an error:
 
-!["Error copying files"](.\images\copy-error.jpg)
+!["Error copying files"](./images/copy-error.jpg)
 
 The specific error ```failed to compute cache key: "/artifacts" not found: not found``` points to a directory that couldn't be found. Changing this to "c:\artifacts" throws almost the same error:
 
@@ -48,11 +48,11 @@ docker run -it {image} /bin/bash
 
 The screenshot shows three directories: ```"Files", "Hives" and "UtilityVM"```
 
-!["the directories that were copied"](.\images\file-overview.jpg)
+!["the directories that were copied"](./images/file-overview.jpg)
 
 This basically means, that on "a" location on the windows-image, three folder exists which are copied over. Listing the content of the "Files" directory, showed the required artifacts directory:
 
-!["The artifact folder exists in the Files directory"](.\images\files-listing.jpg)
+!["The artifact folder exists in the Files directory"](./images/files-listing.jpg)
 
 Changing the copy action from "." to "Files\artifacts" brought the expected result
 

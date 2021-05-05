@@ -11,7 +11,7 @@ tags:
 - Azure Pipelines
 - msdeploy
 ---
-In our company, we have build literally hundreds of webapis over the years, which are still being used and under active development. During these years, a practice was developed to automatically build and deploy those webapis using msdeploy. Part of the process is to replace parameters inside the packages, using the [parameters/setparameter.xml](https://docs.microsoft.com/en-us/aspnet/web-forms/overview/deployment/web-deployment-in-the-enterprise/configuring-parameters-for-web-package-deployment) approach. This work is cumbersome, complex, error-prone, but was, for a long time, the only (supported) way of working. It also became part of a solid process which hasn't been evaluated for years. However, configuration is one of the main timesinks, so it was time to re-evaluate to find out if things could become easier 
+In our company, we have build literally hundreds of webapis over the years, which are still being used and under active development. During these years, a practice was developed to automatically build and deploy those webapis using msdeploy. Part of the process is to replace parameters inside the packages, using the [parameters/setparameter.xml](https://docs.microsoft.com/en-us/aspnet/web-forms/overview/deployment/web-deployment-in-the-enterprise/configuring-parameters-for-web-package-deployment) approach. This work is cumbersome, complex, error-prone, but was, for a long time, the only (supported) way of working. It also became part of a solid process which hasn't been evaluated for years. However, configuration is one of the main timesinks, so it was time to re-evaluate to find out if things could be simplified
 
 > this blogpost has been written with the .Net 4.7.1 in mind
 

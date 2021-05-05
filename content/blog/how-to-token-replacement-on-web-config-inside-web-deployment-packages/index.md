@@ -21,7 +21,7 @@ Using msdeploy with parameters and setparameters.xml has two downsides:
 1. This method is cumbersome, especially when working with *loads* of variables. For every variable, a location in the package, a parameters.xml entry, a setparameters.xml entry and an XPath query has to be made. 
 2. For local deployments, this process could be used (by altering the publishin profile), but this process is error-prone and requires often a lot of trial and error. Developers tend to choose a shortcut and include default values inside the web.config, with a chance of committing or checking in unwanted configuration their repository.
 
-A web.config often looks like the snippet below:
+A web.config could look like the snippet below:
 
 ```xml
 <appSettings>
@@ -29,11 +29,11 @@ A web.config often looks like the snippet below:
   <add key="property2" value="pass@w0rd1" />
   <add key="property3" value="http://someendpoint" />
 </appSettings>
-
 ```
-
+Changing the configuration approach _and_ getting rid of default configuration in the web.config, would be a win-win situation.
 ## The solution
-A specific Azure Devops Task, called the [File Transform task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/file-transform?view=azure-devops) offers a much easier approach to replace variables, by using tokens: within the connectionstrings and appSettings section of an xml file, every token which has been pre- and post-fixed by double underscores __ (example: ```__token__```) can be replaced by an evironment variable. However, the use of this tasks is not as trivial as it looks like. Specifying the targetfiles requires extra effort and working with the local settings doesn't work the same way as before anymore, as the defaultvalues should be replaced by the various  ```__tokens__``` which need to be replaced. 
+
+A specific Azure Devops Task, called the [File Transform task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/file-transform?view=azure-devops) offers a much easier approach to replace variables, by using tokens: within the connectionstrings and appSettings section of an xml file, every token which has been pre- and post-fixed by double underscores __ (example: ```__token__```) can be replaced by an evironment variable which is specified in Azure Devops. However, the use of this tasks is not as trivial as it looks like. Specifying the targetfiles requires extra effort and working with the local settings doesn't work the same way as before anymore, as the defaultvalues should be replaced by the various  ```__tokens__``` which need to be replaced. 
 
 ```xml
 <appSettings>

@@ -16,7 +16,7 @@ In our company, we have build literally hundreds of webapis over the years, whic
 > this blogpost has been written with the .Net 4.7.1 in mind
 
 ## Downsides
-There are two downsides on this approach:
+Using msdeploy with parameters and setparameters.xml has two downsides:
 
 1. This method is cumbersome, especially when working with *loads* of variables. For every variable, a location in the package, a parameters.xml entry, a setparameters.xml entry and an XPath query has to be made. 
 2. For local deployments, this process could be used (by altering the publishin profile), but this process is error-prone and requires often a lot of trial and error. Developers tend to choose a shortcut and include default values inside the web.config, with a chance of committing or checking in unwanted configuration their repository.

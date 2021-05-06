@@ -1,5 +1,5 @@
 ---
-title: "how to token replacement using the file transform task inside web deployment packages"
+title: "How to token replacement using the file transform task inside web deployment packages"
 date: "2021-05-05"
 category: 
 - "Azure Devops"

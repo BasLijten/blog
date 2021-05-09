@@ -28,6 +28,17 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-next-seo`,
+      options: {
+        openGraph: {
+          type: 'website',
+          locale: 'en_US',
+          url: 'https://blog.baslijten.com/',
+          site_name: 'A blog on Sitecore, Azure, .Net and Security',
+        },
+      }
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [

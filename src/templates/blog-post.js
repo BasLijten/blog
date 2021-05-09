@@ -21,6 +21,10 @@ class BlogPostTemplate extends React.Component {
           openGraph={{
             title: post.frontmatter.title,
             description: post.excerpt,
+            type: `article`,
+            article: {
+              publishedTime: post.frontmatter.ogdate + "Z"
+            },
             images: [
               {
                 url:  site.siteMetadata.siteUrl + post.frontmatter.img.childImageSharp.gatsbyImageData.images.fallback.src,            
@@ -97,6 +101,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "YYYY, MMM DD")
+        ogdate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
         tags
         img {
           childImageSharp {

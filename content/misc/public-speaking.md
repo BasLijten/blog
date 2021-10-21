@@ -6,7 +6,7 @@ draft: true
 category: "Community activities"
 description: "List of public speaking activities"
 tags:
-  - "Tag"
+  - "Public speaking"
 ---
 
 # Overview of public speaking activities throughout the years

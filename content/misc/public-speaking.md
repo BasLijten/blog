@@ -14,7 +14,8 @@ tags:
 ## 2021
 | Date | Title | Location | Description |
 --- | --- | --- | ---
-8 april |  3 things I have learned when I started with Sitecore on Docker | [Sitecore Usergroup the Netherlands](https://sugnl.net) | todo
+Octobre | Save time and money with stateful sitecore deployments- how to use a gitops workflow with kubernetes | Sitecore symposium | 
+8 april |  3 things I have learned when I started with Sitecore on Docker | [Sitecore Usergroup the Netherlands](https://sugnl.net) | 
 
 ## 2020
 | Date | Title | Location | Description |
@@ -29,8 +30,8 @@ march | realtime personalization | sugnl |
 ## 2019
 | Date | Title | Location | Description |
 --- | --- | --- | ---
-Octobre | ?? | Sitecore symposium Las Vegas |
-April | ?? |  Sugcon | 
+Octobre | Sitecore in the Enterprise - Optimize your time to deliver towards the speed of ligtht | Sitecore symposium Las Vegas |
+April | Sitecore in the Enterprise - Optimize your time to deliver towards the speed of ligtht |  Sugcon | 
 ?? | ?? | sugnl | 
 
 ## 2018
@@ -38,7 +39,7 @@ April | ?? |  Sugcon |
 --- | --- | --- | ---
 Octobre, 15 | [https://www.slideshare.net/baslijten/worlds-fastest-delivery-pipeline-for-sitecore-on-azure](https://www.slideshare.net/baslijten/worlds-fastest-delivery-pipeline-for-sitecore-on-azure) | Sitecore Symposium Orlando | 
 April | ?? | sugcon | ??
-March | Robbie the sitecore robot | Siteore Developer Day | ??
+March | Robbie the sitecore robot | Siteore Developer Day | 
 
 ## 2017
 | Date | Title | Location | Description |

@@ -23,4 +23,25 @@ When running PaaS workloads in Azure, you often pay a certain fee for these serv
 
 This third and last blogpost will explain on how to get the data from application insights into power bi and how to generate the reports
 ## Export the application insights query
-The first step is to export your query to PowerBIO
+The first step is to export your query to Power BI. This can be done through the UI in log analytics
+
+![](.\images\export.png)
+
+This will result in a file that can be downloaded, which  contains the complete M-query which should be imported in Power BI. In order to do this, select "Blank Query" under "Get Data":
+
+![](.\images\get-data.jpg)
+
+The next step is to open the advanced editor and paste the contents of the file in this editor. :
+![](.\images\advanced-editor.jpg)
+
+This results into a dataset with a few columns. Change the type of each column to the right dataset:
+ColumnName | type
+--- | ---
+hourOfDay | Whole Number
+day | Date
+appName | Text
+count_ | Whole Number
+
+After changing the data types, add a conditional column, this contains the business logic to determine activity:
+
+![](.\images\conditional.jpg)

@@ -7,7 +7,7 @@ category:
 - "Azure"
 - "Sitecore"
 description: "running a lot of Sitecore environments on Azure might bring a lot of costs, as the payroll continues 24/7. This blogpost series describes how to get insights in the actual utilization (and waste)"
-img: ./images/utilization-per-app-no-numbers - banner.png
+img: ./images/utilization-per-app-with-numbers-1.png
 tags:
 - "Application Insights"
 - "Power BI"

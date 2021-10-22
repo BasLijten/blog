@@ -1,6 +1,6 @@
 ---
-title: "How to get insights in your (Sitecore) paas utilization using application insights and Power BI - Part 1 - Overview"
-date: "2021-10-21"
+title: "How to get insights in your (Sitecore) paas utilization using application insights and Power BI - Pt 1 - Overview"
+date: "2021-10-19"
 category: 
 - "Application Insights"
 - "Power BI"

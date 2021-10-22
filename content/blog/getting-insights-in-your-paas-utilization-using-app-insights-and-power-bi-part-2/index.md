@@ -1,13 +1,13 @@
 ---
 title: "Platform insights Pt 2 - Get the data from application insights"
-date: "2021-10-21"
+date: "2021-10-20"
 category: 
 - "Application Insights"
 - "Power BI"
 - "Azure"
 - "Sitecore"
 description: "running a lot of Sitecore environments on Azure might bring a lot of costs, as the payroll continues 24/7. This blogpost series describes how to get insights in the actual utilization (and waste)"
-img: ./images/utilization-per-app-no-numbers - banner.png
+img: ./images/banner.jpg
 tags:
 - "Application Insights"
 - "Power BI"

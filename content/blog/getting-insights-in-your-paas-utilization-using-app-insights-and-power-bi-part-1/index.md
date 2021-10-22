@@ -1,5 +1,5 @@
 ---
-title: "How to get insights in your (Sitecore) paas utilization using application insights and Power BI - Part 1 - Introduction"
+title: "How to get insights in your (Sitecore) paas utilization using application insights and Power BI - Part 1 - Overview"
 date: "2021-10-21"
 category: 
 - "Application Insights"
@@ -14,7 +14,7 @@ tags:
 - "Azure"
 - "Sitecore"
 ---
-When running PaaS workloads in Azure, you often pay a certain fee for these services. In case of, for example, Azure App Services, these resources cannot be paused, which will net you some costs. When having larger, complexer sets of resources (for example, a Sitecore workload), costs might add up and when having multiple workloads, those costs will increase even harder. Lower environments, such as Dev, Test, Acceptance, Quality, or whatsoever, are often running 24/7, while they are not, or just a bit, utilized, however, it's not visible how much % of the time they are utilized and when this happens. In order to overcome this, I created a kusto query and a power bi report to acquire these insights. In three blogposts I wil share the results, the kusto-query and the power-bi implementation
+When running PaaS workloads in Azure, you often pay a certain fee for these services. In case of, for example, Azure App Services, these resources cannot be paused, which will net you some costs. When having larger, complexer sets of resources (for example, a Sitecore workload), costs might add up and when having multiple workloads, those costs will increase even harder. Lower environments, such as Dev, Test, Acceptance, Quality, or whatsoever, are often running 24/7, while they are not, or just a bit, utilized, however, it's not visible how much % of the time they are utilized and when this happens. In order to overcome this, I created a kusto query and a power bi report to acquire these insights. In a few blogposts I will give a small overview, show how to create the query, how to import the data into Power BI and how to create some neat heatmaps in the Power BI reports. 
 
 > *This is part 1 of 4 of this blogpost series* 
 > * part 1 *(this blogpost)* - introduction: in this blogpost I will cover the outcomes

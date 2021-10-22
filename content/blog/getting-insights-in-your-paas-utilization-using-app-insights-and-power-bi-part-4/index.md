@@ -34,7 +34,7 @@ It turned out that I found two components very valuable to build heatmaps:
 ### Microsoft Table Heatmap
 Although it just got a 2 star rating, it turned out to be very valuable when I started my journey. I had great results in no time and it has some great visualization options. 
 
-![](.\images\heatmap-custom.png)
+![](./images/heatmap-custom.png)
 
 When in need of automatically updating data, this visual is not useable for *this* situation: every row has to be added manually to the visualization. As the rows change over time, as applications come and go, this a very time consuming and doesn't fit into the automatic generation of reports. In addition of this: as we have a very straigthforward table (as can be seen in [this blogpost](..\geosearch-with-fast-search-for-sharepoint-2010-part-2-custom-pipeline-extensions)), the dataset needs to be pivoted as well. With every dataset refresh, this may lead to a new structure of the pivoted table being created.
 
@@ -55,11 +55,11 @@ Whenever the values in the columns and/or rows change, this leads to an automati
 
 The real power shines in it's conditional formatting:
 
-![](.\images\conditional-formatting.jpg)
+![](./images/conditional-formatting.jpg)
 
 This leads to a visualization which might look like the visual below:
 
-![](.\images\utilization-per-app-with-numbers-1.png)
+![](./images/utilization-per-app-with-numbers-1.png)
 
 Within a glimp of an eye, it becomes clear what environments are active, fairly active and "not so active" 
 
@@ -71,7 +71,7 @@ When creating a new matrix with the following columns, the heatmap "total amount
 * select a datafield with the value attached to it (activity)
 
 In the visual below, I hide the actual numbers, but it gives an overview of the occupation per day
-![](.\images\number-of-systems-per-hour-per-day-no-numbers.png).
+![](./images/number-of-systems-per-hour-per-day-no-numbers.png).
 
 These numbers can be used for the calculation of the amount of hours that should be assigned to the [reservation discounts](https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-discount-app-service) for the various services. But that is input for another blogpost
 

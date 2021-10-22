@@ -26,16 +26,16 @@ This third and last blogpost will explain on how to get the data from applicatio
 ## 1 - Export the application insights query
 The first step is to export your query to Power BI. This can be done through the UI in log analytics
 
-![](.\images\export.png)
+![](./images/export.png)
 
 This will result in a file that can be downloaded, which  contains the complete M-query which should be imported in Power BI. 
 
 ## 2 - Import the query into Power BI
 In order to do this, select "Blank Query" under "Get Data":
-![](.\images\get-data.jpg)
+![](./images/get-data.jpg)
 
 The next step is to open the advanced editor and paste the contents of the file in this editor. :
-![](.\images\advanced-editor.jpg)
+![](./images/advanced-editor.jpg)
 
 > Note: I did not specify any authentication method. Based on * situation* an alternative authentication method may be needed. I won't go into this approach in this article.
 
@@ -49,7 +49,7 @@ appName | Text
 count_ | Whole Number
 
 After changing the data types, add a conditional column, this contains the business logic to determine activity:
-![](.\images\conditional.jpg)
+![](./images/conditional.jpg)
 
 The dataset is now ready to use
 

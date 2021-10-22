@@ -37,11 +37,11 @@ When talking about "activity", I use the following definition:
 
 ### Heatmap with the utilization per workload/environment
 This heatmap shows each day of the month(1-31) with in each row a separate environment. Every cell has a value 0-24, which means the amount of hours with activity on this environment. This gives insight on the utilization for each environment. In this snapshot (out of 150) - The first environment has a full utilization (24h per day), while there are some environments which could be used more. 
-![](.\images\utilization-per-app-with-numbers-1.png)
+![](./images/utilization-per-app-with-numbers-1.png)
 
 ### heatmap with the amount of systems running per hour per day
 This heatmap gives insight in the amount of workloads which are being used at once and identifies peakload. Each column represents an hour of the day, each row represents a different date. It is (as expected) clearly visible that there is a peakload between 7 and 14h on weekdays and there is almost no activity before and after these hours, during weekends and on fridays.
-![](.\images\number-of-systems-per-hour-per-day-no-numbers.png)
+![](./images/number-of-systems-per-hour-per-day-no-numbers.png)
 
 ## Summary
 Having insights in the usage of your environments help you in determing what environments can (temporarily) be deleted or scaled down to reduce costs, while it gives insight in determing how many environments are running at once and whether or not reserved capactity should be acquired or not. The next two blogposts will explain how to create these reports

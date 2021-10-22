@@ -20,7 +20,7 @@ When running PaaS workloads in Azure, you often pay a certain fee for these serv
 > * part 1  - [Introduction: in this blogpost I will cover the outcomes on "getting insight on your platfrom utilization](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-1)
 > * part 2 - [How to create the kusto query](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-2)
 > * part 3 *(this blogpost)* - How to import your data from application insights into Power BI
-> * part 4 - How to create heatmaps in Power BI
+> * part 4 - [How to create heatmaps in Power BI](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-4)
 
 This third and last blogpost will explain on how to get the data from application insights into power bi and how to generate the reports
 ## 1 - Export the application insights query

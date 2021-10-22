@@ -20,7 +20,7 @@ When running PaaS workloads in Azure, you often pay a certain fee for these serv
 > * part 1 *(this blogpost)* - introduction: in this blogpost I will cover the outcomes
 > * part 2 - [how to create the kusto query](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-2)
 > * part 3 - [how to create the Power BI report](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-3)
-> * part 4 - How to create heatmaps in Power BI
+> * part 4 - [How to create heatmaps in Power BI](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-4)
 
 Based on these outcomes, certain decisions could be made: what environments might be deleted or be scaled down, and what kind of appointments should be made regarding reserved instances?
 

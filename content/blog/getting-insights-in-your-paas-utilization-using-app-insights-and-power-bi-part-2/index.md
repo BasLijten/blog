@@ -20,7 +20,7 @@ When running PaaS workloads in Azure, you often pay a certain fee for these serv
 > * part 1  - [Introduction: in this blogpost I will cover the outcomes on "getting insight on your platfrom utilization](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-1)
 > * part 2 *(this blogpost)* - How to create the kusto query
 > * part 3 - [How to create the Power BI report](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-3)
-> * part 4 - How to create heatmaps in Power BI
+> * part 4 - [How to create heatmaps in Power BI](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-4)
 
 In the previous blogpost I explained what kind of reports will be created. In order to create these reports, data is needed, this blogpost will explain how to get this data.
 

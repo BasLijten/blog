@@ -5,16 +5,36 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import DefaultLayout from '../components/layout'
 import SEO from '../components/seo'
-
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 import 'katex/dist/katex.min.css'
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
-
+    const site = this.props.data.site
     return (
       <DefaultLayout>
-        <SEO title={post.frontmatter.title} description={post.excerpt} />
+        {/* <SEO title={post.frontmatter.title} description={post.excerpt} /> */}
+        <GatsbySeo 
+          title={post.frontmatter.title} 
+          description={post.excerpt}
+          openGraph={{
+            title: post.frontmatter.title,
+            description: post.excerpt,
+            type: `article`,
+            article: {
+              publishedTime: post.frontmatter.ogdate + "Z"
+            },
+            images: [
+              {
+                url:  site.siteMetadata.siteUrl + post.frontmatter.img.childImageSharp.gatsbyImageData.images.fallback.src,            
+              }
+            ]
+          }}           
+          twitter={{
+            handle: '@BasLijten',
+            cardType: 'summary_large_image',
+          }}/>
         <div className="clearfix post-content-box">
           <article className="article-page">
             <div className="page-content">
@@ -71,6 +91,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        siteUrl
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -80,6 +101,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "YYYY, MMM DD")
+        ogdate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
         tags
         img {
           childImageSharp {

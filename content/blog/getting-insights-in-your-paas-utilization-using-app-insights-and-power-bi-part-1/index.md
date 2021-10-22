@@ -16,10 +16,11 @@ tags:
 ---
 When running PaaS workloads in Azure, you often pay a certain fee for these services. In case of, for example, Azure App Services, these resources cannot be paused, which will net you some costs. When having larger, complexer sets of resources (for example, a Sitecore workload), costs might add up and when having multiple workloads, those costs will increase even harder. Lower environments, such as Dev, Test, Acceptance, Quality, or whatsoever, are often running 24/7, while they are not, or just a bit, utilized, however, it's not visible how much % of the time they are utilized and when this happens. In order to overcome this, I created a kusto query and a power bi report to acquire these insights. In three blogposts I wil share the results, the kusto-query and the power-bi implementation
 
-> *This is part 1 of 3 of this blogpost series* 
+> *This is part 1 of 4 of this blogpost series* 
 > * part 1 *(this blogpost)* - introduction: in this blogpost I will cover the outcomes
 > * part 2 - [how to create the kusto query](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-2)
 > * part 3 - [how to create the Power BI report](..\getting-insights-in-your-paas-utilization-using-app-insights-and-power-bi-part-3)
+> * part 4 - How to create heatmaps in Power BI
 
 Based on these outcomes, certain decisions could be made: what environments might be deleted or be scaled down, and what kind of appointments should be made regarding reserved instances?
 

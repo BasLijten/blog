@@ -5,7 +5,7 @@ category:
 - "net 6"
 - "Sitecore"
 description: "How to add net6 and the hot reload functionality to your Sitecore asp.net renderinghost"
-img: ./images/utilization-per-app-no-numbers - banner.png
+img: ./images/hot.jpg
 tags:
 - "net 6"
 - "Sitecore"

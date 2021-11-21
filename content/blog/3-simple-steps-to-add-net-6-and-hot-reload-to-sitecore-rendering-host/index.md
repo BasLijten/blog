@@ -17,7 +17,7 @@ The result is not different from [the video](https://www.youtube.com/watch?v=4S3
 
 `youtube: https://www.youtube.com/embed/p0zPYYZO8cw`
 ## The changes
-Just three actions are need:
+Just three actions are needed:
 
 ### 1. Update the csproj file
 In order to be able to use the .Net6 framework, the ```.csproj``` file needs to be updated to use the TargetFramework, as seen below. 

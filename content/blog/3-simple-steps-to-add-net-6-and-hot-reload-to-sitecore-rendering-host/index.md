@@ -15,9 +15,7 @@ In this blogpost I'll explain how to convert the existing Asp.Net core 3.1 ender
 ## The result 
 The result is not different from [the video](https://www.youtube.com/watch?v=4S3vPzawnoQ&ab_channel=ScottHanselman) published by [scott hanselman](https://www.hanselman.com/), I wrote this blogpost only to show how to convert the existing asp.net core 3.1 rendering host project to .Net 6, to achieve the same result. This can be seen in the video below:
 
-video: [youtube](https://youtu.be/p0zPYYZO8cw)
-`youtube: https://youtu.be/p0zPYYZO8cw
-
+`youtube: https://www.youtube.com/embed/p0zPYYZO8cw`
 ## The changes
 Just three actions are need:
 

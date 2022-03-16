@@ -11,6 +11,11 @@ tags:
 
 # Overview of public speaking activities throughout the years
 
+## 2022
+| Date | Title | Location | Description |
+--- | --- | --- | ---
+March | Developing a distributed architecture using DAPR and Project Tye | Achmea Techday | 
+
 ## 2021
 | Date | Title | Location | Description |
 --- | --- | --- | ---

@@ -7,9 +7,9 @@
   "bugs": {
     "url": "https://github.com/wangonya/flexible-gatsby/issues"
   },
-  "engines" : { 
-    "npm" : ">=7.0.0",
-    "node" : ">=16.0.0"
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "cross-env": "^7.0.3",
@@ -39,7 +39,8 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "eslint": "^8.20.0",

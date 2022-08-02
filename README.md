@@ -1,5 +1,5 @@
 <h1 align="center">
-  Flexible Gatsby
+  Flexible Gatsby ..
 </h1>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a0a6e226-6c7a-43e0-bab6-0c658c8abca5/deploy-status)](https://app.netlify.com/sites/flexible-gatsby/deploys)

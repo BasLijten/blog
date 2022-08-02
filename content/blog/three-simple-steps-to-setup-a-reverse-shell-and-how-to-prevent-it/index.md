@@ -75,7 +75,7 @@ When a reverse shell has been created, it is possible to run any command that is
 
 This gives the following results - needless to say that sensitive information like connectionstrings, license files, or other information, could be available through these strings.
 
-![Environment variables output](images/env-variables.jpg)
+![Environment variables output](./images/env-variables.jpg)
 
 #### The first approach: explicitly setup the connection from the PowerShell console
 
@@ -97,13 +97,13 @@ The next step is to make the shell connection from your environment:
 
 Hit run, and, if your system is vulnerable, the following output should be visible in your console application. For reference: the Sitecore context and the environment variables were printed to prove that this remote shell is working:
 
-![remote shell is working](.\images/environment-variables-output.jpg)
+![remote shell is working](./images/environment-variables-output.jpg)
 
 ##### Anti-virus and anti-malware
 
 When running this on Windows 10 or 11, Windows Defender could recognize the malicious payload:
 
-![malicious payload](.\images/malicious-payload.jpg)
+![malicious payload](./images/malicious-payload.jpg)
 
 This will only happen when running the payload On-premise! When running this payload on Azure App Services or within Kubernetes, Windows Defender will not stop this script from running. A simple workaround is to download a csharp file with the payload and compile it. Different approach, but the same result, and this one will not be detected by defender. The point I want to make is: there are many, many ways to pull of this attack and some of them will be discovered, some won't be discovered, with other words: hackers will always find a way to execute a payload for a reverse shell, which will not be detected by your anti-virus software.
 
@@ -117,7 +117,7 @@ This apporoach is more sophisticated and doesn't require your dev to have any pe
 
 In this example, I setup a piece of content which can be serialized by Sitecore and gets injected into the content tree, in the path `/Sitecore/system/modules/PowerShell/Script Library/Content Editor/warning/warning 1`
 
-![payload in yaml](.\images\payload1-in-yaml.jpg)
+![payload in yaml](./images/payload1-in-yaml.jpg)
 
 I took the same approach to compile a c# file -> on a windows machine, windows defender detects the payload, and removes the payload. In the next example I'll show an approach on how to simply hide the payload by base64-encoding the powershell payload:
 

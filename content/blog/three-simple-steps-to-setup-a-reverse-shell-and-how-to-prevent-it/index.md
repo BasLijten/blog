@@ -109,7 +109,7 @@ This will only happen when running the payload On-premise! When running this pay
 
 > Below is an example of a csharp payload which remains undetected 
 
-![Example of csharp payload](./images/csharp%20payload.jpg)
+![Example of csharp payload](./images/csharp-payload.jpg)
 
 #### The second approach: inject the reverse shell from your serialized content
 

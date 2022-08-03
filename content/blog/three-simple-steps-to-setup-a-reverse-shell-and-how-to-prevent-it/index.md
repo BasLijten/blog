@@ -1,12 +1,12 @@
 ---
 title: "Protect your Sitecore environment: Three simple steps to setup a reverse shell in Sitecore and learn how to prevent this"
-date: "2022-04-20"
+date: "2022-08-09"
 category: 
 - "Sitecore"
 - "Sitecore Powershell Extensions"
 - "Security"
-description: "The Achmea techday 2022"
-img: ./images/crop-techday-websiteheader-2022.jpg
+description: "Protect your Sitecore instances from reverse shells"
+img: ./images/environment-variables-output.jpg
 tags:
 - "Sitecore"
 - "Sitecore Powershell Extensions"

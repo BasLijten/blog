@@ -1,6 +1,6 @@
 ---
 title: "ChatGPT: The AI Tool That Can Write Sitecore MVC Renderings"
-date: "2022-12-06"
+date: "2022-12-05"
 category:
 - "OpenAI"
 - "Sitecore"

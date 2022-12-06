@@ -1,5 +1,5 @@
 ---
-title: "my first experiences with ChatGPT and how it can aid Sitecore development"
+title: "My first experiences with ChatGPT and how it can aid Sitecore development"
 date: "2022-12-06"
 category:
 - "OpenAI"

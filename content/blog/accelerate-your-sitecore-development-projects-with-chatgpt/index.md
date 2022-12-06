@@ -7,7 +7,7 @@ category:
 - "ChatGPT"
 - "Automation"
 description: "learn how ChatGPT can help with accelerating Sitecore Development"
-img: ./images/hot.jpg
+img: ./images/sprint.jpg
 tags:
 - "net 6"
 - "Sitecore"

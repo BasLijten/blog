@@ -7,7 +7,7 @@ category:
 - "ChatGPT"
 - "Automation"
 description: "ChatGPT is a powerful AI tool that can generate Sitecore MVC renderings with just a few inputs. Learn how ChatGPT can help you create dynamic and engaging web pages with a simple code example."
-img: ./images/hot.jpg
+img: ./images/banner-convert-code.jpg
 tags:
 - "OpenAI"
 - "Sitecore"
@@ -53,4 +53,4 @@ export default MyComponent;
 
 ## Conclusion
 
-With ChatGPT, developers can quickly and easily generate Sitecore MVC renderings, saving them time and effort and allowing them to focus on creating dynamic and engaging web pages. It even can be used to convert existing code from one language into another. 
+With ChatGPT, developers can quickly and easily generate Sitecore MVC renderings, saving them time and effort and allowing them to focus on creating dynamic and engaging web pages. It even can be used to convert existing code from one language into another.

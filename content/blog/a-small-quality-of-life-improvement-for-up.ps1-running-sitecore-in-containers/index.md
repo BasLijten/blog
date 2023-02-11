@@ -1,6 +1,6 @@
 ---
 title: "A small QOL improvement for the up.ps1 to run Sitecore in containers"
-date: "2023-02-03"
+date: "2023-02-11"
 category:
 - "PowerShell"
 - "docker"

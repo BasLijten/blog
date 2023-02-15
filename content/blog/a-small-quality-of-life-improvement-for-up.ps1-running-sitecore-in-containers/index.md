@@ -1,5 +1,5 @@
 ---
-title: "A small QOL improvement for the up.ps1 to run Sitecore in containers"
+title: "A small Quality of Life improvement for the up.ps1 to run Sitecore in containers"
 date: "2023-02-11"
 category:
 - "PowerShell"

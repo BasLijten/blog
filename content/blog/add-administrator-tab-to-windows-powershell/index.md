@@ -33,8 +33,11 @@ winget install gerardog.gsudo
 
 After installation of this tool, the next step is to configure Windows terminal to add a configuration with the administrator privileges
 
-![elevated privileges in a separate window](./images/2023-04-21_16-33-13.gif)
+![elevated privileges in a separate window](./images/2023-04-21_16-30-53.gif)
 
 ![elevated privileges in a new tab](./images/2023-04-21_16-33-13.gif)
 
+## Open in split pane view
 
+
+## Summary

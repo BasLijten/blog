@@ -11,7 +11,9 @@ tags:
 - "Sitecore"
 ---
 
-For the platform that I often work with, it is required that some tasks are run with administrative privileges. I often forget to open my windows terminal with admin privileges, or to open vscode with admin privileges. Aside from forgetting it, I dislike that from a security perspective as well. Windows terminal, however, does support to open a new console with administrative privileges, however, this will end up into a new windows terminal being opened, I'd rather open a new tab with the same privileges. In the end it is even possible to run a regular shell and elevated shell side by side. This blogpost explains how to do this.
+For the platform that I often work with, it is required that some tasks are run with administrative privileges. I often forget to open my windows terminal with admin privileges, or to open vscode with admin privileges. Aside from forgetting it, I dislike that from a security perspective as well. When admin privileges are required, vscode or Windows terminal often gets opened with these privileges and is not closed afterwards. There are a few solutions to overcome this: 1) Windows terminal, does support to open a new console with administrative privileges, however, this will end up into a new windows terminal being opened, or 2) a tool called `gsudo` can be used to run a certain script, shell or command with admin privleges.
+
+In some cased, I'd like just to open an extra tab with extra privileges instead of a second terminal with these permissions. This blogpost explains how to combine Windows Terminal with `gsudo` in order to open a tab in WIndows terminal with these permissions. In the end it is even possible to run a regular shell and elevated shell side by side. This blogpost explains how to do this.
 
 ![running shells side by shell](./images/2023-04-21_16-44-07.gif)
 

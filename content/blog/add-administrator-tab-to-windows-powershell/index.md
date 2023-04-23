@@ -1,11 +1,11 @@
 ---
-title: "Add a tab with admin privileges to windows terminal using gsudo"
+title: "Add a tab with admin privileges to Windows Terminal using gsudo"
 date: "2023-04-21"
 category: 
 - "Powershell"
 - "Sitecore"
 description: "When working with windows powershell you sometimes have to switch to a console with admin privleges. With the default behaviour, a new window will be opened. This blogpost explains how to make this possible within a new tab"
-img: ./images/hot.jpg
+img: ./images/banner.png
 tags:
 - "PowerShell"
 - "Sitecore"

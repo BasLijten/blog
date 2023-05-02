@@ -12,7 +12,7 @@ module.exports = {
       email: `baslijten@gmail.com`,
     },
   },
-  plugins: [
+  plugins: [    
     {
       resolve: `gatsby-source-filesystem`,
       options: {

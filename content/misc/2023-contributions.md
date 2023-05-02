@@ -5,6 +5,7 @@
 Since april 2023 I am when of the organizaers of Sugnl
 
 ## blogposts
+
 title | description | date
 --- | --- | ---
 A  Quality of Life improvement for the up.ps1 to run Sitecore in containers | modification which can automatically change to windows containers | 11-2-2023
@@ -29,8 +30,14 @@ Sitecore segment for oh my posh | added sitecore segment for oh my posh | may 20
 Sitecore plugin switch environments | plugin to make a named xmcloud environment your default environment
 
 ## Product team feedback
+
 title | description | date
 --- | --- | ---
 Personalization workshop | took part of personalization workshop with the product team. As a follow up, I was invited to take part on the collabotation program | 20-01-2023
 Search feedback | User Testing opportunity for Sitecore Search | 31-3-2023
 
+## documentation update
+
+title | description | date
+--- | --- | ---
+[walkthrough sync items](https://doc.sitecore.com/xmc/en/developers/xm-cloud/walkthrough--synchronizing-items-between-remote-and-local-xm-cloud-instances-with-the-sitecore-cli.html) | page was exposing internal url's of sitecore | may 2023

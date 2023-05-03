@@ -1,6 +1,6 @@
 ---
 title: "how to handle errors and prevent exposure of information when using outputbinding in .net isolated azure functions"
-date: "2023-05-04"
+date: "2023-05-03"
 category: 
 - "Azure"
 - "Azure Functions"

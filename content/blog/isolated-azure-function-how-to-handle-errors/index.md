@@ -19,7 +19,7 @@ The solution in this blogpost serves to goals: handle error situations when usin
 
 The example below accepts an empty POST to `api/SendMessage/<userid>`. It creates a SignalRMessage for the specific userid and sends this to the configured signalR service. As this is also a HTTPTrigger input binding, the output is also send back to the calling system.
 
-```c#
+```csharp
 [Function("SendMessage")]
 [SignalROutput(HubName = "chat", ConnectionStringSetting = "SignalRConnection")]
     {
@@ -42,13 +42,13 @@ This causes two issues:
 
 See the request and response below:
 
-```
+```http
 ### send malformed request
 POST http://localhost:7072/api/SendMessage/*$(%&@#_)$#%&#$&# HTTP/1.1
 content-type: application/json
 ```
 
-```
+```http
 HTTP/1.1 200 OK
 Connection: close
 Content-Type: text/plain; charset=utf-8
@@ -70,7 +70,7 @@ Transfer-Encoding: chunked
 
 There is an obious malformed userid input. This should always be prevented, from a security perspective, but also from a costs perspective: every signalR request may lead to additional costs, so these should be filtered. Using a very rudimentary validation, for example a regular expression, will enable the userid validation. The ```SignalRMessageAction``` is required for the SignalROutput, and it could be made ```<nullable>``` When the same request will be sent, the output is as follows:
 
-```
+```http
 HTTP/1.1 204 No Content
 Content-Length: 0
 Connection: close
@@ -80,13 +80,13 @@ Server: Kestrel
 
 But this doesn't solve the issue of exposing to much information:
 
-```
+```http
 ### send correct request
 POST http://localhost:7072/api/SendMessage/henk HTTP/1.1
 content-type: application/json
 ```
 
-```
+```http
 HTTP/1.1 200 OK
 Connection: close
 Content-Type: text/plain; charset=utf-8
@@ -155,7 +155,7 @@ private static readonly Regex regex = new Regex("^[a-zA-Z0-9-]*$");
 
 This leads to the following responses. The Http Response code has been modfied (202/400 vs the default 200/201 code) and the body doesn't contain any information anymore.
 
-```
+```http
 HTTP/1.1 202 Accepted
 Content-Length: 0
 Connection: close

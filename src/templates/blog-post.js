@@ -7,9 +7,12 @@ import DefaultLayout from '../components/layout'
 import SEO from '../components/seo'
 
 import 'katex/dist/katex.min.css'
+import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
+
 
 class BlogPostTemplate extends React.Component {
   render() {
+    deckDeckGoHighlightElement();
     const post = this.props.data.markdownRemark
 
     return (

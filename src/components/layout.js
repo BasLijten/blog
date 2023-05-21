@@ -6,6 +6,8 @@ import Helmet from 'react-helmet'
 import Sidebar from '.././components/sidebar'
 import '../styles/main.scss'
 import '../styles/fonts/font-awesome/css/font-awesome.min.css'
+import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
+deckDeckGoHighlightElement();
 
 const DefaultLayout = ({ children }) => (
   <StaticQuery

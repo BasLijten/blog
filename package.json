@@ -14,7 +14,7 @@
   "dependencies": {
     "@deckdeckgo/highlight-code": "^3.6.0",
     "cross-env": "^7.0.3",
-    "gatsby": "^4.19.2",
+    "gatsby": "^4.25.7",
     "gatsby-plugin-feed": "^4.19.0",
     "gatsby-plugin-google-analytics": "^4.19.0",
     "gatsby-plugin-image": "^2.19.0",

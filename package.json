@@ -12,6 +12,7 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "@deckdeckgo/highlight-code": "^3.6.0",
     "cross-env": "^7.0.3",
     "gatsby": "^4.19.2",
     "gatsby-plugin-feed": "^4.19.0",
@@ -27,11 +28,12 @@
     "gatsby-plugin-webfonts": "^2.2.2",
     "gatsby-remark-copy-linked-files": "^5.19.0",
     "gatsby-remark-embed-video": "^3.2.1",
+    "gatsby-remark-highlight-code": "^3.3.0",
     "gatsby-remark-images": "^6.19.0",
     "gatsby-remark-katex": "^6.19.0",
     "gatsby-remark-prismjs": "^6.19.0",
     "gatsby-source-filesystem": "^4.19.0",
-    "gatsby-transformer-remark": "^5.19.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^4.19.0",
     "katex": "^0.13.3",
     "lodash": "^4.17.21",

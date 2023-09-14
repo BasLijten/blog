@@ -15,7 +15,7 @@ tags:
 - "Yarp"
 ---
 
-A very short read: This blogpost describes why I am considering to use this [Yarp](https://microsoft.github.io/reverse-proxy/) (Yet another Reverse Proxy) (and a reverse proxy in general) instead of more standard ingress-controllers like HAProxy, Nginx or Traefik for a websites migration usecase. Want to know how I got it to work with Kubernetes in Docker Desktop (KinD)? [Click here](#)
+A very short read: This blogpost describes why I am considering to use this [Yarp](https://microsoft.github.io/reverse-proxy/) (Yet another Reverse Proxy) (and a reverse proxy in general) instead of more standard ingress-controllers like HAProxy, Nginx or Traefik for a websites migration usecase. Want to know how I got it to work with Kubernetes in Docker Desktop (KinD)? [Click here](../how-to-deploy-yarp-ingress-controller-on-kubernetes-in-docker-desktop-kind)
 
 In the company I work for, we run Sitecore XP, a .NET 4.8 based CMS, for all of our websites. Sitecore XP is a monolith, which means that all the functionality is bundled in one big application. Think about Authentication Authorization, Security, Session handling, Caching and an WebAPI Proxy (which, as the name suggests, proxies requests to actual WebAPI's). The websites are quite large, consiste of server-side rendered MVC pages, and angular based SPA's. 
 

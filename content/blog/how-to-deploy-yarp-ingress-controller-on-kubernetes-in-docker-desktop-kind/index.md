@@ -1,6 +1,6 @@
 ---
 title: "how to use YARP as an ingress controller in Kubernetes in Docker Desktop (KinD) on Windows 11"
-date: "2023-09-14"
+date: "2023-09-15"
 category: 
 - "Kubernetes"
 - "docker"

@@ -29,7 +29,7 @@ that's all ;)
 
 simply put this check between the start of the script and the first docker command to pull images, and you are good to go:
 
-```PowerShell
+```powershell
 $osType = docker info --format '{{ .OSType }}'
 if($osType -ne 'Windows') {
   $title   = 'Switch platform'

@@ -113,7 +113,9 @@ drwxr-xr-x 8 bas bas 4096 Oct  2 09:48 sitecore-xm-cloud-test/
 bas@Monstar:~/git$
 ```
 
+if making use of oh my posh, you'll see a nice git segment in the prompt, sharing information about the current state:
 
+![git-prompt](./images/git-prompt.png)
 
 ## Install the Sitecore CLI (and see your prompt shine)
 
@@ -124,3 +126,77 @@ sudo apt-get update && \
   sudo apt-get install -y dotnet-sdk-6.0
 ```
 
+After this update, the sitecore cli can be restored:
+
+```bash
+dotnet tool restore
+```
+
+followed by a login on your sitecore cloud environment:
+
+```bash
+dotnet sitecore cloud login
+```
+
+The CLI will prompt to login via a browser. Just CTRL+click this link, and you'll be able to login your CLI. Please take note of the prompt - an extra segment has been added which gives contextual information on which environment you are currently using:
+
+![sitecore-default-prompt](./images/sitecore-prompt-default.png)
+
+next, connect to a new environment (I'll use a dev environment in xmcloud in this example), and verify that the environment has been added.
+
+```bash
+dotnet sitecore cloud environment connect --environment-id xxx
+dotnet sitecore env list
+```
+
+Using the following command, your active environment, can be set. As I added ```dev```, I'll change my default environment to ```dev```. Using the env list command, you can verify that the default environment has been changed to ```dev```
+
+```bash
+dotnet sitecore env set-default -n dev
+dotnet sitecore env list
+```
+
+Even better: this reflects in your prompt as well!
+![Sitecore custom env prompt](./images/sitecore-prompt-dev.png)
+
+## Install Frontend tooling in order to build your xmcloud bits
+
+In orde to use the tooling that has been written (and optimized!) for linux, make sure to not include the windows-path in your PATH variable. This can be done by adding the following lines to your /etc/wsl.conf:
+
+```
+[interop]
+appendWindowsPath=false
+```
+
+After this, you have to close your WSL-session, and run ```Restart-Service LxssManager``` under administrator credentials. Afterwards, open a new WSL2 prompt. When running ```which npm``` and it doesn't give any results, you're good to go. Now, you can install the frontend tooling. Let's start with nvm:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+```
+
+After this, you can install the latest version of node:
+
+```bash
+nvm install --lts
+```
+
+Switch to your rendering host and run npm install:
+
+```bash
+cd src/sxastarter
+npm install
+```
+
+Last, but not least, we'll need to make sure that vscode can be started from WSL2. Because we prevented the WindowsPath to be added to the PATH variable, we'll need to add the vscode path manually. make sure to replace {USERNAME} with your username:
+
+```bash
+export PATH=$PATH:"/mnt/c/Users/{USERNAME}/AppData/Local/Programs/Microsoft VS Code/bin"
+```
+
+Test if code can be started, and if this is the case, make this change permanent:
+
+```bash
+echo 'export PATH=$PATH:"/mnt/c/Users/{USERNAME}/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.bashrc
+```
+
+happy coding!

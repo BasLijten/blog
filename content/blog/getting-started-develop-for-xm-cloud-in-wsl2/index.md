@@ -1,6 +1,6 @@
 ---
 title: "Getting started: Develop in WSL2 for XM Cloud"
-date: "2023-10-1"
+date: "2023-10-01"
 category:
 - "Frontend"
 - "XMCloud"
@@ -73,9 +73,9 @@ Below are the steps that I followed:
 
 ![custom prompt](./images/custom-prompt.png)
    
-## Configure git and clone the xm-starter-kut
+## Configure git and clone the xm-starter-kit
 
-when cloning a repo, you will be prompted for a password. 
+When cloning a repo, on a fresh Ubuntu machine, you will be prompted for a password:
 
 ```bash
 bas@Monstar:~/git$ git clone https://github.com/BasLijten/sitecore-xm-cloud-test
@@ -83,7 +83,7 @@ Cloning into 'sitecore-xm-cloud-test'...
 Username for 'https://github.com':
 ```
 
-Git is prompting for a plain password, whicih is deprecated. I prefer to use the git credential manager for this, which can be referenced from windows:
+Git is prompting for a plain password, and this is deprecated functionality. I prefer to use the git credential manager for this, which can be referenced from windows:
 
 ```bash
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe"
@@ -112,6 +112,8 @@ drwxr-x--- 3 bas bas 4096 Oct  2 09:48 ../
 drwxr-xr-x 8 bas bas 4096 Oct  2 09:48 sitecore-xm-cloud-test/
 bas@Monstar:~/git$
 ```
+
+
 
 ## Install the Sitecore CLI (and see your prompt shine)
 

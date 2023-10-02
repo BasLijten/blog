@@ -9,7 +9,7 @@ category:
 - "Nextjs"
 - "WSL2"
 description: "A small performnance comparison between developing in WSL2 and Windows 11"
-img: ./images/windows-linux.jpg
+img: ./images/sitecore-prompt-dev.png
 tags:
 - "Frontend"
 - "XMCloud"
@@ -19,7 +19,7 @@ tags:
 - "WSL2"
 ---
 
-This blogpost makes a small comparison between the performance of developing in WSL2 (Ubuntu 22.04) and Windows 11. The results are based on a few test runs on a XMCloud NextJS starterkit and the XMCloud playsummit website. In my WSL installation, I cloned the repository in the WSL filesystem, and in Windows, I cloned the repository on the Windows filesystem. With other words, I didn't run the test on the mounted disk. I also natively installed the tooling in Ubuntu, and didn't referenfe any binary in Windows. The reason no mounted disks are used, is that this is significantly slower as any other option. The combination of the faster filesystem and the native tooling shows that it is faster to develop "natively" in WSL2 than on Windows 11. Read [this blogpost](../getting-started-develop-for-xm-cloud-in-wsl2/) for more information on how to setup WSL2 for XMCloud development.
+This blogpost makes a small comparison between the performance of developing in WSL2 (Ubuntu 22.04) and Windows 11. The results are based on a few test runs on a XMCloud NextJS starterkit and the XMCloud playsummit website. In my WSL installation, I cloned the repository in the WSL filesystem, and in Windows, I cloned the repository on the Windows filesystem. With other words, I didn't run the test on the mounted disk. I also natively installed the tooling in Ubuntu, and didn't reference any binary in Windows. The reason no mounted disks are used, is that this is significantly slower as any other option. The combination of the faster filesystem and the native tooling shows that it is faster to develop "natively" in WSL2 than on Windows 11. Read [this blogpost](../getting-started-develop-for-xm-cloud-in-wsl2/) for more information on how to setup WSL2 for XMCloud development.
 
 All times where measured the following way:
 

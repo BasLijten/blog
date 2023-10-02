@@ -9,7 +9,7 @@ category:
 - "Nextjs"
 - "WSL2"
 description: "Setting up WSL2 in order to develop for XM Cloud"
-img: ./images/windows-linux.jpg
+img: ./images/sitecore-prompt-dev.png
 tags:
 - "Frontend"
 - "XMCloud"
@@ -24,14 +24,15 @@ In the Sitecore universe, Sitecore XM cloud is the next best thing. Not having t
 
 1. (Optional) Install a fresh ubuntu 22 WSL instance.
 2. (Optional) Install Oh-my-posh for an awesome prompt - WITH Sitecore CLI integration! 
-3. Install the Sitecore CLI (and see your prompt shine)
-4. Install Frontend tooling in order to build your xmcloud installation
+3. Configure the git Credential Manager
+4. Install the Sitecore CLI (and see your prompt shine)
+5. Install Frontend tooling in order to build your xmcloud installation
 
-## (Optional) Install a fresh ubuntu 22 WSL instance
+### (Optional) Install a fresh ubuntu 22 WSL instance
 
 If you don't have a WSL2 instance yet, you can install one by following the steps on [this page](https://docs.microsoft.com/en-us/windows/wsl/install-win10). I prefer to use Ubuntu 22, but you can choose any distro you like. For my setup, I chose to install a second instance, following [this blogpost](https://cloudbytes.dev/snippets/how-to-install-multiple-instances-of-ubuntu-in-wsl2).
 
-## (Optional) Install Oh-my-posh for an awesome prompt - WITH Sitecore CLI integration!
+### (Optional) Install Oh-my-posh for an awesome prompt - WITH Sitecore CLI integration
 
 I [recently wrote a plugin](https://blog.baslijten.com/oh-my-sitecore-I-powered-up-your-shell/) for [oh-my-posh](https://ohmyposh.dev/) for the [Sitecore CLI integration](https://ohmyposh.dev/docs/segments/sitecore). 
 
@@ -73,7 +74,7 @@ Below are the steps that I followed:
 
 ![custom prompt](./images/custom-prompt.png)
    
-## Configure git and clone the xm-starter-kit
+### Configure git and clone the xm-starter-kit
 
 When cloning a repo, on a fresh Ubuntu machine, you will be prompted for a password:
 
@@ -117,7 +118,7 @@ if making use of oh my posh, you'll see a nice git segment in the prompt, sharin
 
 ![git-prompt](./images/git-prompt.png)
 
-## Install the Sitecore CLI (and see your prompt shine)
+### Install the Sitecore CLI (and see your prompt shine)
 
 First, dotnet needs to be installed, as Ubuntu doesn't ship with it. The sitecore cli required dotnet-6. I used [this documentation](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2204) to install it:
 
@@ -159,7 +160,7 @@ dotnet sitecore env list
 Even better: this reflects in your prompt as well!
 ![Sitecore custom env prompt](./images/sitecore-prompt-dev.png)
 
-## Install Frontend tooling in order to build your xmcloud bits
+### Install Frontend tooling in order to build your xmcloud bits
 
 In orde to use the tooling that has been written (and optimized!) for linux, make sure to not include the windows-path in your PATH variable. This can be done by adding the following lines to your /etc/wsl.conf:
 

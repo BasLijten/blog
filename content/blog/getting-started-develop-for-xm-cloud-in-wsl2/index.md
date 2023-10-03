@@ -18,15 +18,15 @@ tags:
 - "Nextjs"
 - "WSL2"
 ---
-In the Sitecore universe, Sitecore XM cloud is the next best thing. Not having to develop for Sitecore on your local machine, but in the cloud, is a huge step forward. [Sebastian Winter](https://www.linkedin.com/in/sebastian-winter-506962165/?originalSubdomain=de), Developer Advocete for Sitecore, did an excellent job with [this video](https://www.youtube.com/watch?v=Kig3kWZ8FuQ) to get you up and running on Windows. However, frontend developers tend to prefer to work on MacOS, Linux, or WSL2, in order to get some (major) speed improvements. For WSL2, it does require some setup. In this blogpost, I'll explain how to setup your machine to develop for Sitecore XM Cloud in WSL2. I'll describe how a fresh Ubuntu 22 instance can be setup to get you ready.
+In the Sitecore universe, Sitecore XM cloud is the next best thing. Not having to develop for Sitecore on your local machine, but in the cloud, is a huge step forward. [Sebastian Winter](https://www.linkedin.com/in/sebastian-winter-506962165/?originalSubdomain=de), Developer Advocate for Sitecore, did an excellent job with [this video](https://www.youtube.com/watch?v=Kig3kWZ8FuQ) to get you up and running with headless development for Sitecore XM Cloud on *Windows*. However, frontend developers tend to prefer to work on MacOS, Linux, or WSL2, in order to get some (major) [speed improvements](../getting-started-develop-for-xm-cloud-in-wsl2-benefits/). For WSL2, it does require some setup. In this blogpost, I'll explain how to setup your machine to develop for Sitecore XM Cloud in WSL2. I'll describe how a fresh Ubuntu 22 instance can be setup to get you ready.
 
 ## Steps to take
 
 1. (Optional) Install a fresh ubuntu 22 WSL instance.
 2. (Optional) Install Oh-my-posh for an awesome prompt - WITH Sitecore CLI integration! 
-3. Configure the git Credential Manager
+3. Configure the Git Credential Manager (GCM) and clone a repo [skip](#configure-git-and-clone-the-xm-starter-kit)
 4. Install the Sitecore CLI (and see your prompt shine)
-5. Install Frontend tooling in order to build your xmcloud installation
+5. Install Frontend tooling natively in order to build your xmcloud installation
 
 ### (Optional) Install a fresh ubuntu 22 WSL instance
 
@@ -76,6 +76,8 @@ Below are the steps that I followed:
    
 ### Configure git and clone the xm-starter-kit
 
+> An important note first. When cloning a repo, this should happen on the WSL filesystem, so DO NOT USER YOUR MOUNTED DRIVE (starting with /mnt/c....). This will have severe performance implications.
+
 When cloning a repo, on a fresh Ubuntu machine, you will be prompted for a password:
 
 ```bash
@@ -84,13 +86,13 @@ Cloning into 'sitecore-xm-cloud-test'...
 Username for 'https://github.com':
 ```
 
-Git is prompting for a plain password, and this is deprecated functionality. I prefer to use the git credential manager for this, which can be referenced from windows:
+Git is prompting for a plain password, and this is deprecated functionality on Github. I prefer to use the git credential manager for this, which can be referenced from windows:
 
 ```bash
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe"
 ```
 
-Now, when cloning a repo, you won't be prompted for a username or password and the repo will be cloned.
+After configuring this manager, you won't be prompted for a username or password and the repo will be cloned.
 
 ```bash
 bas@Monstar:~/git$ git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe"
@@ -120,7 +122,7 @@ if making use of oh my posh, you'll see a nice git segment in the prompt, sharin
 
 ### Install the Sitecore CLI (and see your prompt shine)
 
-First, dotnet needs to be installed, as Ubuntu doesn't ship with it. The sitecore cli required dotnet-6. I used [this documentation](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2204) to install it:
+First, the dotnet CLI needs to be installed, as Ubuntu doesn't ship with it. The sitecore cli requires dotnet-6. I used [this documentation](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2204) to install it:
 
 ```bash
 sudo apt-get update && \
@@ -133,17 +135,17 @@ After this update, the sitecore cli can be restored:
 dotnet tool restore
 ```
 
-followed by a login on your sitecore cloud environment:
+Now, you're good to go to login on your sitecore cloud environment:
 
 ```bash
 dotnet sitecore cloud login
 ```
 
-The CLI will prompt to login via a browser. Just CTRL+click this link, and you'll be able to login your CLI. Please take note of the prompt - an extra segment has been added which gives contextual information on which environment you are currently using:
+The CLI will prompt to login via a browser. Just CTRL+click this link, and you'll be able to authorize  your CLI. Please take note of the prompt - an extra segment has been added which gives contextual information on which environment you are currently using. In this case, it points to "Default" (this is the default behaviour)
 
 ![sitecore-default-prompt](./images/sitecore-prompt-default.png)
 
-next, connect to a new environment (I'll use a dev environment in xmcloud in this example), and verify that the environment has been added.
+After authorizing the CLI, connect to a new environment (I'll use a dev environment in xmcloud in this example), and verify that the environment has been added.
 
 ```bash
 dotnet sitecore cloud environment connect --environment-id xxx
@@ -155,6 +157,10 @@ Using the following command, your active environment, can be set. As I added ```
 ```bash
 dotnet sitecore env set-default -n dev
 dotnet sitecore env list
+
+CURRENT NAME
+        xmCloud
+*       dev
 ```
 
 Even better: this reflects in your prompt as well!
@@ -162,33 +168,34 @@ Even better: this reflects in your prompt as well!
 
 ### Install Frontend tooling in order to build your xmcloud bits
 
-In orde to use the tooling that has been written (and optimized!) for linux, make sure to not include the windows-path in your PATH variable. This can be done by adding the following lines to your /etc/wsl.conf:
+In orde to use the tooling that has been written (and optimized!) for linux, make sure to not include the windows-path in your PATH variable. This prevents Linux from using installed tooling which might have been installed on Windows. This can be done by adding the following lines to your /etc/wsl.conf:
 
-```
+```bash
 [interop]
 appendWindowsPath=false
 ```
 
-After this, you have to close your WSL-session, and run ```Restart-Service LxssManager``` under administrator credentials. Afterwards, open a new WSL2 prompt. When running ```which npm``` and it doesn't give any results, you're good to go. Now, you can install the frontend tooling. Let's start with nvm:
+You have to close your WSL-session, and run ```Restart-Service LxssManager``` under administrator credentials. Afterwards, open a new WSL2 prompt. When running ```which npm``` and it doesn't give any results, you're good to go. Now, you can install the frontend tooling. Let's start with nvm:
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 ```
 
-After this, you can install the latest version of node:
+Using this node version manager, you can install a specific version of node, for the xmcloud workload I sugged to use the latest LTS version:
 
 ```bash
 nvm install --lts
 ```
 
-Switch to your rendering host and run npm install:
+Switch to do directory which your rendering host resides in and run an npm install:
 
 ```bash
 cd src/sxastarter
 npm install
 ```
 
-Last, but not least, we'll need to make sure that vscode can be started from WSL2. Because we prevented the WindowsPath to be added to the PATH variable, we'll need to add the vscode path manually. make sure to replace {USERNAME} with your username:
+Last, but not least, we'll need to make sure that vscode can be started from WSL2. Because we prevented the WindowsPath to be added to the PATH variable, we'll need to add the vscode path manually. make sure to replace **{USERNAME}** with your username:
+
 
 ```bash
 export PATH=$PATH:"/mnt/c/Users/{USERNAME}/AppData/Local/Programs/Microsoft VS Code/bin"
@@ -202,4 +209,4 @@ echo 'export PATH=$PATH:"/mnt/c/Users/{USERNAME}/AppData/Local/Programs/Microsof
 
 ## Summary
 
-Setting up your WSL2 distrubution doesn't take much time, but it [saves precious time](../getting-started-develop-for-xm-cloud-in-wsl2-benefits/). Having a masterful prompt, accompanied with navtively optimized tooling is invaluable. Get started today!
+Setting up your WSL2 distribution doesn't take much time, but it [saves precious time](../getting-started-develop-for-xm-cloud-in-wsl2-benefits/). Having a masterful prompt, accompanied with navtively optimized tooling is invaluable. Get started today!

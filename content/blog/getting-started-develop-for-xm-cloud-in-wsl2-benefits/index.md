@@ -9,7 +9,7 @@ category:
 - "Nextjs"
 - "WSL2"
 description: "A small performnance comparison between developing in WSL2 and Windows 11"
-img: ./images/sitecore-prompt-dev.png
+img: ./images/windows-linux.jpg
 tags:
 - "Frontend"
 - "XMCloud"

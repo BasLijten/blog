@@ -1,6 +1,6 @@
 ---
 title: "Getting started: Develop in WSL2 for XM Cloud"
-date: "2023-10-02"
+date: "2023-10-03"
 category:
 - "Frontend"
 - "XMCloud"
@@ -202,3 +202,4 @@ echo 'export PATH=$PATH:"/mnt/c/Users/{USERNAME}/AppData/Local/Programs/Microsof
 
 ## Summary
 
+Setting up your WSL2 distrubution doesn't take much time, but it [saves precious time](../getting-started-develop-for-xm-cloud-in-wsl2-benefits/). Having a masterful prompt, accompanied with navtively optimized tooling is invaluable. Get started today!

@@ -40,24 +40,35 @@ Follow the installation instructions for Linux and windows terminal [over here](
 
 Below are the steps that I followed:
 
-1. Install unzip ```sudo apt install unzip``` 
-2. Install: ```curl -s https://ohmyposh.dev/install.sh | sudo bash -s```
-3. Install the Meslo nerd font: ```oh-my-posh font install``` and select ```Meslo``` from the list
-  > To ensure correct rendering of the glyphs you will need to enable the option Use the new text renderer ("AtlasEngine") in your terminal settings. For further details, see here. Also, make sure to setup the font that is being used in terminal 
-  ```json
-  {
-    "profiles":
-    {
-        "defaults":
-        {
-            "fontFace": "MesloLGM Nerd Font"
-        }
-    }
-  }
-  ``` 
+1. Install Oh-my-posh and install a nerdfont
 
-4. Download a custom theme. I really like the this one. Make sure to download it to your root directory: ```curl https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json --output custom.json```
-5. Add this specific Sitecore Segment to the custom theme:
+    ```bash
+    sudo apt install unzip # install unzip 
+    curl -s https://ohmyposh.dev/install.sh | sudo bash -s # Install oh my posh
+    oh-my-posh font install # select Meslo from the list
+    ```
+
+2. Configure Windows terminal to use the correct font
+
+    > To ensure correct rendering of the glyphs you will need to enable the option Use the new text renderer ("AtlasEngine") in your terminal settings. For further details, see here. Also, make sure to setup the font that is being used in terminal 
+    ```json
+    {
+      "profiles":
+      {
+          "defaults":
+          {
+              "fontFace": "MesloLGM Nerd Font"
+          }
+      }
+    }
+    ``` 
+
+3. Download a custom theme. I really like the this one. Make sure to download it to your home directory: 
+    ```bash
+    curl https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json --output custom.json
+    ```
+
+4. Add this specific Sitecore Segment to the custom theme:
    ```
    {
           "background": "#c386f1",
@@ -72,7 +83,7 @@ Below are the steps that I followed:
 6. Change the prompt. Add ```eval "$(oh-my-posh init bash --config ~/custom.json)"``` to the end of your ~\.profile file
 7. close your session and open it again. Your prompt should look something like this now:
 
-![custom prompt](./images/custom-prompt.png)
+    ![custom prompt](./images/custom-prompt.png)
    
 ### Configure git and clone the xm-starter-kit
 

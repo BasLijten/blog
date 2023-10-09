@@ -1,6 +1,6 @@
 ---
 title: "Getting started: Develop in for XM Cloud in a devcontainer"
-date: "2023-10-09"
+date: "2023-10-08"
 category:
 - "Frontend"
 - "XMCloud"

@@ -19,7 +19,7 @@ tags:
 - "WSL2"
 ---
 
-Ok, I am impressed. As I was experimenting with [devcontainers](../getting-started-develop-for-xm-cloud-in-a-dev-container/), my respected collague [Stefan Roks](theroks.com) pointed me out that I should be able to run this container in github codespaces as well. And while I was in a hurry, I really, really wanted to test this out and guess what? I got it up and running in *under* 5 minutes
+Ok, I am impressed. As I was experimenting with [devcontainers](../getting-started-develop-for-xm-cloud-in-a-dev-container/), my collague [Stefan Roks](theroks.com) pointed me out that I should be able to run this container in github codespaces as well. And while I was in a hurry, I really, really wanted to test this out and guess what? I got it up and running in *under* 5 minutes
 
 ![codespace](./images/codespaces.gif)
 

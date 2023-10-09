@@ -19,7 +19,7 @@ tags:
 - "WSL2"
 ---
 
-In my previous two blogposts I described the benefits of working with WSL2 and how to configure this environment in order to work with it. This blogpost is all about developing for xmCloud within a DevContainer. I first ran into devcontainers when developing a [custom sitecore segment](../oh-my-sitecore-I-powered-up-your-shell/) for [Oh-my-posh](https://ohmyposh.dev/). As it is written in GO, I would have to install the complete development environment on my local machine, or in a VM. I luckily quickly found out about the devcontainer: It provided a complete environment with all the tooling I needed, with all recommended vscode plugins pre-installed as well. This is a real game-changer in terms of the onboarding process. All you need is Docker and VSCode. This blogposts briefly describes how a devcontainer can be setup and I'll share the steps that I took to get the startkerit up and running for XMCloud inside a devcontainer.
+In my previous two blogposts I described the benefits of working with WSL2 and how to configure this environment in order to work with it. This blogpost is all about developing for xmCloud within a DevContainer. I first ran into devcontainers when developing a [custom sitecore segment](../oh-my-sitecore-I-powered-up-your-shell/) for [Oh-my-posh](https://ohmyposh.dev/). As it is written in GO, I would have to install the complete development environment on my local machine, or in a VM. I luckily quickly found out about the devcontainer: It provided a complete environment with all the tooling I needed, with all recommended vscode plugins pre-installed as well. This is a real game-changer in terms of getting (new) developers up to speed. All you need is Docker and VSCode. This blogposts briefly describes how a devcontainer can be setup and I'll share the steps that I took to get the startkerit up and running for XMCloud inside a devcontainer. As a bonus, you can read [over here](../getting-started-develop-for-xm-cloud-in-github-codespaces/) how to use devcontainers in the cloud, to be specific within [github codespaces](https://github.com/features/codespaces)
 
 ## benefits
 
@@ -34,15 +34,15 @@ One of the downsides, is that some commands run a bit slower (I'll update my pos
 
 ## Create a devcontainer file for XM Cloud
 
-Creating a devcontainer file and using it, require a few steps:
+Creating a devcontainer file and using it, requires a few steps:
 
 1. Create the configuration file ```.devcontainer/devcontainer.json```
 2. Create a configuration script in order to install extra tooling
 3. Reopen your repository in the container
 
-### the devcontainer.json
+### Create the devcontainer.json
 
-The devcontainer describes your environment. In the code-snippet below, I configured the following:
+The devcontainer describes your environment. In the code-snippet below, the I configured the following capabilities:
 
 * The baseimage to use
 * VSCode extensions
@@ -96,38 +96,34 @@ As the xmcloud frontend runs on nextjs, a typescript / nodejs devcontainer image
 
 The customization section can contain [product specific configuration](https://containers.dev/supporting). The [specific customizations for vscode](https://containers.dev/supporting#visual-studio-code) gives the possibility to specify extensions that need to be installed and default settings. 
 
-##### VSCode extensions
-
-When an extensions.json is available in the .vscode folder, it may contain one or more recommendatins that vscode should show in your extensions toolbar:
+When an extensions.json is present in the .vscode folder, it may contain one or more recommendations that vscode should show in your extensions toolbar:
 
 ![vscode extension recommendations](./images/vs-code-recommendations.png)
 
-##### install VSCode extensions by default
+In this example, the recommended extensions that the starterkit comes with were used. I introduced these recommendations at the start of this year to [Sitecore.Demo.Edge](https://github.com/Sitecore/Sitecore.Demo.Edge/pull/500) and it since has been adopted by Sitecore to include within all of their codebases. 
 
-I chose the recommended extensions that the starterkit comes with. I introduced these recommendations at the start of this year to [Sitecore.Demo.Edge](https://github.com/Sitecore/Sitecore.Demo.Edge/pull/500) and it since has been adopted by Sitecore to include in all of their codebases. 
-
-For devcontainers, these customizations can be specified in the ```customizations``` section. This can be seen at lines 4-10 of the ```devcontainer.json```
+When working with devcontainers, these customizations could be specified in the ```customizations``` section. This can be seen at lines 4-10 of the ```devcontainer.json```
 
 ```yaml{4-10}    
 {
     "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
     "customizations": {
         "vscode": {
-        "extensions": [            
-            "GraphQL.vscode-graphql",
-            "dbaeumer.vscode-eslint",
-            "esbenp.prettier-vscode",
-            "mikestead.dotenv",
-            "redhat.vscode-yaml"
-            ]
-        },
+            "extensions": [            
+                "GraphQL.vscode-graphql",
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "mikestead.dotenv",
+                "redhat.vscode-yaml"
+                ]
+            },
     },
     "forwardPorts": [3000],
     "postCreateCommand": "bash scripts/install.sh"
 }
 ```
 
-This results in the extensions being installed within  the container:
+This results in the extensions being installed within the container:
 
 ![extensions installed in devcontainer](./images/vs-code-extensions-installed.png)
 
@@ -137,7 +133,7 @@ The port which needs to be exposed to the outer world, in order to be able to co
 
 #### postCreateCommand
 
-With this command, extra actions can be executed, to install extra tooling. This could be done by [configuring devcontainer features](https://code.visualstudio.com/blogs/2022/09/15/dev-container-features) as well, but this approach was faster (in terms of trying things out) and more approachable for me. 
+With this command, extra actions can be executed, to install extra tooling or configure the devcontainer. This could be done by [configuring devcontainer features](https://code.visualstudio.com/blogs/2022/09/15/dev-container-features) as well, but this approach was faster (in terms of trying things out) and more approachable for me. Another approach would be to use a dockerfile, to install extra layers on top of the base image, but the downside of that approach is that is doesn't have access to the workspace. In this example, a dotnet tool restore has to be executed, which prevents the dockerfile to be used in this situation.
 
 ```yaml{14}    
 {
@@ -158,7 +154,7 @@ With this command, extra actions can be executed, to install extra tooling. This
 }
 ```
 
-In this specific solution a bash-script runs in order to execute some extra commands. The same steps that were used to [configure WSL2](../getting-started-develop-for-xm-cloud-in-wsl2/) were used, but executed differently.
+In this specific solution a bash-script runs in order to execute some extra commands. The same steps that were used to [configure WSL2](../getting-started-develop-for-xm-cloud-in-wsl2/) were used, but executed differently:
 
 * Install Micorosoft .Net 6 SDK
 * Install Sitecore CLI
@@ -190,7 +186,7 @@ npm install --prefix ./src/sxastarter
 
 The last thing to leaves us apart from running this development environment in a container, is opening it in a container. The first time this happens, the container has te be build.
 
-First, press ```CTRL + SHIFT + P``` and select the action ```>Dev Containers: Rebuild without cache and Reopen in Container```. This command causes the container to be build for the first time and install the extra tooling on top of it. A log, similar to the log shows up in your terminal window. 
+First, press ```CTRL + SHIFT + P``` and select the action ```>Dev Containers: Rebuild without cache and Reopen in Container```. This command causes the container to be build for the first time and install the extra tooling on top of it. A log, similar to the log below shows up in your terminal window. 
 
 
 ```bash

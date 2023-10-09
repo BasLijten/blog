@@ -1,5 +1,5 @@
 ---
-title: "Getting started: Develop in for XM Cloud in a github codespaces using devcontainers within 5 minutes"
+title: "Getting started: Develop for XM Cloud with github codespaces using devcontainers within 5 minutes"
 date: "2023-10-09"
 category:
 - "Frontend"

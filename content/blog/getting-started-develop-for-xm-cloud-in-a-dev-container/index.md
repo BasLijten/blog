@@ -9,7 +9,7 @@ category:
 - "Nextjs"
 - "WSL2"
 description: "Setting up a dev container in order to develop for xm cloud"
-img: ./images/sitecore-prompt-dev.png
+img: ./images/banner.png
 tags:
 - "Frontend"
 - "XMCloud"

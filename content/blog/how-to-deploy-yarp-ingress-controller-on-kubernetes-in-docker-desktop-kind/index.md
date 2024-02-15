@@ -21,7 +21,7 @@ In my [previous blogpost](../why-to-choose-yarp-for-a-sitecore-migration/) I des
 
 The following setup was used: [Kubernetes in Docker Desktop](https://kind.sigs.k8s.io/) (KinD) based on the [quick start guide](https://kind.sigs.k8s.io/docs/user/quick-start/), a multi-node setup with one control-plane and two worker-nodes, to be specific.
 
-```yaml
+```
 # three node (two workers) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4

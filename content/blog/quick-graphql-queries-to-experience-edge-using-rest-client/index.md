@@ -5,7 +5,7 @@ category:
 - "Graphql"
 - "Experience Edge"
 description: "A quick productivity boost: GraphQL queries with the vscode REST Client extension"
-img: ./images/yarp.png
+img: ./images/header.png
 tags:
 - "grpahql"
 - "experience edge"

@@ -1,6 +1,6 @@
 ---
-title: "Quick Graphql queries to Experience Edge or XM/XP using REST Client"
-date: "2023-03-16"
+title: "a smal productivity boost: Graphql queries to Experience Edge or XM/XP using the vscode rest client plugin"
+date: "2024-03-16"
 category: 
 - "Graphql"
 - "Experience Edge"

@@ -1,5 +1,5 @@
 ---
-title: "A small productivity boost: Graphql create queries to Experience Edge or XM/XP using the vscode rest client plugin"
+title: "A small productivity boost: create parameterized Graphql queries to Experience Edge or XM/XP using the vscode rest client plugin"
 date: "2024-03-16"
 category: 
 - "Graphql"

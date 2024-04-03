@@ -33,6 +33,8 @@ server {
 
 however, I didn't want to ship a complete new config file just to fix this issue. Luckily, the ngnix ingress controller supports a [broad amount of annotations](https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/) in order to configure the ingress controller.
 
+Please not that the chosen values are arbitrary and should be adjusted to your specific needs. The following annotations can be added to the ingress resource:
+
 ```yaml{6-8}
 apiVersion: networking.k8s.io/v1
 kind: Ingress

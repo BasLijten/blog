@@ -11,6 +11,13 @@ tags:
 
 # Overview of public speaking activities throughout the years
 
+## 2023
+
+| Date | Title | Location | Description |
+--- | --- | --- | ---
+june | hacking | sugnl | hacking
+november | xm cloud | techday | xmcloud
+
 ## 2022
 | Date | Title | Location | Description |
 --- | --- | --- | ---

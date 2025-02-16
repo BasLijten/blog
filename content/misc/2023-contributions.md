@@ -4,6 +4,9 @@
 
 Since april 2023 I am when of the organizaers of Sugnl
 
+## Techday NL organization
+400 attendees
+
 ## blogposts
 
 title | description | date
@@ -13,12 +16,18 @@ SignalR userID | how to set signalR userID for realtime personalization | 20-2-2
 update on setting up userid | | 24-2-2023
 Add a tab with admin privileges to Windows Terminal using gsudo | handy when making new sitecore docker installations, as it always requires admin privileges | april 2023
 Custom sitecore segment for oh my posh | how and why i wrote the custom segment for oh my posh - it shows the current context information of yuour connected system | may 2023
+why to choose Yarp for a Sitecore migration | sep 2023
+how to use YARP as an ingress controller in Kubernetes in Docker Desktop (KinD) on Windows 11 | sep 2023
+Getting started: Develop in WSL2 for XM Cloud - the benefits | oct 2023
+Getting started: Develop in WSL2 for XM Cloud | oct 2923
 
 hacking sitecore | remote shell | ...
 
 ## public speaking
 
 sugnl | hacking sitecore
+techday | xmcloud
+
 
 ## code
 

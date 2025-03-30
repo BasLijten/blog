@@ -16,7 +16,7 @@ hacking sitecore | remote shell | ...
 
 ## code
 
-title | description | date
+title | description | date 
 --- | --- | ---
 
 
@@ -29,7 +29,7 @@ information disclosue github | internal environments information disclosures | f
 documentation update out of process cache for editorhost | 2025-02-16
 
 
-## documentation update
+## documentation updates
 
 title | description | date
 --- | --- | ---

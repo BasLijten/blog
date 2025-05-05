@@ -14,17 +14,17 @@ tags:
 - "traefik"
 ---
 
-Building and hosting Sitecore can be done in various ways, and based on your requirements a choice should be made. The [following article](https://developers.sitecore.com/learn/accelerate/xm-cloud/pre-development/project-architecture/multisite) in the Sitecore Architecture Cookbook describes various considerations on this topic. It basically comes down to a choice for how you would organize sites in xm cloud and your preferred choice of hosting the frontend. When working with [NextJS](https://nextjs.org), sitecore offers a [multisite addon](https://doc.sitecore.com/xmc/en/developers/jss/22/jss-xmc/the-next-js-multisite-add-on.html), it basically offers functionality to expose multiple sites from a single deployment with NextJS:
+Building and hosting the Sitecore head can be done in various ways, and based on your requirements a choice should be made. The [following article](https://developers.sitecore.com/learn/accelerate/xm-cloud/pre-development/project-architecture/multisite) in the Sitecore Architecture Cookbook describes various considerations on this topic. It basically comes down to a choice for how you would organize sites in xm cloud and your preferred choice of hosting the frontend. When working with [NextJS](https://nextjs.org), sitecore offers a [multisite addon](https://doc.sitecore.com/xmc/en/developers/jss/22/jss-xmc/the-next-js-multisite-add-on.html), it basically offers functionality to expose multiple sites from a single deployment with NextJS:
 
 ![single vs multisite hosting](./images/one-app-vs-multi.png)
 
-When hosting your projects on vercel, things might get a bit complicated. Out of the box, vercel supports hosting up to 50 domains, as the [following article](https://vercel.com/docs/domains/working-with-domains/add-a-domain) describes, but when introducing an own reverse proxy and firewall, things get a bit more complex. The target architecture looks like this (simplified)
+When hosting your projects on vercel, things might get a bit complicated. Out of the box, vercel supports hosting up to 50 domains, as the [following article](https://vercel.com/docs/domains/working-with-domains/add-a-domain) describes, but when introducing an own reverse proxy and firewall, things get a bit more complex. That architecture might look like this (simplified). 
 
 ![vercel hosting with own firewall](./images/reverse-proxy.excalidraw.png)
 
-In order to be able to test this setup, quite a bit configuration is needed.
+Especially an own reverse proxy, the vercel firewall and image optimization, can be a challenge to setup, and in my opinion, it should be done as soon as possible in a project. In order to be able to test this setup, quite a bit configuration is needed. Often, when running these kind of setups, the corporate firewall/reverse proxy is being configured by other people than the developers, so it might be hard to test and solve specific situations. That is a single reason why this setup is valueable to a Sitecore developer ;).
 
-> using the sitecore multisite middleware has advantages and disadvantages. This article will not cover these, it is all about "how to get it working in a complex scenario". The only thing I *really* want to mention, is that, when using this approach, the middleware will *always* trigger, which might lead to a higher spend in vercel.
+> using the sitecore multisite middleware has advantages and disadvantages. This article will not cover these, it is all about "how to get the traffic flow working in a complex scenario". It doesn't mean it works correctly. Things will break, which have to be solved and I might touch these subjects in a later blogpost. The only thing I *really* want to mention, is that, when using this approach, the middleware will *always* trigger, which might lead to a higher spend in vercel.
 
 ## Configuring Sitecore
 
@@ -242,4 +242,7 @@ private handler = async (req: NextRequest, res?: NextResponse): Promise<NextResp
     });
     response = this.rewrite(rewritePath, req, response);
 ```
-Conclusion
+
+## Conclusion
+
+Setting up a multisite architecture with Sitecore and Vercel's reverse proxy isn't straightforward. At first glance, it might seem like a complex puzzle. However, by dissecting each component—middleware for hostname resolution, media path rewrites, and environment-specific configurations—the overall picture becomes clearer. Through this exploration, we've demystified the setup, transforming it from a daunting task into a manageable implementation.

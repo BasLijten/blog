@@ -53,7 +53,7 @@ $renderingHostName = "$project_name.localhost"
 $nextjsHostName = "www.$renderingHostName"
 ```
 
-later, a wildcard certificate for this renderinghostname get's created `*.project_name.localhost`
+later, a wildcard certificate for this renderinghostname gets created `*.project_name.localhost`
 
 ```powershell
 Write-Host "Generating Traefik TLS certificate..." -ForegroundColor Green
@@ -192,7 +192,7 @@ When the domain has been added which was created in vercel, the sitecore middlew
 
 ## When a plan comes together - traefik revisited
 
-A working custom domain in vercel was configured, and sitecore has been configured to serve the correct site when navigating to that host. The last past is to add our reverse proxy, and configure it in such a way, that our custom domain *also* works. Pointing this proxy to the custom domain however, does *not* work. You will probabily get the following error:
+A working custom domain in vercel was configured, and sitecore has been configured to serve the correct site when navigating to that host. The last part is to add our reverse proxy, and configure it in such a way, that our custom domain *also* works. Pointing this proxy to the custom domain however, does *not* work. You will probably get the following error:
 
 ```
 404: NOT_FOUND
@@ -203,7 +203,7 @@ Code: DEPLOYMENT_NOT_FOUND
 
 ### configuring the hostname using the host-headered site approach.
 
-This should be solved by adding a host in the traefik middleware. When this doesn't happen, than traefik will launch a request to vercel for the orginal domain. This domain and deployment exists, but the specified hostname ```site1-vercel.dkw.localhost``` does - of course - *not* exist. This piece of middleware tells vercel: `although I am requesting some custom domain name, the real hostname that I am looking for is ```custom-vercel-domain-name```, which *does* exist.
+This should be solved by adding a host in the traefik middleware. When this doesn't happen, then traefik will launch a request to vercel for the original domain. This domain and deployment exists, but the specified hostname ```site1-vercel.dkw.localhost``` does - of course - *not* exist. This piece of middleware tells vercel: `although I am requesting some custom domain name, the real hostname that I am looking for is ```custom-vercel-domain-name```, which *does* exist.
 
 ```yaml
   middlewares:

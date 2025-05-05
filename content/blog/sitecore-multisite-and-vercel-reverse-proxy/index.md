@@ -203,7 +203,7 @@ Code: DEPLOYMENT_NOT_FOUND
 
 ### configuring the hostname using the host-headered site approach.
 
-This should be solved by adding a host in the traefik middleware. When this doesn't happen, than traefik will launch a request to vercel for the orginal domain. This domain and deployment exists, but the specified hostname ```site1-vercel.dkw.localhost``` does - of course - *not* exist. This piece of middleware tells vercel: `although I am requesting some custom domain name, the real hostname that I am looking for is ```custom-vercel-domain-name```, which *does* exist.
+This should be solved by adding a host in the traefik middleware. When this doesn't happen, then traefik will launch a request to vercel for the original domain. This domain and deployment exists, but the specified hostname ```site1-vercel.dkw.localhost``` does - of course - *not* exist. This piece of middleware tells vercel: `although I am requesting some custom domain name, the real hostname that I am looking for is ```custom-vercel-domain-name```, which *does* exist.
 
 ```yaml
   middlewares:

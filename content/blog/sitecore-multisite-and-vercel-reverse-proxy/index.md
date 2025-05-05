@@ -192,7 +192,7 @@ When the domain has been added which was created in vercel, the sitecore middlew
 
 ## When a plan comes together - traefik revisited
 
-A working custom domain in vercel was configured, and sitecore has been configured to serve the correct site when navigating to that host. The last past is to add our reverse proxy, and configure it in such a way, that our custom domain *also* works. Pointing this proxy to the custom domain however, does *not* work. You will probabily get the following error:
+A working custom domain in vercel was configured, and sitecore has been configured to serve the correct site when navigating to that host. The last part is to add our reverse proxy, and configure it in such a way, that our custom domain *also* works. Pointing this proxy to the custom domain however, does *not* work. You will probably get the following error:
 
 ```
 404: NOT_FOUND

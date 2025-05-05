@@ -53,7 +53,7 @@ $renderingHostName = "$project_name.localhost"
 $nextjsHostName = "www.$renderingHostName"
 ```
 
-later, a wildcard certificate for this renderinghostname get's created `*.project_name.localhost`
+later, a wildcard certificate for this renderinghostname gets created `*.project_name.localhost`
 
 ```powershell
 Write-Host "Generating Traefik TLS certificate..." -ForegroundColor Green

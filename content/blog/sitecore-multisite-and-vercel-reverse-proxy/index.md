@@ -22,7 +22,7 @@ When hosting your projects on vercel, things might get a bit complicated. Out of
 
 ![vercel hosting with own firewall](./images/reverse-proxy.excalidraw.png)
 
-Especially an own reverse proxy, the vercel firewall and image optimization, can be a challenge to setup, and in my opinion, it should be done as soon as possible in a project. In order to be able to test this setup, quite a bit configuration is needed. Often, when running these kind of setups, the corporate firewall/reverse proxy is being configured by other people than the developers, so it might be hard to test and solve specific situations. That is a single reason why this setup is valueable to a Sitecore developer ;).
+Especially an own reverse proxy, the vercel firewall and image optimization, can be a challenge to setup, and in my opinion, it should be done as soon as possible in a project. In order to be able to test this setup, quite a bit configuration is needed. Often, when running these kind of setups, the corporate firewall/reverse proxy is being configured by other people than the developers, so it might be hard to test and solve specific situations. That is a single reason why this setup is valuable to a Sitecore developer ;).
 
 > using the sitecore multisite middleware has advantages and disadvantages. This article will not cover these, it is all about "how to get the traffic flow working in a complex scenario". It doesn't mean it works correctly. Things will break, which have to be solved and I might touch these subjects in a later blogpost. The only thing I *really* want to mention, is that, when using this approach, the middleware will *always* trigger, which might lead to a higher spend in vercel.
 

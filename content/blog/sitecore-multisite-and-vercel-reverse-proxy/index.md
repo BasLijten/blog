@@ -128,7 +128,7 @@ http:
 
 ##### Deployment protection
 
-The first challenge to overcome, is (probably) an authentication challenge, as Vercel requires non-production environments to authenticate. When this is not solved, than you will be redirected to the targeturl, instead of sending traffic through this reverse proxy. This can be bypassed to configure the `x-vercel-protection-bypass=<secret>` querystring, but as this is at least inconvenient, as it would have to be provided for every request, another solution should be used.
+The first challenge to overcome, is (probably) an authentication challenge, as Vercel requires non-production environments to authenticate. When this is not solved, then you will be redirected to the target URL, instead of sending traffic through this reverse proxy. This can be bypassed to configure the `x-vercel-protection-bypass=<secret>` querystring, but as this is at least inconvenient, as it would have to be provided for every request, another solution should be used.
 
 This solution is by sending configuring the `x-vercel-protection-bypass` header in traefik. It basically sends this header with every request to vercel, in order to bypass this deployment protection. In the configuration below, the middleware `addSite1Host` has been added to the configuration, which defines this middleware. The site1 configuration under routers has been updated to point to this middleware.
 

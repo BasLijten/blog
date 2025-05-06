@@ -9,8 +9,9 @@ Since april 2023 I am when of the organizaers of Sugnl
 title | description | date
 --- | --- | ---
 Out of process redis cache for editorhost for Vercel with Azure Cache for Redis - ClientClosed error in api/editing/render | out of process redis cache | 2025-02-16
+how to test a reverse proxy with sitecore multisite and vercel | how to setup this locally with yarp | 2025-05-06
 
-hacking sitecore | remote shell | ...
+
 
 ## public speaking
 

@@ -68,7 +68,7 @@ and in the end, the environment variable is stored
  Set-EnvFileVariable "RENDERING_HOST" -Value "$nextjsHostName" -Path $envFileLocation
 ```
 
-In the docker compose setup, this specific `RENDERING_HOST` variable will be bound to the rendering host service. Take not of the labels-section. Here, docker get's configured in such a way, the the rendering-host parameter is bound to this service, while configured on the traefik middleware. The fun part, is that there is an explicit configuration for www.project_name.localhost, while there is a wildcard certificate available, which can be used for basically anything.
+In the docker compose setup, this specific `RENDERING_HOST` variable will be bound to the rendering host service. Take note of the labels-section. Here, docker gets configured in such a way, the rendering-host parameter is bound to this service, while configured on the traefik middleware. The fun part is that there is an explicit configuration for www.project_name.localhost, while there is a wildcard certificate available, which can be used for basically anything.
 
 ```yaml
  rendering:

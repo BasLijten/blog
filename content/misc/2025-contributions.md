@@ -31,6 +31,11 @@ preview function with remote editorhost (vercel) | not working - lead to fix in 
 content SDK v0.1 feedback | component props addition, minor bugs | april 2025
 feedback experience edge with open unprocesses v2 graphql query | open to public, shouldn't be the case | april 2025
 security issue | security vuln in baselime images | solved march 2025
+graphql schme feedback to Alistair Deneys | case sensitivity | april 2025
+grpahql scheme feedback to Alistair Deneys | contains/notContains/not operator | may 2025
+pages editor: edit link feedback | link cannot be editied in some cases | may 2025
+xmcloud: multiple languages on template item when cloning | see title | may 2025
+
 
 ## documentation update
 

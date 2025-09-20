@@ -36,7 +36,7 @@
     "gatsby-source-filesystem": "^5.15.0",
     "gatsby-transformer-remark": "^6.15.0",
     "gatsby-transformer-sharp": "^5.15.0",
-    "katex": "^0.13.24",
+    "katex": "^0.16.22",
     "lodash": "^4.17.21",
     "prismjs": "^1.30.0",
     "prop-types": "^15.8.1",

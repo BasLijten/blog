@@ -1,19 +1,19 @@
 ---
-title: "Fast Search for SharePoint caveat: Apply a sortformula"
-date: "2011-11-15"
-categories: 
-  - "fast"
-  - "sharepoint-2010"
+title: 'Fast Search for SharePoint caveat: Apply a sortformula'
+date: '2011-11-15'
+categories:
+  - 'fast'
+  - 'sharepoint-2010'
 ---
 
-Fast Search for SharePoint provides [four great possibilities](http://msdn.microsoft.com/en-us/library/ff394654.aspx "ranking and sorting in Fast Search for SharePoint 2010") to influence the sort order of your resultset that was returned:
+Fast Search for SharePoint provides [four great possibilities](http://msdn.microsoft.com/en-us/library/ff394654.aspx 'ranking and sorting in Fast Search for SharePoint 2010') to influence the sort order of your resultset that was returned:
 
 - Sort by Managed property
 - Sort by Rank
 - Sort by Formula
 - Sort in Random order
 
-When I was working on my presentaion and demo for the [diwug](http://www.diwug.nl/ "Dutch Information Worker User Group") (Dutch Information Worker User Group) last week, to show off on how you can improve your search experience by using custom ranking models, custom sort orders and extending the pipeline, I ran into an issue that I wasn't aware off. When I used a custom sort formula, I did get the right **_result set_**, but not the right **_result order_**.
+When I was working on my presentaion and demo for the [diwug](http://www.diwug.nl/ 'Dutch Information Worker User Group') (Dutch Information Worker User Group) last week, to show off on how you can improve your search experience by using custom ranking models, custom sort orders and extending the pipeline, I ran into an issue that I wasn't aware off. When I used a custom sort formula, I did get the right **_result set_**, but not the right **_result order_**.
 
 ## The Scenario
 
@@ -29,7 +29,7 @@ The query I executed was the following:
 
 ![](images/img_528a637fd49e8.png)
 
-and this query provided me the following dataset. the result_set_ returned by the query was correct!
+and this query provided me the following dataset. the result*set* returned by the query was correct!
 
 ![](images/img_528a638894cf9.png)
 
@@ -45,11 +45,11 @@ As seen in the table, the actual resultorder that was returned, wasn't in line w
 
 ##  What Happened?
 
-When I digged into this problem, my eye felled on [one line of documentation on MSDN](http://msdn.microsoft.com/en-us/library/ff394654.aspx "custom ranking and sorting in Fast Search for SharePoint 2010"):
+When I digged into this problem, my eye felled on [one line of documentation on MSDN](http://msdn.microsoft.com/en-us/library/ff394654.aspx 'custom ranking and sorting in Fast Search for SharePoint 2010'):
 
 ![](images/img_528a63aaa3c32.png)
 
-this line tells us that every managed property of type decimal that is used in a formula, is treated in another way then other numeric types like integers and doubles. Whenever a sortformula is applied to the resultset, all managed properties of type _'decimal',_ are multiplied by (10^decimal digits). Retrieving the managed property via powerShell, does learn us that "decimal digits" is not a property of that managed property, but it's called "decimal places":
+this line tells us that every managed property of type decimal that is used in a formula, is treated in another way then other numeric types like integers and doubles. Whenever a sortformula is applied to the resultset, all managed properties of type *'decimal',* are multiplied by (10^decimal digits). Retrieving the managed property via powerShell, does learn us that "decimal digits" is not a property of that managed property, but it's called "decimal places":
 
 ![](images/img_528a63b7462cf.png)
 

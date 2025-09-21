@@ -1,15 +1,15 @@
 ---
-title: "Using Application Insights annotations to mark publishing events in Sitecore"
-date: "2018-12-17"
-categories: 
-  - "analytics"
-  - "application-insights"
-  - "azure"
-  - "devops"
-  - "logging"
-  - "performance"
-  - "vsts"
-img: "./images/img_5c180bee7caf8.png"
+title: 'Using Application Insights annotations to mark publishing events in Sitecore'
+date: '2018-12-17'
+categories:
+  - 'analytics'
+  - 'application-insights'
+  - 'azure'
+  - 'devops'
+  - 'logging'
+  - 'performance'
+  - 'vsts'
+img: './images/img_5c180bee7caf8.png'
 ---
 
 In my [previous blogpost](http://blog.baslijten.com/using-application-insights-annotations-and-how-to-trigger-them-within-your-application/) I described how to create annotations within an application. This blogpost explains how this was integrated in Sitecore and how it could have helped in analyzing our severe performance problems
@@ -40,13 +40,11 @@ What was the reason behind the empty cache? THese caches can be flushed manually
 
 ![](images/img_5c1813e2a9007.png)
 
- 
-
 ## The implementation
 
 The implementation was fairly simple; First, I created the annotation library (as described in my previous blogpost), the second step was to create a publishing processor which gets executed just before the actual publish action:
 
-```csharp
+````csharp
  namespace PublishAnnotations.Pipelines.Publishing { public class AnnotatePublishAction : PublishProcessor { public override void Process(PublishContext context) { var client = new TelemetryClient(TelemetryConfiguration.Active);
 
 var dependency = new DependencyTelemetry(); dependency.Name = "Annotate publish action"; dependency.Target = "Application Insights"; dependency.Type = "Http"; var operation = client.StartOperation(dependency);
@@ -60,3 +58,4 @@ public void AnnotatePublishingAction() { var annotation = new Annotations.Annota
 ## Summary
 
 Publishing actions _might_ have severe implications when there are components in your code which cannot handle these (regular) publishing events too well. That's why we decided to add these annotations to the pipeline, they might have helped us in finding the issue much much faster. In the future, we will loadtest our applications _including_ publication actions and cache flushes, to be sure that these actions will not influence the performance anymore as well.
+````

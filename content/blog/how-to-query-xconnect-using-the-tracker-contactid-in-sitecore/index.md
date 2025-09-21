@@ -1,17 +1,17 @@
 ---
-title: "How to query xConnect using the tracker ContactID in Sitecore"
-date: "2018-11-11"
-categories: 
-  - "code"
-  - "sitecore"
-  - "xconnect"
+title: 'How to query xConnect using the tracker ContactID in Sitecore'
+date: '2018-11-11'
+categories:
+  - 'code'
+  - 'sitecore'
+  - 'xconnect'
 ---
 
 There are situations where not all custom facets have been loaded into your session, or where you want to explicitly check for updates on a custom facet in xConnect, for example when external systems might have been making changes to this facet. This blogpost explains how to use the trackerContactID to query xconnect, which can be used to get these custom facets.
 
 In anonymous situations, the _only_ identifier that is available, is the current contact id:
 
-```csharp
+````csharp
  var xdbIdentifier = Tracker.Current.Contact.ContactId; ```
 
 Although it might be attached to other identities, it’s the only identifier that might be available. This ID can be used to setup a new client connection to xConnect and do a lookup for the contact, including one or more custom facets.
@@ -27,3 +27,4 @@ Now, the IdentifiedContactReference can be constructed and be used in your (cust
  var id = new IdentifiedContactReference("xDB.Tracker", xdbIdentifier.ToXConnectIdentifier()); ```
 
 Happy querying!
+````

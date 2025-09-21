@@ -1,13 +1,13 @@
 ---
-title: "How to deploy Sitecore web deploy packages using the VSTS Azure App Service task"
-date: "2018-04-11"
-categories: 
-  - "azure"
-  - "code"
-  - "deployment"
-  - "development"
-  - "sitecore"
-img: "./images/2018-04-11_14-30-23.png"
+title: 'How to deploy Sitecore web deploy packages using the VSTS Azure App Service task'
+date: '2018-04-11'
+categories:
+  - 'azure'
+  - 'code'
+  - 'deployment'
+  - 'development'
+  - 'sitecore'
+img: './images/2018-04-11_14-30-23.png'
 ---
 
 With the introduction of the Sitecore 8.2, Sitecore also introduced some Sitecore web deployment packages (WDP), which are used by the [Sitecore-Azure-Quickstart-Templates](https://github.com/Sitecore/Sitecore-Azure-Quickstart-Templates) for the deployment of Sitecore. When using ARM templates to provision the Sitecore Infrastructure and deploy the Sitecore application, this works fabulously. But when there is a requirement to use the VSTS Azure App Service deployment task, these packages can’t be used, due to two reasons. This blogpost explains why this task can’t be used _and_ how to fix it (and explains why I spend a _lot_ of time on writing a custom deployment script)
@@ -26,13 +26,11 @@ However, when using the default Sitecore cloud wdp’s (which can be downloaded 
 
 The vsts task creates a msdeploy task and for some reason, this vsts task can’t handle the Sitecore web deploy package. This task creates the following msdeploy command:
 
-**_“msdeploy -verb:sync -source:package=Sitecore\_package.zip -dest:ContentPath=”azure-site” -…_**
+**_“msdeploy -verb:sync -source:package=Sitecore_package.zip -dest:ContentPath=”azure-site” -…_**
 
 In “normal” situations (custom build web deploy packages), this vsts task does it job. Luckily, all vsts tasks are [open sourced on github](https://github.com/Microsoft/vsts-tasks/), which means that we could take a peak at the code to find out what went wrong.
 
 Some code exists which determines whether or not a web deployment package has been used. This is determined by the following function:
-
- 
 
 ![](images/img_5ace18576f7c2.png)
 

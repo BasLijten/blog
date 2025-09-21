@@ -1,9 +1,9 @@
 ---
-title: "Upgrading Masterpage and UIVersion from SharePoint 2007 to SharePoint 2010 without v4.master"
-date: "2012-03-20"
+title: 'Upgrading Masterpage and UIVersion from SharePoint 2007 to SharePoint 2010 without v4.master'
+date: '2012-03-20'
 ---
 
-When upgrading from SharePoint 2007 to SharePoint 2010, several scenarios are possible. When using [the database attach method](http://technet.microsoft.com/en-us/library/cc263299.aspx "database attach method"), it's possible to stay in "V3" mode, or execute a visual upgrade too and make use of all SharePoint 2010 love. Whenever custom masterpages have been created for SharePoint 2007, the visual upgrade itself isn't too much of an option: it upgrades the UIVersion of the current web to V4, but the custom masterpage is replaced by the default v4.master, which (of course) doesn't provide any customizations. the next step is to create a new customized masterpage for SharePoint 2010, add it to your site and make sure to set this masterpage as the new default/custom masterpage.
+When upgrading from SharePoint 2007 to SharePoint 2010, several scenarios are possible. When using [the database attach method](http://technet.microsoft.com/en-us/library/cc263299.aspx 'database attach method'), it's possible to stay in "V3" mode, or execute a visual upgrade too and make use of all SharePoint 2010 love. Whenever custom masterpages have been created for SharePoint 2007, the visual upgrade itself isn't too much of an option: it upgrades the UIVersion of the current web to V4, but the custom masterpage is replaced by the default v4.master, which (of course) doesn't provide any customizations. the next step is to create a new customized masterpage for SharePoint 2010, add it to your site and make sure to set this masterpage as the new default/custom masterpage.
 
 The scenario I wanted to achieve, was the following:
 
@@ -13,7 +13,7 @@ The scenario I wanted to achieve, was the following:
 
 ## The problems of (visual) upgrading to SharePoint 2010
 
-The problems of visual upgrading consist of several issues: it doesn't work right out of the box (but that is expected), and some steps are needed to deploy and undeploy a masterpage, before the real SP2010 masterpage can be set, because the v4.master seems to be _**required**_
+The problems of visual upgrading consist of several issues: it doesn't work right out of the box (but that is expected), and some steps are needed to deploy and undeploy a masterpage, before the real SP2010 masterpage can be set, because the v4.master seems to be **_required_**
 
 ### 1 - Upgrade the site doesn't work immediately
 
@@ -23,7 +23,7 @@ As stated above, a visual upgrade using the user interface or upgrade by code/po
 2: $web.UIVersion = 4
 3: $web.Update()
 
-sadly, this will bug out, because SharePoint _requires_ the v4.master to be able to upgrade to v4-mode. The v4.master has to be made available via a feature (or manually) in the masterpage gallery, before the upgrade can be executed.
+sadly, this will bug out, because SharePoint *requires* the v4.master to be able to upgrade to v4-mode. The v4.master has to be made available via a feature (or manually) in the masterpage gallery, before the upgrade can be executed.
 
 ### 2 - Upgrade to a masterpage that isn't needed
 
@@ -45,7 +45,7 @@ As described above. I wanted to achieve the following scenario:
 
 When firing up reflector, we see that the following happens in code:
 
-When the UIVersion is set, an internal function called "SetUIVersion" is executed. This function takes the UIVersion as a parameter and a boolean which decides wether or not to set the masterpage. _Unfortunately, this function is an internal function, so it can't be used without using reflection._
+When the UIVersion is set, an internal function called "SetUIVersion" is executed. This function takes the UIVersion as a parameter and a boolean which decides wether or not to set the masterpage. *Unfortunately, this function is an internal function, so it can't be used without using reflection.*
 
 The SetUIVersion function contains some logic to determine whether to rollback to UIVersion 3, or to upgrade to UIVersion 4. After the decision, the internal function SwitchMasterPages is called, with 5 parameters:
 
@@ -55,7 +55,7 @@ That function is called with the following parameters
 
 ![](images/img_528a5d312fc30.png)
 
-And what happens _in_ this function gets interesting. This function checks what default and custom masterpage are currently set (the V3 masterpages), and stores them in the propertybag of the current web, specified, by the parameters specified in the function. To determine what new masterpage needs to be set, that same propertybag is checked: in this case the properties "v4master" and "v4customMaster". if they are empty, the default v4.master is used:
+And what happens *in* this function gets interesting. This function checks what default and custom masterpage are currently set (the V3 masterpages), and stores them in the propertybag of the current web, specified, by the parameters specified in the function. To determine what new masterpage needs to be set, that same propertybag is checked: in this case the properties "v4master" and "v4customMaster". if they are empty, the default v4.master is used:
 
 ![](images/img_528a5d3b7c1a6.png)
 

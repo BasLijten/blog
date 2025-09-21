@@ -1,9 +1,9 @@
 ---
-title: "Gotchas while installing Sitecore 9 using the Sitecore installation framework"
-date: "2017-10-25"
-categories: 
-  - "deployment"
-  - "sitecore"
+title: 'Gotchas while installing Sitecore 9 using the Sitecore installation framework'
+date: '2017-10-25'
+categories:
+  - 'deployment'
+  - 'sitecore'
 ---
 
 Sitecore released a nice Installation framework to install Sitecore, xConnect and configure Solr. I used this framework already a few times (on a few machines and it turned out that I am very proficient in breaking things. Especially Sitecore 9). During this installation I faced some inconvenient issues (and found out some tips) which I wanted to share with you. This should help you getting up and running even faster!
@@ -63,8 +63,6 @@ _it might be possible that the Marketing automation table cannot be deleted. I a
 For some reason I always forget those. As xConnect will NOT work without those post-installation steps the script below really should be executed. As it came from the guide: when copy-pasting it from the guide, the query will bug out. Fire up your Sql management studio, create a new query and set the mode to SQLCMD.
 
 <script src="https://gist.github.com/BasLijten/78f8a736e13b652588666ec18d4e9c39.js"></script>
-
- 
 
 # Conclusion
 

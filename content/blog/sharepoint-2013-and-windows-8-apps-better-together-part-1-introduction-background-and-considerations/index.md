@@ -1,17 +1,17 @@
 ---
-title: "SharePoint 2013 and Windows 8 apps - better together Part 1: Introduction, background and considerations"
-date: "2013-03-16"
-categories: 
-  - "rest"
-  - "search"
-  - "sharepoint"
-  - "windows-8"
+title: 'SharePoint 2013 and Windows 8 apps - better together Part 1: Introduction, background and considerations'
+date: '2013-03-16'
+categories:
+  - 'rest'
+  - 'search'
+  - 'sharepoint'
+  - 'windows-8'
 ---
 
 This is the first post as part of a blog series about the integration of using SharePoint 2013 as a datasource for windows 8 apps.
 
 - [Part 1: Introduction, Background and Considerations (this post)](SharePoint 2013 and Windows 8 apps – better together Part 1: Introduction, background and considerations "Part 1: Introduction, Background and Considerations")
-- [Part 2: Platform choice, using the right API and data access](http://blog.baslijten.com/sharepoint-2013-and-windows-8-apps-better-together-part-2-platform-choice-using-the-right-api-and-data-access/ "Part 2: Platform Choice, using the right API and data access")
+- [Part 2: Platform choice, using the right API and data access](http://blog.baslijten.com/sharepoint-2013-and-windows-8-apps-better-together-part-2-platform-choice-using-the-right-api-and-data-access/ 'Part 2: Platform Choice, using the right API and data access')
 - Part 3: Integrating Search using REST
 - Part 4: Authentication
 

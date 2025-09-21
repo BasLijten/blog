@@ -1,9 +1,9 @@
 ---
-title: "How to use Application insights and your visitors to detect when your site is offline"
-date: "2021-02-16"
-categories: 
-  - "sitecore"
-img: "./images/image-6.png"
+title: 'How to use Application insights and your visitors to detect when your site is offline'
+date: '2021-02-16'
+categories:
+  - 'sitecore'
+img: './images/image-6.png'
 ---
 
 When hosting high traffic websites, it’s important to keep them up and running at all times. At the moment one of them goes down, it might lead to a conversion loss or decrease in NPS. Detection of unplanned downtime is very important in these cases. In some cases, there isn’t even downtime, but \*something\* in the infrastructure prevents the website from loading (I’ll explain a few cases after the break). This blogpost will teach you how to use your visitors as a continuous monitoring beacon. Code can be found here. Also a small shoutout to my colleague Marten Bonnema who created an [AI-plugin](https://github.com/Pkiri/pwa-ai) which \*does\* work with serviceworkers.
@@ -36,7 +36,7 @@ Let’s assume that the service worker has been installed. Within the following 
 
 ![](images/image-1.png)
 
- A common scenario is to lookup resources in a local cache and return them directly, even before an http request could be made. When this request bugs out (in other words: there is a network error, protocol error, network reset, you name it), an exception will be thrown. Just catch the exception and start logging. _Note:_ Although there is very convenient use of promises, I didn’t make use of these promises in this example. As most readers of my blog are .Net (Sitecore) developers, this notation will be a bit more accessible to read.
+A common scenario is to lookup resources in a local cache and return them directly, even before an http request could be made. When this request bugs out (in other words: there is a network error, protocol error, network reset, you name it), an exception will be thrown. Just catch the exception and start logging. _Note:_ Although there is very convenient use of promises, I didn’t make use of these promises in this example. As most readers of my blog are .Net (Sitecore) developers, this notation will be a bit more accessible to read.
 
 ![](images/image-2.png)
 

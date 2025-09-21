@@ -1,11 +1,11 @@
 ---
-title: "SharePoint: Modifying the PeopleResults.aspx - adding custom Profile Properties"
-date: "2010-08-21"
-categories: 
-  - "peoplesearch"
-  - "search"
-  - "sharepoint"
-  - "userprofile"
+title: 'SharePoint: Modifying the PeopleResults.aspx - adding custom Profile Properties'
+date: '2010-08-21'
+categories:
+  - 'peoplesearch'
+  - 'search'
+  - 'sharepoint'
+  - 'userprofile'
 ---
 
 To modify the results of the peopleresults.aspx, a few stepts have to be taken.  

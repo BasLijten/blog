@@ -1,6 +1,6 @@
 ---
-title: "Create an organizational account to administrate azure when having a Microsoft Account"
-date: "2015-05-11"
+title: 'Create an organizational account to administrate azure when having a Microsoft Account'
+date: '2015-05-11'
 ---
 
 When you created your Microsoft Azure subscription with a personal Microsoft Account, it’s likely that you won’t be able to use some azure services, for example, [the new Power BI service](http://www.powerbi.com/), as they require an organizational account. This blogpost describes on how to create an organizational account and delegate the azure administrator role to this account, so you’ll be free to use _any_ azure service.
@@ -21,9 +21,9 @@ To create a new account, navigate to your Azure Active Directory Tenant:
 - Select your directory
 - Select “Users”
 - Select Add User
-    - In step 1), Make sure to select under “type of user”: “New user in your organization” write down the user account name of your user:![](images/img_554f9ccc62c7d.png)
-    - In step 2), make sure to select “global admin”
-    - Write down the email address of the new user: you will need it in the next step:
+  - In step 1), Make sure to select under “type of user”: “New user in your organization” write down the user account name of your user:![](images/img_554f9ccc62c7d.png)
+  - In step 2), make sure to select “global admin”
+  - Write down the email address of the new user: you will need it in the next step:
 - Finish the creation of your new organizational account using the wizard
 
 ## 3 – Assign an Azure Subscription to your organizational account to administrate your Azure service
@@ -36,7 +36,7 @@ To give your newly created organizational administrator account administrator pe
 ![](images/img_554f9d268b03c.png)
 
 - Click “Add” on the menu below and assign the email address of the newly created organizational account
-    - It’s the same account as you wrote down in the previous step. When you entered a correct value (an account which exists in your Windows Azure active Directory), you’ll get a notification as shown in the image below:![](images/img_554f9d7abe790.png)
+  - It’s the same account as you wrote down in the previous step. When you entered a correct value (an account which exists in your Windows Azure active Directory), you’ll get a notification as shown in the image below:![](images/img_554f9d7abe790.png)
 
 By finishing this step, your organizational account is allowed to fully manage azure and thus, create services which require an organizational account!
 

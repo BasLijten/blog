@@ -1,11 +1,11 @@
 ---
-title: "CrossListQueryInfo not able to return MultiLookup Fields"
-date: "2009-08-14"
-categories: 
-  - "caml"
-  - "crosslistqueryinfo"
-  - "query"
-  - "sharepoint"
+title: 'CrossListQueryInfo not able to return MultiLookup Fields'
+date: '2009-08-14'
+categories:
+  - 'caml'
+  - 'crosslistqueryinfo'
+  - 'query'
+  - 'sharepoint'
 ---
 
 Some time ago [I wrote a blogpost about how to use the CrossListQueryInfo and CrossListQueryCache](http://bloggingabout.net/blogs/bas/archive/2009/03/27/using-the-crosslistqueryinfo-and-crosslistquerycache.aspx) to be able to find any item within a site within a very small amount of time. Hower, since today I know that this method cant be used when you are trying to retrieve items that contain a MultiLookupField in the ViewFields.

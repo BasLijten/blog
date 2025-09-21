@@ -1,18 +1,19 @@
 ---
-title: "Accelerate Your Sitecore Development Projects with ChatGPT"
-date: "2022-12-05"
+title: 'Accelerate Your Sitecore Development Projects with ChatGPT'
+date: '2022-12-05'
 category:
-- "OpenAI"
-- "Sitecore"
-- "ChatGPT"
-- "Automation"
-description: "learn how ChatGPT can help with accelerating Sitecore Development"
+  - 'OpenAI'
+  - 'Sitecore'
+  - 'ChatGPT'
+  - 'Automation'
+description: 'learn how ChatGPT can help with accelerating Sitecore Development'
 img: ./images/sprint.jpg
 tags:
-- "openAI"
-- "chatGPT"
-- "Sitecore"
+  - 'openAI'
+  - 'chatGPT'
+  - 'Sitecore'
 ---
+
 As a Sitecore developer, you know the importance of fast and efficient development. With ChatGPT, you can speed up your Sitecore projects even further. ChatGPT is a natural language processing (NLP) tool that uses machine learning to generate Sitecore MVC and Nextjs code. Simply input your desired functionality and ChatGPT will generate the code for you.
 
 ## How ChatGPT Works

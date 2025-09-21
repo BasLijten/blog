@@ -1,16 +1,16 @@
 ---
-title: "Sitecore Security #1: How to replace the password hashing algorithm"
-date: "2016-05-02"
-categories: 
-  - "security"
-  - "sitecore"
-tags: 
-  - "algorithm"
-  - "hashing"
-  - "password"
-  - "security"
-  - "sitecore"
-img: "./images/2016-04-30_14-30-22.png"
+title: 'Sitecore Security #1: How to replace the password hashing algorithm'
+date: '2016-05-02'
+categories:
+  - 'security'
+  - 'sitecore'
+tags:
+  - 'algorithm'
+  - 'hashing'
+  - 'password'
+  - 'security'
+  - 'sitecore'
+img: './images/2016-04-30_14-30-22.png'
 ---
 
 Let’s face it: It’s a business nowadays to hack sites, retrieve personal information and sell them on the black markets, think of usernames, passwords, credit card details and-so-on. Often, this data is stolen using SQL injection attacks, which _may_ be possible to your Sitecore site as well, thus, it’s better to be safe than sorry. As Sitecore ships with an old hashing algorithm to handle Sitecore users login, it’s time to replace the hashing algorithm as well. When having a fresh installation, this isn’t much of an issue, but for existing installations, you will face the challenge on upgrading your existing users, because the password hashing algorithm will be changed. This blogpost will show how to upgrade the hashing algorithm, describe those challenges, and tell you how to increase your Sitecore security.
@@ -53,7 +53,7 @@ Another option was to deploy the new hashing algorithms to Sitecore. It turned o
 
 The company “[Zetetic](https://www.zetetic.net/)” created the [.net versions of these algorithms](https://www.nuget.org/packages/Zetetic.Security) which can be used within your application. Before this algorithm can be used, these have to be registered first. I chose to do this in the initialization pipeline of Sitecore with just a single line of code:
 
-This line of code will make the hashing algorithm available for use in the membership configuration section of Sitecore. Change the “SHA1” hashAlgorithmType to “pbkdf2\_local” and you’re good to go. Except for one small issue: due to the change of the algorithm, no one will be able to login anymore.
+This line of code will make the hashing algorithm available for use in the membership configuration section of Sitecore. Change the “SHA1” hashAlgorithmType to “pbkdf2_local” and you’re good to go. Except for one small issue: due to the change of the algorithm, no one will be able to login anymore.
 
 ## Resetting the admin password
 
@@ -71,8 +71,6 @@ Another part is to increase the password policy, as the out of the box is pretty
 - **passwordAttemptWindow:             10**
 - **minRequiredPasswordLength             12**
 - **minRequiredNonAlphanumericCharacters 2**
-
- 
 
 A better approach would be to use the following regular expression (**passwordStrengthRegularExpression**) which forces the passwords to have at least an upper case, lower case, one number and a special sign in your password:
 

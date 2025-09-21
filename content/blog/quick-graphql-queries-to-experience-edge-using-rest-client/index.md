@@ -1,15 +1,15 @@
 ---
-title: "A small productivity boost: create parameterized Graphql queries to Experience Edge or XM/XP using the vscode rest client plugin"
-date: "2024-03-16"
-category: 
-- "Graphql"
-- "Experience Edge"
-description: "A quick productivity boost: GraphQL queries with the vscode REST Client extension"
+title: 'A small productivity boost: create parameterized Graphql queries to Experience Edge or XM/XP using the vscode rest client plugin'
+date: '2024-03-16'
+category:
+  - 'Graphql'
+  - 'Experience Edge'
+description: 'A quick productivity boost: GraphQL queries with the vscode REST Client extension'
 img: ./images/header.png
 tags:
-- "grpahql"
-- "experience edge"
-- "sitecore"
+  - 'grpahql'
+  - 'experience edge'
+  - 'sitecore'
 ---
 
 When building for Sitecore Experience Edge, or Sitecore XM/XP using the one of the graphQL queries, it often is mandatory to find out what kind of data the queries returned to the client. While there is an excellent IDE available to build and test queries, it is often a hassle to copy, paste and modify the queries, copy over the api-keys and, in my case, finding the right url's to work with. For XP and XM environments, these paths are diffent in comparison to the Experience Edge environment. THis blogpost explains how I use the REST Client extension in vscode to quickly test and modify graphQL queries.
@@ -36,6 +36,7 @@ query {
     }
 }
 ```
+
 When the extension is installed correctly, a small action button with the text `Send Request` will appear below the name:
 
 ![Send Request](./images/rest-client-extension.png)
@@ -52,12 +53,12 @@ Various approaches are feasable here: you can use the `settings.json` file to st
 
 Let's take a look at the query above, but now with variables. When wanting to work with queries which work on XM/XP and Experience Edge, there are a few parameters which are different:
 
-parameter | Experience Edge | var-location | XM/XP | var-location
---- | --- | --- | --- | ---
-hostname | https://edge.sitecorecloud.io | `settings.json` | any hostname | `settings.json`
-path | `/api/graphql/v1` | `settings.json` | `/sitecore/api/graph/edge/` | `settings.json`
-apikey | secret, env-specific | local machine | secret, env-specific | local machine
-SITECORE_SITE_NAME | same, but different over projects | `dotenv` | same, but different over projects | `dotenv`
+| parameter          | Experience Edge                   | var-location    | XM/XP                             | var-location    |
+| ------------------ | --------------------------------- | --------------- | --------------------------------- | --------------- |
+| hostname           | https://edge.sitecorecloud.io     | `settings.json` | any hostname                      | `settings.json` |
+| path               | `/api/graphql/v1`                 | `settings.json` | `/sitecore/api/graph/edge/`       | `settings.json` |
+| apikey             | secret, env-specific              | local machine   | secret, env-specific              | local machine   |
+| SITECORE_SITE_NAME | same, but different over projects | `dotenv`        | same, but different over projects | `dotenv`        |
 
 When using the variables, the query would look as follows:
 
@@ -88,20 +89,19 @@ My `settings.json` looks as follows:
 
 ```json
 {
-    "rest-client.environmentVariables": {
-        "$shared": {        
-        },
-        "xp": {
-            "hostname": "https://xp.local",
-            "path": "/sitecore/api/graph/edge/",
-            "apikey": "XPSECRET"
-        },
-        "edge": {
-            "hostname": "https://edge.sitecorecloud.io",
-            "path": "/api/graphql/v1",
-            "apikey": "EXPERIENCEEDGE"
-        }
+  "rest-client.environmentVariables": {
+    "$shared": {},
+    "xp": {
+      "hostname": "https://xp.local",
+      "path": "/sitecore/api/graph/edge/",
+      "apikey": "XPSECRET"
+    },
+    "edge": {
+      "hostname": "https://edge.sitecorecloud.io",
+      "path": "/api/graphql/v1",
+      "apikey": "EXPERIENCEEDGE"
     }
+  }
 }
 ```
 
@@ -109,9 +109,8 @@ Per environment, I maintain a separate configuration. The apikey refers to the l
 
 The combination `CTRL+ALT-E` is the shortcut to switch between environments. Every configured environment is shown in the dropdown:
 
-![Switch environment](./images/switch-environments.png)	
+![Switch environment](./images/switch-environments.png)
 
 ### Conlcusion
 
 Using the rest-client, you can store common queries in git and by using variables, you can easily switch between environments. This is a great productivity boost, as you can quickly test and modify queries. The auto-completion for the variables is a great feature, as it helps you to quickly build queries. When making use of the environment variables, it is even secure, as the secrets won't show up in git.
-

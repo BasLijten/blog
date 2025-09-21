@@ -1,11 +1,11 @@
 ---
-title: "Sitecore on Azure: Create custom web deploy packages using the Sitecore Azure Toolkit"
-date: "2016-12-11"
-categories: 
-  - "azure"
-  - "deployment"
-  - "sitecore"
-img: "./images/Toolkit.jpg"
+title: 'Sitecore on Azure: Create custom web deploy packages using the Sitecore Azure Toolkit'
+date: '2016-12-11'
+categories:
+  - 'azure'
+  - 'deployment'
+  - 'sitecore'
+img: './images/Toolkit.jpg'
 ---
 
 In my previous blogpost I described how the Sitecore Azure Toolkit works and how to create web deploy packages. In this this blogpost I’ll explain how to create your own web deploy package configurations which can be used on Azure and on-premises, even with Sitecore versions older than Sitecore 8.2 update 1. You can apply role specific configurations, or add custom modules like Coveo, PowerShell Extensions, Unicorn, or even one you package up. Using these techniques will help you establish a repeatable process with standard tooling leading to decreased deployment time. How cool would it be to have Continuous Delivery and Deployment all the way to production?! I’ll demonstrate in an example, Sitecore PowerShell Extensions, how to work towards a continuous delivery process. As a bonus I’ll package Unicorn as well – future posts will depend on this example so why not tackle them now.
@@ -24,7 +24,7 @@ The current Azure toolkit, provided ARM templates, and web deploy packages allow
 
 There is one “grey” area: Sitecore modules in this Foundational layer.
 
-I truly believe that when you are deploying your projects, you should clear the complete web application site root_,_ redeploy the foundational modules, the features and on top of that the projects. A big challenge with this approach however includes the following:
+I truly believe that when you are deploying your projects, you should clear the complete web application site root*,* redeploy the foundational modules, the features and on top of that the projects. A big challenge with this approach however includes the following:
 
 How should Sitecore module packages be deployed? The use of web deploy packages does not include installation modules such as Sitecore PowerShell Extensions, Coveo, WFFM.
 
@@ -79,7 +79,7 @@ I want the the remoting service Enabled and requireSecureConnection to be config
 
 ### The XDT
 
-Inside the BasLijten.PowerShellExtensions folder, create a folder called “XDTS”. To apply an XDT to a patch file simply recreate the same folder/file structure to that file. In this case, the patch file resides at the location “App\_Config\\Include\\Cognifide.PowerShell.Config”. This means that the _same_ folder structure in the XDTS folder needs to be created. To be able to apply the XDT transformation to “Cognifide.PowerShell.Config”, the file “Cognifide.PowerShell.Config.xdt” has to be created in that folder. The transformation will be applied automatically after creating the WDP. For the sake of completeness, this is the XDT that I used:
+Inside the BasLijten.PowerShellExtensions folder, create a folder called “XDTS”. To apply an XDT to a patch file simply recreate the same folder/file structure to that file. In this case, the patch file resides at the location “App*Config\\Include\\Cognifide.PowerShell.Config”. This means that the \_same* folder structure in the XDTS folder needs to be created. To be able to apply the XDT transformation to “Cognifide.PowerShell.Config”, the file “Cognifide.PowerShell.Config.xdt” has to be created in that folder. The transformation will be applied automatically after creating the WDP. For the sake of completeness, this is the XDT that I used:
 
 <script src="https://gist.github.com/BasLijten/7b4e6085c2c664f14ce4bd446f14c2cf.js"></script>
 

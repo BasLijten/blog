@@ -1,27 +1,27 @@
 ---
-title: "To Elastic pool or not to elastic Pool for Sitecore on Azure"
-date: "2019-04-14"
-categories: 
-  - "azure"
-  - "azure-sql"
-  - "sitecore"
-tags: 
-  - "azure"
-  - "azure-sql"
-  - "paas"
-img: "./images/image-20.png"
+title: 'To Elastic pool or not to elastic Pool for Sitecore on Azure'
+date: '2019-04-14'
+categories:
+  - 'azure'
+  - 'azure-sql'
+  - 'sitecore'
+tags:
+  - 'azure'
+  - 'azure-sql'
+  - 'paas'
+img: './images/image-20.png'
 ---
 
-In the Sitecore #azure [slack channel](https://sitecorechat.slack.com) there are often discussions about pricing, scaling and performance. A common best practice which is shared in this channel is the use of Elastic Pools for your SQL databases. In this article I our findings, how you can compute the costs for elastic pools and how it will affect performance, as opposed to the default Sitecore ARM templates.  
-  
-PS: the costs I share are all retrieved from the [Azure pricing calculator](https://azure.microsoft.com/en-us/pricing/calculator/?devtest=true&service=sql-database) and are not actual prices from my company – I will _never_ share these.  
-  
+In the Sitecore #azure [slack channel](https://sitecorechat.slack.com) there are often discussions about pricing, scaling and performance. A common best practice which is shared in this channel is the use of Elastic Pools for your SQL databases. In this article I our findings, how you can compute the costs for elastic pools and how it will affect performance, as opposed to the default Sitecore ARM templates.
+
+PS: the costs I share are all retrieved from the [Azure pricing calculator](https://azure.microsoft.com/en-us/pricing/calculator/?devtest=true&service=sql-database) and are not actual prices from my company – I will _never_ share these.
+
 This blogpost is a part of [these blogpost series](https://blog.baslijten.com/sitecore-on-azure-design-considerations-to-be-more-cost-efficient-and-have-more-performance/)
 
 ## Total costs of Sitecore databases on Azure Paas
 
-The exact amount of costs depends on the way how the Sitecore environment has been scaled. In [_default Sitecore tiers_](https://kb.sitecore.net/articles/043375) different combinations of isolated SQL databases have been used, which result in the following Pay-as-you-go costs. At the moment that there will be a requirement on “automatic failover, geo replication” or whatsoever, the default setup does not meet these requirements and will effectively lead to a double in SQL costs, which wouldn’t be a major problem for the XM setup, but will lead to a significantly increase of costs for the XP setup.  
-  
+The exact amount of costs depends on the way how the Sitecore environment has been scaled. In [_default Sitecore tiers_](https://kb.sitecore.net/articles/043375) different combinations of isolated SQL databases have been used, which result in the following Pay-as-you-go costs. At the moment that there will be a requirement on “automatic failover, geo replication” or whatsoever, the default setup does not meet these requirements and will effectively lead to a double in SQL costs, which wouldn’t be a major problem for the XM setup, but will lead to a significantly increase of costs for the XP setup.
+
 Below are the costs for the XP/XM single and large workloads, following the [Sitecore recommendations](https://kb.sitecore.net/articles/043375)
 
 <table class="wp-block-table"><tbody><tr><td>tier</td><td>Single XP</td><td>Large tier XP</td><td>Single XM</td><td>Large tier XM</td></tr><tr><td>Costs</td><td>198,56</td><td>1167,-</td><td>86,-</td><td>136,53</td></tr></tbody></table>
@@ -32,11 +32,11 @@ While Sitecore’s default setup offers isolated databases, a lot of people move
 
 ### An analysis of a workload running in production
 
-In this overview I’ll show a roll up of the DTU consumption of databases during the last week of last year and first week of this year on an environment that had quite some load. Please not that we didn’t use forms and that we didn’t enable the analytics on the Content Delivery servers, so this might give a distorted view in comparison with_your_ environment, but it helped _us_ to scale our environment delivery to save a serious amount of money:
+In this overview I’ll show a roll up of the DTU consumption of databases during the last week of last year and first week of this year on an environment that had quite some load. Please not that we didn’t use forms and that we didn’t enable the analytics on the Content Delivery servers, so this might give a distorted view in comparison with*your* environment, but it helped _us_ to scale our environment delivery to save a serious amount of money:
 
 ![](images/image-3.png)
 
-rollup of database resource consumption for a production workload - Learn how to create your own overview here  
+rollup of database resource consumption for a production workload - Learn how to create your own overview here
 
 Legend:
 
@@ -55,8 +55,8 @@ This simple overview gives a lot of valuable insights:
 
 ### A solution: Move databases to the elastic pool
 
-While there was an overcommitment, some databases still didn’t cut it. Using an elastic pool is an excellent solution for these problems. As we were just consuming 82 DTU at max, the move to a 100DTU elastic pool is quite interesting: while the total costs for a single instance isolated database setup are EUR 199,-, the large production workload costed us around EUR 430,- (we didn’t scale shard0 and shard1 to P1, as we didn’t use the xconnect services too much yet).  
-  
+While there was an overcommitment, some databases still didn’t cut it. Using an elastic pool is an excellent solution for these problems. As we were just consuming 82 DTU at max, the move to a 100DTU elastic pool is quite interesting: while the total costs for a single instance isolated database setup are EUR 199,-, the large production workload costed us around EUR 430,- (we didn’t scale shard0 and shard1 to P1, as we didn’t use the xconnect services too much yet).
+
 By moving to a 100 DTU elastic pool, the costs could have been reduced to 186,-, according to the azure pricing calculator.
 
 ### The downside of a single elastic pool
@@ -79,8 +79,8 @@ The DTU-based model basically is a linear combination between computing power an
 
 DTU model vs the vCore model
 
-The general rule of thumb: Each 100 DTU in the standard tier requires at least 1 vCore in the general purpose tier. More info on these model can be found [here](https://docs.microsoft.com/nl-nl/azure/sql-database/sql-database-purchase-models#understanding-dtus).  
-  
+The general rule of thumb: Each 100 DTU in the standard tier requires at least 1 vCore in the general purpose tier. More info on these model can be found [here](https://docs.microsoft.com/nl-nl/azure/sql-database/sql-database-purchase-models#understanding-dtus).
+
 When applying this model on the information that we just have analysed, a choice could be made for a 1vCore general purpose setup. When bringing own licenses _and_ reserving resources for the next three years, it could bring the price down to just 46,- in a Gen 4 setup or 92,- for 2 vCores in a Gen 5 setup. Looking back at the estimated costs, that is a reduction for every workload!
 
 ![](images/image-5.png)

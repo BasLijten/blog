@@ -1,21 +1,21 @@
 ---
-title: "how to use YARP as an ingress controller in Kubernetes in Docker Desktop (KinD) on Windows 11"
-date: "2023-09-15"
-category: 
-- "Kubernetes"
-- "docker"
-- "containers"
-- "Yarp"
-description: "A simple guide to get the Yarp ingress controller to work in Kubernetes in Docker (KinD)"
+title: 'how to use YARP as an ingress controller in Kubernetes in Docker Desktop (KinD) on Windows 11'
+date: '2023-09-15'
+category:
+  - 'Kubernetes'
+  - 'docker'
+  - 'containers'
+  - 'Yarp'
+description: 'A simple guide to get the Yarp ingress controller to work in Kubernetes in Docker (KinD)'
 img: ./images/yarp.png
 tags:
-- "Kubernetes"
-- "docker"
-- "containers"
-- "Yarp"
+  - 'Kubernetes'
+  - 'docker'
+  - 'containers'
+  - 'Yarp'
 ---
 
-In my [previous blogpost](../why-to-choose-yarp-for-a-sitecore-migration/) I described why I am considering to use this [Yarp](https://microsoft.github.io/reverse-proxy/) (Yet another Reverse Proxy) (and a reverse proxy in general) instead of more standard ingress-controllers like HAProxy, Nginx or Traefik for a websites migration usecase. In this blogpost I will explain how I got it to work with Kubernetes in Docker Desktop (KinD).  While it is a very accessible and fast way to run Kubernetes on your local machine, it is not always easy to get things to work. Easy for more people who are experienced with Docker and Kubernetes, but for me it was a real discovery tour.
+In my [previous blogpost](../why-to-choose-yarp-for-a-sitecore-migration/) I described why I am considering to use this [Yarp](https://microsoft.github.io/reverse-proxy/) (Yet another Reverse Proxy) (and a reverse proxy in general) instead of more standard ingress-controllers like HAProxy, Nginx or Traefik for a websites migration usecase. In this blogpost I will explain how I got it to work with Kubernetes in Docker Desktop (KinD). While it is a very accessible and fast way to run Kubernetes on your local machine, it is not always easy to get things to work. Easy for more people who are experienced with Docker and Kubernetes, but for me it was a real discovery tour.
 
 ## Setup
 
@@ -31,28 +31,28 @@ nodes:
 - role: worker
 ```
 
-I learned quickly that on the windows ecosystem, the kubernetes cluster is not accessible from the host machine. While this might be solved with port-forwarding, this is not the most convenient solution. This is where exposing the ingress-controller comes in. By forwarding ports from  the host to an ingress controller, the services behind it can easily be accessed via the ingress controller. The kind [user guide for ingress](https://kind.sigs.k8s.io/docs/user/ingress/) has three examples on how to do this with Contour, Kong and NGINX, but not with Yarp. To be sure that the examples worked, the NGNIX example was tested, and indeed, it worked. A small change to the multi-node cluster configuration, was required, though:
+I learned quickly that on the windows ecosystem, the kubernetes cluster is not accessible from the host machine. While this might be solved with port-forwarding, this is not the most convenient solution. This is where exposing the ingress-controller comes in. By forwarding ports from the host to an ingress controller, the services behind it can easily be accessed via the ingress controller. The kind [user guide for ingress](https://kind.sigs.k8s.io/docs/user/ingress/) has three examples on how to do this with Contour, Kong and NGINX, but not with Yarp. To be sure that the examples worked, the NGNIX example was tested, and indeed, it worked. A small change to the multi-node cluster configuration, was required, though:
 
 ```yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
-- role: control-plane
-  kubeadmConfigPatches:
-  - |
-    kind: InitConfiguration
-    nodeRegistration:
-      kubeletExtraArgs:
-        node-labels: "ingress-ready=true"
-  extraPortMappings:
-  - containerPort: 80
-    hostPort: 80
-    protocol: TCP
-  - containerPort: 443
-    hostPort: 443
-    protocol: TCP
-- role: worker
-- role: worker
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "ingress-ready=true"
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
+  - role: worker
+  - role: worker
 ```
 
 ## Ingress example based on NGINX
@@ -132,9 +132,9 @@ kubectl apply -f ./samples/KubernetesIngress.Sample/Combined/ingress-controller.
 
 ## Happy Ingress!
 
-YOU WISH! While the ingress controller is running, it is not accesible from the host, at this point. Various actions are needed to solve this. Following the ingress guide, the control-plane had a node-label ```node-labels: "ingress-ready=true"``` and through the ```extraPortMappings``` property, the ports 80 and 443 were exposed. This would make the ingress controller accessible from the host machine.
+YOU WISH! While the ingress controller is running, it is not accesible from the host, at this point. Various actions are needed to solve this. Following the ingress guide, the control-plane had a node-label `node-labels: "ingress-ready=true"` and through the `extraPortMappings` property, the ports 80 and 443 were exposed. This would make the ingress controller accessible from the host machine.
 
-After deploying the yarp-controller, it showed up on one of the workers. With an exposed port on the controle-plane, this was never going to work. As I expected that the node-label ```node-labels: "ingress-ready=true"``` was used to be able to push the nginx controller to the controle-plane, I decided to look at the [nginx definition for kind](https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml) - which is a bit overwhelming for me -. I, indeed, found the "ingress-ready" as a node-selector:
+After deploying the yarp-controller, it showed up on one of the workers. With an exposed port on the controle-plane, this was never going to work. As I expected that the node-label `node-labels: "ingress-ready=true"` was used to be able to push the nginx controller to the controle-plane, I decided to look at the [nginx definition for kind](https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml) - which is a bit overwhelming for me -. I, indeed, found the "ingress-ready" as a node-selector:
 
 ```yaml{22}
 apiVersion: apps/v1
@@ -160,23 +160,23 @@ spec:
       nodeSelector:
         ingress-ready: "true"
         kubernetes.io/os: linux
-      serviceAccountName: ingress-nginx      
+      serviceAccountName: ingress-nginx
 ```
 
-Applying that node-selector to the yarp-controller definition didn't work out. Using the command ```kubectl -n yarp describe pod ingress-yarp-5b89978cfd-znzs2``` I found out that the Pod couldn't be deployed due to the following error message:
+Applying that node-selector to the yarp-controller definition didn't work out. Using the command `kubectl -n yarp describe pod ingress-yarp-5b89978cfd-znzs2` I found out that the Pod couldn't be deployed due to the following error message:
 
 > **0/3 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }, 2 node(s) didn't match Pod's node affinity/selector. preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling..**
 
-Luckily, the nginx definition helped out, as it had the ```toleration``` set for the control-plane:
+Luckily, the nginx definition helped out, as it had the `toleration` set for the control-plane:
 
 ```yaml
 tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Equal
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/control-plane
-        operator: Equal
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Equal
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Equal
 ```
 
 After adding this configuration to the definition, the deployment succeeded succesfully. But there was still no working situation. After closely comparing the the contour, kong and nginx definitions with the yarp definition, it turned out that a small detail was overlooked:
@@ -197,10 +197,10 @@ After adding this configuration to the definition, the deployment succeeded succ
           protocol: TCP
 ### YARP
 ports:
-        - containerPort: 8000          
+        - containerPort: 8000
           name: proxy
           protocol: TCP
-        - containerPort: 8443          
+        - containerPort: 8443
           name: proxy-ssl
           protocol: TCP
 ```
@@ -217,7 +217,7 @@ While the root redirect worked, the /bar and /foo redirects didn't give a result
 
 ![](./images/request-bar-failed.png)
 
-a route pattern for ```/{**catch-all}``` was found, but, apparently, not the required pattern for /foo and /bar. Looking closely at the spec below (the file was modified a bit for the root based redirect and the IngressClassName), the only redenation could be that yarp didn't support regex based paths.
+a route pattern for `/{**catch-all}` was found, but, apparently, not the required pattern for /foo and /bar. Looking closely at the spec below (the file was modified a bit for the root based redirect and the IngressClassName), the only redenation could be that yarp didn't support regex based paths.
 
 ```yaml{6,13,20}
 apiVersion: networking.k8s.io/v1
@@ -254,7 +254,7 @@ spec:
               number: 80
 ```
 
-Funny enough, ```curl "http://localhost/foo(/|$)(.*)"``` leads to a succesful result. Totally unexpected, but it brought me one step closer to the final solution. The question remained: If the regular expression didn't work, what would work?
+Funny enough, `curl "http://localhost/foo(/|$)(.*)"` leads to a succesful result. Totally unexpected, but it brought me one step closer to the final solution. The question remained: If the regular expression didn't work, what would work?
 
 ## Route matches in Yarp
 
@@ -265,38 +265,38 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: minimal-ingress
-  annotations: 
+  annotations:
     yarp.ingress.kubernetes.io/transforms: |
       - PathPattern: "/{**catch-all}"
 spec:
   ingressClassName: yarp
   rules:
-  - http:
-      paths:      
-      - pathType: Prefix
-        path: /foo
-        backend:
-          service:
-            name: foo-service
-            port:
-              number: 8080
-      - pathType: Prefix
-        path: /bar
-        backend:
-          service:
-            name: bar-service
-            port:
-              number: 8080
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: backend
-            port:
-              number: 80
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /foo
+            backend:
+              service:
+                name: foo-service
+                port:
+                  number: 8080
+          - pathType: Prefix
+            path: /bar
+            backend:
+              service:
+                name: bar-service
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
 ```
 
-the Prefix implementation automatically catches the part after the path in a ```{**catchAll}``` token. This token can be used in the transformation, as seen in the annotation. *After* the match has been applied, the request to the target service will be rewritten. In this case, the Path is omitted and only the ```{**catch-al}``` is added to the request (as part of the PathPattern transformation).
+the Prefix implementation automatically catches the part after the path in a `{**catchAll}` token. This token can be used in the transformation, as seen in the annotation. _After_ the match has been applied, the request to the target service will be rewritten. In this case, the Path is omitted and only the `{**catch-al}` is added to the request (as part of the PathPattern transformation).
 
 This will result in the following results:
 
@@ -306,8 +306,4 @@ This will result in the following results:
 
 ## Summary
 
-While it was a bit of a struggle to get this to work, it was a very interesting journey. Yarp *can* be run as an ingress-controller on Kubernetes, there is even code for it in their repo. By making some slight modifications to the ingress-controller definition, I managed to get it to run on Kubernetes in Docker Desktop, which will enable me to do some additional research on my migration project :D. I am not sure if this setup is production ready, as little to no activity can be found on the web, but I'll get in touch with the maintainers to find out about that.
-
-
-
-
+While it was a bit of a struggle to get this to work, it was a very interesting journey. Yarp _can_ be run as an ingress-controller on Kubernetes, there is even code for it in their repo. By making some slight modifications to the ingress-controller definition, I managed to get it to run on Kubernetes in Docker Desktop, which will enable me to do some additional research on my migration project :D. I am not sure if this setup is production ready, as little to no activity can be found on the web, but I'll get in touch with the maintainers to find out about that.

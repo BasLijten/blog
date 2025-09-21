@@ -1,10 +1,10 @@
 ---
-title: "Use the Sitecore Azure toolkit to deploy your on premises environment"
-date: "2016-12-13"
-categories: 
-  - "azure"
-  - "deployment"
-  - "sitecore"
+title: 'Use the Sitecore Azure toolkit to deploy your on premises environment'
+date: '2016-12-13'
+categories:
+  - 'azure'
+  - 'deployment'
+  - 'sitecore'
 ---
 
 Let’s face it: a lot of customers won’t deploy to Azure immediately, but will have a migration to Azure on their roadmap for the next year. It’s wise prepare as much as possible to make the transition smooth. This blogpost shows off how what the differences between the current Azure and classic on-premises are and how to create custom web deploy packages for your on premise environments, to be in line with a possible future upgrade to Azure. It will make your local deployments repeatable while making use of Microsoft standards. Additional advantage: Your (initial) deployments may happen faster!
@@ -15,7 +15,7 @@ See the video below where I explained what I did
 
 # The biggest difference between classic deployments and Azure
 
-In classic deployments we do recognize the /data, /database and /website folders in the root of IIS. This choice was made in the past to be sure to keep the /data folder not accessible via IIS. In Azure, however, this is not possible: the choice has been made to move this /data folder into the /App\_data. This will also be the “new” location of your license.xml. Some 3rd party modules, such as Unicorn, also have their data-storage in /data, these should be moved to /App\_data as well.
+In classic deployments we do recognize the /data, /database and /website folders in the root of IIS. This choice was made in the past to be sure to keep the /data folder not accessible via IIS. In Azure, however, this is not possible: the choice has been made to move this /data folder into the /App_data. This will also be the “new” location of your license.xml. Some 3rd party modules, such as Unicorn, also have their data-storage in /data, these should be moved to /App_data as well.
 
 # Preparations: Create dacpac files for your databases
 
@@ -48,17 +48,17 @@ As this will be a web deploy package used for on premise deployments, no cloud c
 The first step is to create  a new cargo payload which contains the DACPAC files, the SQL script to set the admin password, the patchfile for the datafolder and the license.xml. With the ARM templates in Azure this license.xml can be provisioned, but I didn’t find a way to dynamically include this license.xml in web deploy packages yet. A cargo payload with the following files and structure has to be created:
 
 - CopyToRoot
-    - Core.dacpac
-    - Web.dacpac
-    - Master.dacpac
-    - Reporting.dacpac
-    - sql
+  - Core.dacpac
+  - Web.dacpac
+  - Master.dacpac
+  - Reporting.dacpac
+  - sql
 - CoptyToWebsite
-    - App\_Config
-        - Include
-            - config (with \\App\_data as datafolder)
-        - App\_Data
-            - xml
+  - App_Config
+    - Include
+      - config (with \\App_data as datafolder)
+    - App_Data
+      - xml
 
 Run the New-SCCargoPayload command to create the sccpl and you’re good to go.
 

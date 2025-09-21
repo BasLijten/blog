@@ -1,13 +1,13 @@
 ---
-title: "Test and demo environments in an instant: How to pre-provision content to the master and web database in Sitecore containers in 5 simple steps"
-date: "2020-12-29"
-categories: 
-  - "container"
-  - "containers"
-  - "devops"
-  - "docker"
-  - "sitecore"
-img: "./images/image-10.png"
+title: 'Test and demo environments in an instant: How to pre-provision content to the master and web database in Sitecore containers in 5 simple steps'
+date: '2020-12-29'
+categories:
+  - 'container'
+  - 'containers'
+  - 'devops'
+  - 'docker'
+  - 'sitecore'
+img: './images/image-10.png'
 ---
 
 In our company, we use Unicorn for content serialization, in order to be able to deploy “applicative” content like templates across our environments. For dev and test, we also provide content that we use for regression testing in these environments; we don’t (want to) sync our production content to these environments. We also had the wish to spin up environments upon request, with all of this content available in an instant, for example to validate pull requests. With 20000 yml files, the synchronization process takes at least 45 minutes: this takes way too long for a fast regression test and doesn’t fit in a fast “shift left” strategy. With the introduction of containers, things have changed, as full pre-provisioned environments can be spinned up in literally minutes.
@@ -60,7 +60,7 @@ This uncovered the secrets behind the DeployDatabases.ps1 (more secrets are reve
 
 The script iterates through all \*.dacpac files in the specified _Resources_ directory, the one that is specified as resourcesDirectory in the RUN command in your Dockerfile.
 
-Foreach dacpac, the fullname (sourceFile) and the basename is extracted (lines 100-103). The interesting part happens at line 116: using the sqlPackage command, the sourceFile is applied on the database which contains the name of your dacpac file. What does this mean? Let’s say you have the a dacpac located in “c:\\jss\_data\\Sitecore.Master.dacpac”, then this file will be applied to an already existing “Sitecore.Master” database.
+Foreach dacpac, the fullname (sourceFile) and the basename is extracted (lines 100-103). The interesting part happens at line 116: using the sqlPackage command, the sourceFile is applied on the database which contains the name of your dacpac file. What does this mean? Let’s say you have the a dacpac located in “c:\\jss_data\\Sitecore.Master.dacpac”, then this file will be applied to an already existing “Sitecore.Master” database.
 
 _Of course, this technique of using dacpac is not new, as it has been used for ages by Sitecore in their Web Deployment Packages (for use in conjunction with, for example, azure), but there is one difference:In the “Azure” or “On premise” scenario, the perquisite is that there is already a running infrastructure: at least a webserver needs to be configured and Sql needs to be setup as well. When you would spin up a new, fresh environment, this would require to setup a new fresh webserver and a fresh new set of databases, which do cost (a lot) of time. In this case with containers, the actual data gets embedded into the docker image, the only thing that is required, is that the image is pulled and you’re good to go._
 
@@ -108,7 +108,7 @@ The large project that was used as crash test dummy, has the following structure
 
 ![](images/image-4.png)
 
-The server folder contains all the Sitecore code _and_ serialized content, the docker-folder contains the dockerfiles for every role. Hence, the “./server” folder was used as target and “./docker/build/mssql/data/” as output folder.  
+The server folder contains all the Sitecore code _and_ serialized content, the docker-folder contains the dockerfiles for every role. Hence, the “./server” folder was used as target and “./docker/build/mssql/data/” as output folder.
 
 This resulted in the following output:
 

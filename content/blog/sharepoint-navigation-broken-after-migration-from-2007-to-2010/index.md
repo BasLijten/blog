@@ -1,9 +1,9 @@
 ---
-title: "SharePoint Navigation broken after migration from 2007 to 2010"
-date: "2011-07-06"
-categories: 
-  - "sharepoint"
-  - "sharepoint-2010"
+title: 'SharePoint Navigation broken after migration from 2007 to 2010'
+date: '2011-07-06'
+categories:
+  - 'sharepoint'
+  - 'sharepoint-2010'
 ---
 
 When migrating from SharePoint 2007 to SharePoint 2010, it might be possible that your navigation is broken. The error I encountered was the following, but it can occur in more functions within the Navigation namespace.

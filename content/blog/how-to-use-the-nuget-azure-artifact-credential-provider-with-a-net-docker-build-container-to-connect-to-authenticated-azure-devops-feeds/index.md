@@ -1,12 +1,12 @@
 ---
-title: "How to use the Nuget / Azure Artifact credential provider with a .net docker build container to connect to authenticated Azure DevOps feeds"
-date: "2020-08-14"
-categories: 
-  - "sitecore"
-img: "./images/header.png"
+title: 'How to use the Nuget / Azure Artifact credential provider with a .net docker build container to connect to authenticated Azure DevOps feeds'
+date: '2020-08-14'
+categories:
+  - 'sitecore'
+img: './images/header.png'
 ---
 
-This blogpost describes how to add the Azure Artifact nuget credential provider to a windows based docker container for building .Net (full framework) solutions, using authenticated Azure DevOps artifacts feeds. As I couldn’t find a feasible solution, I decided to write a quick guide on how to set this up. This blogpost makes use of the provided Dockerfile structure that Sitecore provides, but the learnings can be applied in any solution. In other words: this post is not tied to the Sitecore ecosystem. To skip immediately to the instructions, click [this link](#install "#install")
+This blogpost describes how to add the Azure Artifact nuget credential provider to a windows based docker container for building .Net (full framework) solutions, using authenticated Azure DevOps artifacts feeds. As I couldn’t find a feasible solution, I decided to write a quick guide on how to set this up. This blogpost makes use of the provided Dockerfile structure that Sitecore provides, but the learnings can be applied in any solution. In other words: this post is not tied to the Sitecore ecosystem. To skip immediately to the instructions, click [this link](#install '#install')
 
 _Note: It has been a while that I was really, really, really enthusiastic about a new release of Sitecore, but this Sitecore 10 release, it’s just: WOW. Sitecore has finally put an enormous effort into making new(ish) technology, such as containers, .net core, real CI/CD, command line automation available to their developers. That, together with the new, supported, serialization solution, Sitecore made a giant leap towards a complete, modern developer experience. This blogpost describes how a private Azure Devops Artififact nuget feed can be used in conjunction with the Sitecore Docker setup._
 
@@ -28,7 +28,7 @@ It's clear that this feed needs credentials, and in this case, nuget tries to op
 
 ## How to use the Nuget / Azure Artifact Credential Provider
 
-First of all, the Azure Artifact Credential Provider needs to be installed. It will be installed in a plugin directory and will automatically be detected by Nuget. In order to use this credential provider, for an unattended use of an azure artifacts feed, the VSS\_NUGET\_EXTERNAL\_FEED\_ENDPOINTS environment variable needs to be set to contain the following data:
+First of all, the Azure Artifact Credential Provider needs to be installed. It will be installed in a plugin directory and will automatically be detected by Nuget. In order to use this credential provider, for an unattended use of an azure artifacts feed, the VSS_NUGET_EXTERNAL_FEED_ENDPOINTS environment variable needs to be set to contain the following data:
 
 ![](images/image-1.png)
 
@@ -51,13 +51,13 @@ After this action, select “Read” under packaging: Read & write could be sele
 The following actions need to be taken:
 
 - Download and Install the Azure Artifacts Credential Provider
-    - Make sure it works with .Net full framework!
+  - Make sure it works with .Net full framework!
 - Configure your solution to work with the environment variable
 - Make the access token configurable
 
 ## Install the Azure Artifacts Credential Provider
 
-_Note: this step can be skipped if you are using the mcr.microsoft.com/dotnet/framework/sdk:4.8 Image as your build tool. For Sitecore users: this image is used within the Sitecore dotnetsdk. The plugin can be found at 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\NuGet\\Plugins\\' Please continue [here](#configure "#configure")_
+_Note: this step can be skipped if you are using the mcr.microsoft.com/dotnet/framework/sdk:4.8 Image as your build tool. For Sitecore users: this image is used within the Sitecore dotnetsdk. The plugin can be found at 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\NuGet\\Plugins\\' Please continue [here](#configure '#configure')_
 
 Open up the dockerfile for the dotnetsdk (under docker/build/dotnetsdk). Add the following lines after the installation of nuget:
 
@@ -67,25 +67,25 @@ _PLEASE make sure that the -AddNetfx switch is NOT omitted. It costed me 4 hours
 
 ## Configure your solution to work with the environment variable and make it configurable
 
-The dockerfile for your solution is probably in the root of your project. Add the following two lines after `“FROM ${BUILD_IMAGE} AS builder`”:
+The dockerfile for your solution is probably in the root of your project. Add the following two lines after `“FROM ${BUILD_IMAGE} AS builder`”:
 
 <script src="https://gist.github.com/BasLijten/1bdeecc52770fa0a8e5887ae7feae62d.js"></script>
 
-These two lines accept an argument from the docker-compose file (FEED\_ACCESSTOKEN) and adds that argument into the environment variable. please take not of the backticks as escape character. If the line was placed between single quotes, the environment variable wouldn't be replaced. As this is just and intermediate layer, the environment variable will not end up in the actual image
+These two lines accept an argument from the docker-compose file (FEED_ACCESSTOKEN) and adds that argument into the environment variable. please take not of the backticks as escape character. If the line was placed between single quotes, the environment variable wouldn't be replaced. As this is just and intermediate layer, the environment variable will not end up in the actual image
 
 In order to finalize all actions, just two more modifications are needed:
 
-1- In the docker-compose.override.yml, the FEED\_ACCESSTOKEN needs to be added for the solution:
+1- In the docker-compose.override.yml, the FEED_ACCESSTOKEN needs to be added for the solution:
 
 ![](images/image-4.png)
 
-2- add the FEED\_ACCESSTOKEN (your PAT) to the .env file.
+2- add the FEED_ACCESSTOKEN (your PAT) to the .env file.
 
 After executing these steps, execute the following command:
 
 `docker-compose build`
 
-If your builder image was changed, that one would be rebuilded, this should not be the case for the Sitecore users. Your solution image _will_ be rebuilded, as changes were made to supply the FEED\_ACCESSTOKEN and the VSS\_NUGET\_EXTERNAL\_FEED\_ENDPOINTS.
+If your builder image was changed, that one would be rebuilded, this should not be the case for the Sitecore users. Your solution image _will_ be rebuilded, as changes were made to supply the FEED_ACCESSTOKEN and the VSS_NUGET_EXTERNAL_FEED_ENDPOINTS.
 
 After the rebuild, your solution should have retrieved the nuget packages from your private azure artifacts repository!
 

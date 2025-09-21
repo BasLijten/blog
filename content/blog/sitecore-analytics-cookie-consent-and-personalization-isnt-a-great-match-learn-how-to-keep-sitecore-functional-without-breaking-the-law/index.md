@@ -1,19 +1,19 @@
 ---
-title: "Sitecore analytics, cookie consent and personalization isn’t a great match – learn how to keep Sitecore functional without breaking the law!"
-date: "2019-08-06"
-categories: 
-  - "personalization"
-  - "sitecore"
-tags: 
-  - "analytics"
-  - "cookie-consent"
-  - "personalization"
-  - "sitecore"
-img: "./images/image-5.png"
+title: 'Sitecore analytics, cookie consent and personalization isn’t a great match – learn how to keep Sitecore functional without breaking the law!'
+date: '2019-08-06'
+categories:
+  - 'personalization'
+  - 'sitecore'
+tags:
+  - 'analytics'
+  - 'cookie-consent'
+  - 'personalization'
+  - 'sitecore'
+img: './images/image-5.png'
 ---
 
-Due to different laws (European as well as local legislation) companies have be very conversative in how they process data, while they have to take care on how they track people. People have to consent whether or not they will be tracked or not. Within Siecore, you might do both. This blogpost shares how to use your cookie consent strategy within Sitecore. In short: There are three level of cookies: Functional, analytic and tracking cookies. Without responding to the cookie consent, Only functional cookies are allowed, while analytics and tracking cookies is forbidden until a user gives approval for these kinds of functionality. Within Sitecore, this is hard to implement, due to the internal workings of Sitecore analytics and (from what I think) Sitecore bug. This blogpost explains why this is hard and how to solve this.  
-  
+Due to different laws (European as well as local legislation) companies have be very conversative in how they process data, while they have to take care on how they track people. People have to consent whether or not they will be tracked or not. Within Siecore, you might do both. This blogpost shares how to use your cookie consent strategy within Sitecore. In short: There are three level of cookies: Functional, analytic and tracking cookies. Without responding to the cookie consent, Only functional cookies are allowed, while analytics and tracking cookies is forbidden until a user gives approval for these kinds of functionality. Within Sitecore, this is hard to implement, due to the internal workings of Sitecore analytics and (from what I think) Sitecore bug. This blogpost explains why this is hard and how to solve this.
+
 _PS: Different companies classify the Sitecore cookies under different levels. I have seen classifications of “Functional”, “Analytics” and “Tracking”. I won’t judge any choice, as I am not a person with a legal background and can’t judge on what all companies implement to prevent data from being collected. This is my personal view and the approach should be applicable to every level. This blogpost applies to Sitecore 9.X_
 
 # Too long; Didn’t Read
@@ -54,7 +54,7 @@ Whenever a user submits (personal) data, this data could be stored. A developer 
 
 When Sitecore analytics is enabled, the functionalities above are all available. But they rely on a single mechanism: the Sitecore Tracker. This one should be active and is filled with a certain context.
 
-The property “Tracker.IsActive” tells is if analytics is turned on, while the Tracker.Current should have a Tracking context for the current user. The “SC\_ANALYTICS\_GLOBAL\_COOKIE” goes hand in hand with this mechanism. It tells us a) who is this user and b) has the user already been classified (as a robot or human?))
+The property “Tracker.IsActive” tells is if analytics is turned on, while the Tracker.Current should have a Tracking context for the current user. The “SC_ANALYTICS_GLOBAL_COOKIE” goes hand in hand with this mechanism. It tells us a) who is this user and b) has the user already been classified (as a robot or human?))
 
 # Cookie consent levels and Sitecore and their precautions
 

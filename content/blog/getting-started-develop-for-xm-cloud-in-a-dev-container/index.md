@@ -1,22 +1,22 @@
 ---
-title: "Getting started: Develop in for XM Cloud in a devcontainer"
-date: "2023-10-08"
+title: 'Getting started: Develop in for XM Cloud in a devcontainer'
+date: '2023-10-08'
 category:
-- "Frontend"
-- "XMCloud"
-- "Sitecore"
-- "NodeJS"
-- "Nextjs"
-- "WSL2"
-description: "Setting up a dev container in order to develop for xm cloud"
+  - 'Frontend'
+  - 'XMCloud'
+  - 'Sitecore'
+  - 'NodeJS'
+  - 'Nextjs'
+  - 'WSL2'
+description: 'Setting up a dev container in order to develop for xm cloud'
 img: ./images/banner.png
 tags:
-- "Frontend"
-- "XMCloud"
-- "Sitecore"
-- "NodeJS"
-- "Nextjs"
-- "WSL2"
+  - 'Frontend'
+  - 'XMCloud'
+  - 'Sitecore'
+  - 'NodeJS'
+  - 'Nextjs'
+  - 'WSL2'
 ---
 
 In my previous two blogposts I described the benefits of working with WSL2 and how to configure this environment in order to work with it. This blogpost is all about developing for xmCloud within a DevContainer. I first ran into devcontainers when developing a [custom sitecore segment](../oh-my-sitecore-I-powered-up-your-shell/) for [Oh-my-posh](https://ohmyposh.dev/). As it is written in GO, I would have to install the complete development environment on my local machine, or in a VM. I luckily quickly found out about the devcontainer: It provided a complete environment with all the tooling I needed, with all recommended vscode plugins pre-installed as well. This is a real game-changer in terms of getting (new) developers up to speed. All you need is Docker and VSCode. This blogposts briefly describes how a devcontainer can be setup and I'll share the steps that I took to get the startkerit up and running for XMCloud inside a devcontainer. As a bonus, you can read [over here](../getting-started-develop-for-xm-cloud-in-github-codespaces/) how to use devcontainers in the cloud, to be specific within [github codespaces](https://github.com/features/codespaces)
@@ -25,10 +25,10 @@ In my previous two blogposts I described the benefits of working with WSL2 and h
 
 As shared in the introduction, devcontainers (may) deliver a completely pre-configured environment. This benefit is not neglectable, as:
 
-* your onboarding-speed for new developers will increase towards the speed of light
-* you can make sure to work with the same (development) tools accross your team(s)
-* you can makre sure to work with the same versions of your software (think about node and breaking changes?)
-* It can be run in Github codespaces! (yay)
+- your onboarding-speed for new developers will increase towards the speed of light
+- you can make sure to work with the same (development) tools accross your team(s)
+- you can makre sure to work with the same versions of your software (think about node and breaking changes?)
+- It can be run in Github codespaces! (yay)
 
 One of the downsides, is that some commands run a bit slower (I'll update my post [Develop in WSL - the benefits](../getting-started-develop-for-xm-cloud-in-wsl2-benefits/) blogpost soon with these numbers), but it is still faster as opposed to native windows 11 development.
 
@@ -36,7 +36,7 @@ One of the downsides, is that some commands run a bit slower (I'll update my pos
 
 Creating a devcontainer file and using it, requires a few steps:
 
-1. Create the configuration file ```.devcontainer/devcontainer.json```
+1. Create the configuration file `.devcontainer/devcontainer.json`
 2. Create a configuration script in order to install extra tooling
 3. Reopen your repository in the container
 
@@ -44,40 +44,43 @@ Creating a devcontainer file and using it, requires a few steps:
 
 The devcontainer describes your environment. In the code-snippet below, the I configured the following capabilities:
 
-* The baseimage to use
-* VSCode extensions
-* port to forward from the container to the host
-* an extra script to run at creation, to install extra tooling 
+- The baseimage to use
+- VSCode extensions
+- port to forward from the container to the host
+- an extra script to run at creation, to install extra tooling
 
-```yaml    
+```yaml
 {
-    "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
-    "customizations": {
-        "vscode": {
-        "extensions": [            
-            "GraphQL.vscode-graphql",
-            "dbaeumer.vscode-eslint",
-            "esbenp.prettier-vscode",
-            "mikestead.dotenv",
-            "redhat.vscode-yaml"
-            ]
+  'image': 'mcr.microsoft.com/devcontainers/typescript-node:0-18',
+  'customizations':
+    {
+      'vscode':
+        {
+          'extensions':
+            [
+              'GraphQL.vscode-graphql',
+              'dbaeumer.vscode-eslint',
+              'esbenp.prettier-vscode',
+              'mikestead.dotenv',
+              'redhat.vscode-yaml',
+            ],
         },
     },
-    "forwardPorts": [3000],
-    "postCreateCommand": "bash scripts/install.sh"
+  'forwardPorts': [3000],
+  'postCreateCommand': 'bash scripts/install.sh',
 }
 ```
 
 #### The image
 
-As the xmcloud frontend runs on nextjs, a typescript / nodejs devcontainer image was chosen. This can be seen on line 2 of the ```devcontainer.json```. Microsoft has a list of their devcontainer images [here](https://github.com/devcontainers/images/tree/main/src)
+As the xmcloud frontend runs on nextjs, a typescript / nodejs devcontainer image was chosen. This can be seen on line 2 of the `devcontainer.json`. Microsoft has a list of their devcontainer images [here](https://github.com/devcontainers/images/tree/main/src)
 
-```yaml{2}    
+```yaml{2}
 {
     "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
     "customizations": {
         "vscode": {
-        "extensions": [            
+        "extensions": [
             "GraphQL.vscode-graphql",
             "dbaeumer.vscode-eslint",
             "esbenp.prettier-vscode",
@@ -91,25 +94,24 @@ As the xmcloud frontend runs on nextjs, a typescript / nodejs devcontainer image
 }
 ```
 
-
 #### VSCode extensions and recommendations
 
-The customization section can contain [product specific configuration](https://containers.dev/supporting). The [specific customizations for vscode](https://containers.dev/supporting#visual-studio-code) gives the possibility to specify extensions that need to be installed and default settings. 
+The customization section can contain [product specific configuration](https://containers.dev/supporting). The [specific customizations for vscode](https://containers.dev/supporting#visual-studio-code) gives the possibility to specify extensions that need to be installed and default settings.
 
 When an extensions.json is present in the .vscode folder, it may contain one or more recommendations that vscode should show in your extensions toolbar:
 
 ![vscode extension recommendations](./images/vs-code-recommendations.png)
 
-In this example, the recommended extensions that the starterkit comes with were used. I introduced these recommendations at the start of this year to [Sitecore.Demo.Edge](https://github.com/Sitecore/Sitecore.Demo.Edge/pull/500) and it since has been adopted by Sitecore to include within all of their codebases. 
+In this example, the recommended extensions that the starterkit comes with were used. I introduced these recommendations at the start of this year to [Sitecore.Demo.Edge](https://github.com/Sitecore/Sitecore.Demo.Edge/pull/500) and it since has been adopted by Sitecore to include within all of their codebases.
 
-When working with devcontainers, these customizations could be specified in the ```customizations``` section. This can be seen at lines 4-10 of the ```devcontainer.json```
+When working with devcontainers, these customizations could be specified in the `customizations` section. This can be seen at lines 4-10 of the `devcontainer.json`
 
-```yaml{4-10}    
+```yaml{4-10}
 {
     "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
     "customizations": {
         "vscode": {
-            "extensions": [            
+            "extensions": [
                 "GraphQL.vscode-graphql",
                 "dbaeumer.vscode-eslint",
                 "esbenp.prettier-vscode",
@@ -135,12 +137,12 @@ The port which needs to be exposed to the outer world, in order to be able to co
 
 With this command, extra actions can be executed, to install extra tooling or configure the devcontainer. This could be done by [configuring devcontainer features](https://code.visualstudio.com/blogs/2022/09/15/dev-container-features) as well, but this approach was faster (in terms of trying things out) and more approachable for me. Another approach would be to use a dockerfile, to install extra layers on top of the base image, but the downside of that approach is that is doesn't have access to the workspace. In this example, a dotnet tool restore has to be executed, which prevents the dockerfile to be used in this situation.
 
-```yaml{14}    
+```yaml{14}
 {
     "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
     "customizations": {
         "vscode": {
-        "extensions": [            
+        "extensions": [
             "GraphQL.vscode-graphql",
             "dbaeumer.vscode-eslint",
             "esbenp.prettier-vscode",
@@ -156,9 +158,9 @@ With this command, extra actions can be executed, to install extra tooling or co
 
 In this specific solution a bash-script runs in order to execute some extra commands. The same steps that were used to [configure WSL2](../getting-started-develop-for-xm-cloud-in-wsl2/) were used, but executed differently:
 
-* Install Micorosoft .Net 6 SDK
-* Install Sitecore CLI
-* Install oh-my-posh
+- Install Micorosoft .Net 6 SDK
+- Install Sitecore CLI
+- Install oh-my-posh
 
 ```bash
 ## install .Net 6 SDK
@@ -182,12 +184,12 @@ echo 'eval "$(oh-my-posh init bash --config /home/node/jandobbeleer.omp.json)"' 
 # restore npm to have a completely prepared environment
 npm install --prefix ./src/sxastarter
 ```
+
 ### reopen in container
 
 The last thing to leaves us apart from running this development environment in a container, is opening it in a container. The first time this happens, the container has te be build.
 
-First, press ```CTRL + SHIFT + P``` and select the action ```>Dev Containers: Rebuild without cache and Reopen in Container```. This command causes the container to be build for the first time and install the extra tooling on top of it. A log, similar to the log below shows up in your terminal window. 
-
+First, press `CTRL + SHIFT + P` and select the action `>Dev Containers: Rebuild without cache and Reopen in Container`. This command causes the container to be build for the first time and install the extra tooling on top of it. A log, similar to the log below shows up in your terminal window.
 
 ```bash
 [3578 ms] Start: Run: tar --no-same-owner -x -f -
@@ -210,18 +212,18 @@ HTTP request sent, awaiting response... 200 OK
 Length: 3134 (3.1K) [application/octet-stream]
 Saving to: 'packages-microsoft-prod.deb'
 
-packages-microsoft- 100%[===================>]   3.06K  --.-KB/s    in 0s      
+packages-microsoft- 100%[===================>]   3.06K  --.-KB/s    in 0s
 
 2023-10-09 09:55:51 (44.3 MB/s) - 'packages-microsoft-prod.deb' saved [3134/3134]
 
 ....
 
 Run `npm audit` for details.
-npm notice 
+npm notice
 npm notice New major version of npm available! 9.5.1 -> 10.2.0
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v10.2.0
 npm notice Run npm install -g npm@10.2.0 to update!
-npm notice 
+npm notice
 Done. Press any key to close the terminal.
 ```
 
@@ -233,4 +235,4 @@ Now that the repository and development environment has been reopened in a devco
 
 ## summary
 
-Creating a development container doesn't take much effort, and gives you the possibility to create a standardized development environment, which can be run anywhere! 
+Creating a development container doesn't take much effort, and gives you the possibility to create a standardized development environment, which can be run anywhere!

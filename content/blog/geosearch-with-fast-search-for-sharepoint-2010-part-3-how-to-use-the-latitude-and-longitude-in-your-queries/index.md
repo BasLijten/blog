@@ -1,14 +1,14 @@
 ---
-title: "GeoSearch with Fast Search for SharePoint 2010 - Part 3: how to use the latitude and longitude in your queries"
-date: "2012-04-10"
-categories: 
-  - "fast"
-  - "geo"
-  - "geolocation"
-  - "sharepoint-2010"
+title: 'GeoSearch with Fast Search for SharePoint 2010 - Part 3: how to use the latitude and longitude in your queries'
+date: '2012-04-10'
+categories:
+  - 'fast'
+  - 'geo'
+  - 'geolocation'
+  - 'sharepoint-2010'
 ---
 
-This is the third and last part of a series of blogposts about GeoSearch with Fast Search for SharePoint. I recently held some presentations about extending the power of Fast (on [DIWUG](http://www.diwug.nl/ "Dutch Information Worker User Group") and the Dutch [TechDays 2012](http://www.techdays.nl/ "Dutch Techdays 2012")) and one of the subjects that I talked about was on how to search for locations, sort on distances etcetera. The recording of my sessions are available on [Channel 9](http://channel9.msdn.com/Events/Speakers/bas+lijten "Bas Lijten on Channel 9") in dutch.
+This is the third and last part of a series of blogposts about GeoSearch with Fast Search for SharePoint. I recently held some presentations about extending the power of Fast (on [DIWUG](http://www.diwug.nl/ 'Dutch Information Worker User Group') and the Dutch [TechDays 2012](http://www.techdays.nl/ 'Dutch Techdays 2012')) and one of the subjects that I talked about was on how to search for locations, sort on distances etcetera. The recording of my sessions are available on [Channel 9](http://channel9.msdn.com/Events/Speakers/bas+lijten 'Bas Lijten on Channel 9') in dutch.
 
 - [Part 1: why and how](http://blog.baslijten.com/geosearch-with-fast-search-for-sharepoint-2010-part-1/)
 - [Part 2: the custom pipeline extension to enrich the Fast index with spatial data](http://blog.baslijten.com/geosearch-with-fast-search-for-sharepoint-2010-part-2-custom-pipeline-extensions/)

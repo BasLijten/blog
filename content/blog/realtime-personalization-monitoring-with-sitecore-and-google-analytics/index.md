@@ -1,18 +1,18 @@
 ---
-title: "Realtime personalization monitoring with Sitecore and google analytics"
-date: "2016-07-20"
-categories: 
-  - "analytics"
-  - "code"
-  - "development"
-  - "mvc"
-  - "personalization"
-  - "sitecore"
-tags: 
-  - "analytics"
-  - "personalization"
-  - "sitecore"
-img: "./images/googleanalytics.jpg"
+title: 'Realtime personalization monitoring with Sitecore and google analytics'
+date: '2016-07-20'
+categories:
+  - 'analytics'
+  - 'code'
+  - 'development'
+  - 'mvc'
+  - 'personalization'
+  - 'sitecore'
+tags:
+  - 'analytics'
+  - 'personalization'
+  - 'sitecore'
+img: './images/googleanalytics.jpg'
 ---
 
 Some of our bigger sites, which don’t run on Sitecore yet, use google analytics to realtime monitor events that happen on a website, think about forms that are submitted and personalizations that are shown to a specific user. Most of the time, external (javascript) tooling is used to inject those personalizations and an event needs to be implemented which will be send to google analytics to register that event. In Sitecore, we can implement those google analytics events by including a javascript in our razor views, but, how can we tell whether or not the component that was shown was part of a personalization flow? Was a custom datasource selected, was the completed component rendered as a personalization? This blogpost series learns you on how to determine what kind of personalizations where exposed to a user and how to tell external systems about those events. It turned out that a (beautiful) pattern can be used that Sitecore itself already introduced themselves a while ago.
@@ -105,8 +105,8 @@ The most parts of the puzzle are on its place now, the last part is to make this
 
 The solution to inject HTML was a bit more complex. The first solution was to create a processor per site and insert the JavaScript via .Net code, but that one is quite error prone, with all the escaping characters. I decided that I wanted to make use of razor views and dynamically load them and render the output to the response filter. This solution has a few advantages: it's easier to make reuse of the processor and customizations can be added very fast, without to much of a hasle. And this solution was _also_ already available in Sitecore: Ever wondered why the ExperienceExplorerView.cshtml was in the /Views/Shared folder? Exactly for this reason, as it's dynamically inserted as well.
 
-The Experience Explorer view has some information on what rule was applied for the 
-current user as well. This solution executes all rules for a 2nd time after the 
+The Experience Explorer view has some information on what rule was applied for the
+current user as well. This solution executes all rules for a 2nd time after the
 page was rendered, I choose not to do this for performance reasons.
 
 The code below shows how a Controller dynamically can be created, inserted and rendered. The partialName at line 1 comes from the processor parameters as well: this makes it possible to specify a separate razor view per site.
@@ -119,4 +119,4 @@ This is the razor view, that easily can be maintained and created by _any_ devel
 
 ## Summary
 
-Sending real-time personalization events is possible with Sitecore, although it wasn’t easy to find out how this could be done. No information of personalization is stored on the rendered objects itself and injecting HTML into the Response wasn’t as easy as expected as well. It turned out that there is quite a nice pattern that Sitecore uses internally to inject renderings _after_ the rendering pipeline, which can be for rendering normal pages as well.
+Sending real-time personalization events is possible with Sitecore, although it wasn’t easy to find out how this could be done. No information of personalization is stored on the rendered objects itself and injecting HTML into the Response wasn’t as easy as expected as well. It turned out that there is quite a nice pattern that Sitecore uses internally to inject renderings *after* the rendering pipeline, which can be for rendering normal pages as well.

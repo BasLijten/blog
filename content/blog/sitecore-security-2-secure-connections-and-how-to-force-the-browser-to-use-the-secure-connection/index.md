@@ -1,15 +1,15 @@
 ---
-title: "Sitecore Security #2: Secure connections and how to force the browser to use the secure connection"
-date: "2016-07-25"
-categories: 
-  - "security"
-  - "sitecore"
-img: "./images/article.jpg"
+title: 'Sitecore Security #2: Secure connections and how to force the browser to use the secure connection'
+date: '2016-07-25'
+categories:
+  - 'security'
+  - 'sitecore'
+img: './images/article.jpg'
 ---
 
 Secure connections? Why would I even bother? It’s expensive, slow, complex and I’ve got a firewall anyway? On the SUGCON in Copenhagen I showed off how easy it is to intercept, modify and redirect unencrypted traffic and what can be done against this threat. This blogpost is all about why you should serve your website _always_ and _fully_ over HTTPS and how the browser can be forced to use this HTTPS connection. This blogpost will _not_ show off how to configure HTTPS and will not tell about _[all the benefits](https://www.troyhunt.com/i-wanna-go-fast-https-massive-speed-advantage/)_ of https. The technique to achieve this is bu adding a HSTS header for your domain, [google recently announced](https://security.googleblog.com/2016/07/bringing-hsts-to-wwwgooglecom.html) that they will introduce this for the complete www.google.com domain as well!
 
- 
+
 
 Note: Some other [great articles](https://www.troyhunt.com/understanding-http-strict-transport/) have been written about this subject, but I intentionally wrote this article to reach out the Sitecore (and SharePoint) community!
 
@@ -21,7 +21,7 @@ As the Sitecore hardening guide describes:
 
 Make the login page available only to SSL requests
 
-This is **_not_** true. This guideline suggests that the login page is the _only_ page taht needs to be exposed via https, but e_very_ page should be served over SSL. And when SSL is mentioned, the technique that should be spoken about is TLS, Transport Layer Security. SSL is completely insecure, while TLS is the improved version of SSL and is nowadays on version 1.2.
+This is **_not_** true. This guideline suggests that the login page is the *only* page taht needs to be exposed via https, but e*very* page should be served over SSL. And when SSL is mentioned, the technique that should be spoken about is TLS, Transport Layer Security. SSL is completely insecure, while TLS is the improved version of SSL and is nowadays on version 1.2.
 
 Why is this _not_ true? When people are connected to insecure Wi-Fi networks data can often easily be sniffed, which means, all traffic can be captured by other devices. This means that all the data that flows over the (virtual) wire, can be captured. When the data is send over HTTP, this data is unencrypted and can by the persons who are capturing this traffic. Personal interests, details, and-so-forth can be captured. Imagine what happens when login credentials would be send over HTTP?
 
@@ -62,21 +62,21 @@ To show off what exactly happens, I included that images below:
 
 #### The inital request
 
-\[caption id="attachment\_18941" align="alignnone" width="605"\]![](images/img_579488481f2f7.png) The initial request is over http and responds with a 301 -> https://insurco\[/caption\]
+\[caption id="attachment_18941" align="alignnone" width="605"\]![](images/img_579488481f2f7.png) The initial request is over http and responds with a 301 -> https://insurco\[/caption\]
 
 #### The page gets redirected
 
-\[caption id="attachment\_18951" align="alignnone" width="605"\]![](images/img_57948885e4eb6.png) The page that is served securely, has the strict-transport-security header added to the response\[/caption\]
+\[caption id="attachment_18951" align="alignnone" width="605"\]![](images/img_57948885e4eb6.png) The page that is served securely, has the strict-transport-security header added to the response\[/caption\]
 
 #### The next time the user tries to visit the webpage over http
 
-\[caption id="attachment\_18961" align="alignnone" width="605"\]![](images/img_579488a1df1d3.png) An internal redirect (status code 307) to the secure page, no network traffic is involved in this step\[/caption\]
+\[caption id="attachment_18961" align="alignnone" width="605"\]![](images/img_579488a1df1d3.png) An internal redirect (status code 307) to the secure page, no network traffic is involved in this step\[/caption\]
 
 # Cool, I want this, how do I do that?
 
 First, a secure connection is needed. After that one, you can configure your proxy to inject this header on every request, or configure the IIS Rewrite module of Microsoft Internet Information Server to use this one. My advice would be to configure this rule on the the proxy, but I you don’t have any access to this proxy or it takes too long, it’s also possible to configure IIS using the following rule. It forces the website to be visited over https and sends the Strict transport security header along with it.
 
-```xml
+````xml
 &lt;rewrite&gt; &lt;rules&gt; &lt;rule name="Http Redirect to HTTPS" enabled="true" stopProcessing="true"&gt; &lt;match url="(.\*)" ignoreCase="true" /&gt; &lt;conditions logicalGrouping="MatchAny"&gt; &lt;add input="{HTTPS}" pattern="off" ignoreCase="true" /&gt; &lt;/conditions&gt; &lt;action type="Redirect" url="https://{HTTP\_HOST}/{R:1}" appendQueryString="true" redirectType="Permanent" /&gt; &lt;/rule&gt; &lt;/rules&gt; &lt;outboundRules&gt; &lt;rule name="Add Strict-Transport-Security when HTTPS" enabled="true"&gt; &lt;match serverVariable="RESPONSE\_Strict\_Transport\_Security" pattern=".\*" /&gt; &lt;conditions&gt; &lt;add input="{HTTPS}" pattern="on" ignoreCase="true" /&gt; &lt;/conditions&gt; &lt;action type="Rewrite" value="max-age=31536000" /&gt; &lt;/rule&gt; &lt;/outboundRules&gt; &lt;/rewrite&gt; ```
 
  
@@ -92,3 +92,4 @@ This preload list requires a very important setting for the preload list: _inclu
 # Summary
 
 Serving sites over HTTP is _not_ safe. Although you might only serve content, attackers may use unsafe connections to inject malicious forms, redirect requests, phish usernames and passwords. To force browsers (and thus, their users) to connect over HTTPS, the Strict-Transport-Security header should be used.
+````

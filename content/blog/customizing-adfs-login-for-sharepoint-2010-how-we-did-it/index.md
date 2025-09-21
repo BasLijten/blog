@@ -1,11 +1,11 @@
 ---
-title: "Customizing ADFS login for SharePoint 2010: how we did it"
-date: "2012-12-28"
-categories: 
-  - "authentication"
-  - "code"
-  - "sharepoint"
-  - "sharepoint-2010"
+title: 'Customizing ADFS login for SharePoint 2010: how we did it'
+date: '2012-12-28'
+categories:
+  - 'authentication'
+  - 'code'
+  - 'sharepoint'
+  - 'sharepoint-2010'
 ---
 
 In SharePoint 2010 the possibility of claims based authentication was introduced. The out of the box experience of this functionality is often OK, for example in cases of corporate intranets and extranets, but it doesn’t always fulfill the requirements of internet facing websites which require authentication.  This blogposts describes why we wanted to implement the active login scenario and learns us what kind of problems we encountered (and nailed ;))
@@ -25,7 +25,7 @@ In SharePoint 2010 the possibility of claims based authentication was introduced
 
 ## Passive login
 
-The out of the box experience that comes with SharePoint 2010 is the so called “passive requestor profile” or “passive login” and works as displayed in the flow below. _Please note that users are being redirected to a Resource STS. SharePoint thinks it’s an Identity Provider, but in our infrastructure, this is not the case. Why, is explained further on._
+The out of the box experience that comes with SharePoint 2010 is the so called “passive requestor profile” or “passive login” and works as displayed in the flow below. *Please note that users are being redirected to a Resource STS. SharePoint thinks it’s an Identity Provider, but in our infrastructure, this is not the case. Why, is explained further on.*
 
 [![](images/1184.passive-login-flow.png)](http://bloggingabout.net/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/bas/1184.passive-login-flow.png)
 
@@ -49,7 +49,7 @@ Below is a small flow diagram to determine whether a user is a customer or an em
 
 [![](images/2110.determineusertype.png)](http://bloggingabout.net/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/bas/2110.determineusertype.png)
 
-“Determine origin” is executed without any user interaction. Whenever a user tries to login, we need to determine their origin. This can be done in various manners, but we decided to make use of the [X-Forwarded-For header](http://en.wikipedia.org/wiki/X-Forwarded-For "X Forwarded For"). It’s a HTTP-request header, that is inserted from our load balancer. External users get the address of the reverse proxy injected, internal users their own IP address. According to Wikipedia (and everything that’s on Wikipedia, is true ;)), it is the de facto standard for identifying the originating IP-address. Whenever the IP in the XFF HTTP header is not equal to the IP of the reverse proxy, a user selection type screen is show. Otherwise, only the customer login screen will be shown.
+“Determine origin” is executed without any user interaction. Whenever a user tries to login, we need to determine their origin. This can be done in various manners, but we decided to make use of the [X-Forwarded-For header](http://en.wikipedia.org/wiki/X-Forwarded-For 'X Forwarded For'). It’s a HTTP-request header, that is inserted from our load balancer. External users get the address of the reverse proxy injected, internal users their own IP address. According to Wikipedia (and everything that’s on Wikipedia, is true ;)), it is the de facto standard for identifying the originating IP-address. Whenever the IP in the XFF HTTP header is not equal to the IP of the reverse proxy, a user selection type screen is show. Otherwise, only the customer login screen will be shown.
 
 [![](images/0815.usertype-selection.png)](http://bloggingabout.net/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/bas/0815.usertype-selection.png)
 
@@ -62,15 +62,15 @@ As seen in the diagram below, this authentication method is much more user frien
 The downside of this approach is that it requires custom code and needs to handle all the logic that ADFS was handling in the passive scenario:
 
 - Get identity claims
-    - Multiple identity providers – choose which IP to use (for example, based on selected userType)
-        - Customers
-        - Employees
-        - Government
-        - Etc.
+  - Multiple identity providers – choose which IP to use (for example, based on selected userType)
+    - Customers
+    - Employees
+    - Government
+    - Etc.
 - Augment resource claims
 - Pass Token to SharePoint
 
-Liam Cleary has done excellent research on this subject and wrote some code for it. I suggest that you read his[blogpost](http://blog.helloitsliam.com/Lists/Posts/Post.aspx?ID=76 "custom ADFS login"). The code is not production ready, but provides a great base to start out on your own active login user control.
+Liam Cleary has done excellent research on this subject and wrote some code for it. I suggest that you read his[blogpost](http://blog.helloitsliam.com/Lists/Posts/Post.aspx?ID=76 'custom ADFS login'). The code is not production ready, but provides a great base to start out on your own active login user control.
 
 #### Login control
 

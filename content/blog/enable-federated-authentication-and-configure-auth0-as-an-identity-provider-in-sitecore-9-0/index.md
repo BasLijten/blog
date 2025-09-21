@@ -1,15 +1,15 @@
 ---
-title: "Enable federated authentication and configure Auth0 as an identity provider in Sitecore 9.0"
-date: "2017-10-23"
-categories: 
-  - "authentication"
-  - "claims"
-  - "code"
-  - "federation"
-  - "owin"
-  - "security"
-  - "sitecore"
-img: "./images/federation-banner.jpg"
+title: 'Enable federated authentication and configure Auth0 as an identity provider in Sitecore 9.0'
+date: '2017-10-23'
+categories:
+  - 'authentication'
+  - 'claims'
+  - 'code'
+  - 'federation'
+  - 'owin'
+  - 'security'
+  - 'sitecore'
+img: './images/federation-banner.jpg'
 ---
 
 Sitecore 9.0 has shipped and one of the new features of this new release is the addition of a federated authentication module. I wrote a module for Sitecore 8.2 in the past ([How to add support for Federated Authentication and claims using OWIN](http://blog.baslijten.com/how-to-add-federated-authentication-with-sitecore-and-owin/)), which only added federated authentication options for visitors. Backend functionality was a lot harder to integrate, but I am glad that Sitecore took the challenge and solved it for both the front- and backend. It means that I can get rid of the old code and finally can use the out of the box solution provided by Sitecore. They created a very pluggable solution which can basically register any kind of authentication module via the OWIN middleware. This blogpost will show how I integrated the Identity broker [Auth0](https://auth0.com/) with Sitecore. Auth0 is a platform which can act as an Identity Broker: it offers solutions to connect multiple identity providers via a single connection. Code is available at [my github repository](https://github.com/BasLijten/sitecore-federated-authentication):
@@ -76,7 +76,7 @@ As the technique behind the authentication is completely different as opposed to
 
 <script src="https://gist.github.com/BasLijten/36207de35d2a388a80f27892bd10e83c.js"></script>
 
- 
+
 
 ### Register the AuthenticationProvider middleware pipeline
 

@@ -1,11 +1,11 @@
 ---
-title: "Fast: Adding managed metadata properties for the use with scopes in SharePoint 2010"
-date: "2011-06-03"
-categories: 
-  - "fast"
-  - "search"
-  - "sharepoint"
-  - "sharepoint-2010"
+title: 'Fast: Adding managed metadata properties for the use with scopes in SharePoint 2010'
+date: '2011-06-03'
+categories:
+  - 'fast'
+  - 'search'
+  - 'sharepoint'
+  - 'sharepoint-2010'
 ---
 
 Lately I was working on a project that required to make use of scopes and some managed metadata properties in those scopes. For some reason, those managed metadata properties didnt show up in my scope selection dropdownlist, but I was sure that this metadata property was available in my Fast Managed Metadata properties list

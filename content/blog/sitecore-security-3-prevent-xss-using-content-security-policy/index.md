@@ -1,9 +1,9 @@
 ---
-title: "Sitecore Security #3: Prevent XSS using Content Security Policy"
-date: "2016-08-04"
-categories: 
-  - "security"
-  - "sitecore"
+title: 'Sitecore Security #3: Prevent XSS using Content Security Policy'
+date: '2016-08-04'
+categories:
+  - 'security'
+  - 'sitecore'
 ---
 
 Clientside code is being used more and more on modern websites. Any kind of resources, for example Javascript, css, fonts, complete pages can be loaded dynamically into websites, from the current website or from an external domain. Attackers might be able to pull off an XSS attack by loading different kinds of data or scripts into your site which will run on your client’s browsers. These injections might happen on your own site, or in external services that you make use of (for example, disquss, or ads you are displaying). Applying a content security policy is one of the defenses against this kind of attack. This blogpost shows of scenarios that might happen (some of them tailored to Sitecore) and how the content security policy can help to prevent a successful attack from happening. As regular solutions provided on the internet do not supply the flexibility that a Sitecore solution (and CMS’ses in general) needs I decided to create a content manageable module and added that one to my SitecoreSecurity module.
@@ -47,7 +47,7 @@ With the CSP, policies can be defined on what kind of resource is allowed, _how_
 
 Not every parameter is available in each resource-group, it depends on the type of resources. Due to the categorization for each resource-type, flexible policies can be created to allow javascript to be loaded from \*.googleapis.com, disable inline-script and disable the unsafe-eval functions, while the css may only be loaded from the same-origin and Insafe-unline is allowed. A policy like that looks like:
 
-Content-Security-Policy: default-src 'none' ; script-src 'self' 
+Content-Security-Policy: default-src 'none' ; script-src 'self'
 https://\*.googleapis.com; style-src 'self' 'unsafe-inline' ;
 
 _Please note that all major browsers support the content security policy header, some in the form of the normal header, some need the X-Content-Security-Policy headers. Some browsers do not support all resources as well._

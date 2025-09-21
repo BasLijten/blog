@@ -1,14 +1,14 @@
 ---
-title: "Sitecore ALM and governance part 1: Validate your deployment packages – how to keep your website stable"
-date: "2016-01-10"
-categories: 
-  - "alm"
-  - "code"
-  - "development"
-  - "open-source"
-  - "sitecore"
-  - "visual-studio"
-img: "./images/Validate-Package.png"
+title: 'Sitecore ALM and governance part 1: Validate your deployment packages – how to keep your website stable'
+date: '2016-01-10'
+categories:
+  - 'alm'
+  - 'code'
+  - 'development'
+  - 'open-source'
+  - 'sitecore'
+  - 'visual-studio'
+img: './images/Validate-Package.png'
 ---
 
 When writing code for Sitecore, this code should someday be deployed to an existing Sitecore environment. Preferably, this should happen “the first time right”. One of our guidelines to achieve this is: Don’t overwrite Sitecore files. Don’t update existing files of other packages. Don’t upgrade assembly versions. Don’t break your site. It might cause a lot of trouble without knowing where to look. When we were still working with SharePoint, there was an internal mechanism to _create_ and _remove_ deployment packages. Developers had to do their best to overwrite out of the box files, as packaging mechanisms were introduced which explicitly required to select the files that you wanted to deploy. I was (and I am) wondered that Sitecore doesn’t offer this feature (well, not as I expected it), and thus I decided to write a blogpost on what shortcomings we see, how to solve them and how to verify that things will good right.
@@ -118,15 +118,15 @@ This will help to prevent a lot of commonly made mistakes.
 With above tools in place, it’s still possible to create packages that overwrite system files. Verify every single package that will be installed, _before_ it will be deployed to the different environments. Just compare the contents of the web deploy package to baseline Sitecore installation, to the custom baseline packages (the nuget files and your generic packages) and to the other projects, to prevent conflicts. How did I do that?
 
 1. I made a baseline directory for a specific Sitecore version and created two different directories in it:
-    - Installation
-    - Webdeploy packages
+   - Installation
+   - Webdeploy packages
 2. I maded an “Instance” folder with a specific “Sitecore instance <name>” folder in it, which is used for all the projects that will be deployed to the same Sitecore instance. In this folder, I have the folder D(evelopment), T(est), A(cceptance) and P(roduction). This leads to the following structure:
-    - Instance
-        - <Instance name>
-            - D
-            - T
-            - A
-            - P
+   - Instance
+     - <Instance name>
+         - D
+         - T
+         - A
+         - P
 3. In the Installation folder, I placed a copy of the Sitecore zip file (that can be downloaded from dev.sitecore.net). In addition to that, I created a zip of the Website folders of the Content Management and Content Delivery servers and placed them into this installation folder. These baselines should be equal for all versions.
 4. I placed The web deploy packages that I created to deploy the assemblies from the generic nuget packages in the webdeploy folder, together with my company specific solutions (thus the nuget layer and the achmea layer from the table at the start of this article)
 5. The instance specific web deploy packages are copied into the instance folder. As the Lifecycle of the project specific packages could be low, they are deployed often, and chances are big that the Development version is not the same as the Production version. To be able to see the difference over different environments, these packages should be managed per environment.

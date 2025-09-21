@@ -1,19 +1,19 @@
 ---
-title: "How to add support for Federated Authentication and claims to Sitecore using OWIN"
-date: "2015-10-26"
-categories: 
-  - "adfs"
-  - "authentication"
-  - "claims"
-  - "federation"
-  - "owin"
-  - "sitecore"
-tags: 
-  - "adfs"
-  - "claims"
-  - "federation"
-  - "owin"
-  - "sitecore"
+title: 'How to add support for Federated Authentication and claims to Sitecore using OWIN'
+date: '2015-10-26'
+categories:
+  - 'adfs'
+  - 'authentication'
+  - 'claims'
+  - 'federation'
+  - 'owin'
+  - 'sitecore'
+tags:
+  - 'adfs'
+  - 'claims'
+  - 'federation'
+  - 'owin'
+  - 'sitecore'
 ---
 
 Out of the box, Sitecore only offers their own forms-based authentication provider, which requires to add every user to the Sitecore membership database. At Achmea, we had the requirement to facilitate login via ADFS, as we are using our user accounts amongst different systems, web applications and apps. In addition to the absence of this functionality, it’s not possible to work with claims as well.
@@ -97,7 +97,7 @@ The RST that is posted to Sitecore by ADFS, needs to be handled. At the moment o
 
 This processor throws an exception if an unsafe form post was found, but adds some exceptions to Sitecore: unsafe form posts to “/Sitecore/shell” and “/Sitecore/admin” are allowed. Unfortunately, these paths are not configurable, thus I replaced that processor by this implementation:
 
-```csharp
+````csharp
  public override void Process(PreprocessRequestArgs args) { Assert.ArgumentNotNull(args, "args"); try { new SuppressFormValidation().Process(args); } catch (HttpRequestValidationException) { string rawUrl = args.Context.Request.RawUrl; if (!rawUrl.Contains("login")) { throw; } } } ```
 
 These solution respects the original processor outcome, catches the exception, but adds a path that should accept an unsafe formpost as well. In any other situation: rethrow the same exception, this causes Sitecore to behave exactly the same as it did before.
@@ -168,11 +168,11 @@ private static AuthenticationTicket GetAuthenticationKeyTicket() { Authenticatio
 
 var ctx = HttpContext.Current.Request; if (ctx.Cookies != null && ctx.Cookies\[".AspNet.Cookies"\] != null) { var cookie = ctx.Cookies\[".AspNet.Cookies"\]; var secureDataFormat = new TicketDataFormat(new MachineKeyProtector()); ticket = secureDataFormat.Unprotect(cookie.Value); } return ticket; }
 
-```
+````
 
 And within that Ticket, the ClaimsIdentity can be found:
 
-```csharp
+````csharp
  // Summary: // Contains user identity information as well as additional authentication state. public class AuthenticationTicket { // // Summary: // Initializes a new instance of the Microsoft.Owin.Security.AuthenticationTicket // class // // Parameters: // identity: // // properties: public AuthenticationTicket(ClaimsIdentity identity, AuthenticationProperties properties);
 
 // // Summary: // Gets the authenticated user identity. public ClaimsIdentity Identity { get; } // // Summary: // Additional state values for the authentication session. public AuthenticationProperties Properties { get; } ```
@@ -200,3 +200,4 @@ Basically, it comes down to 3 valid situations, of which 2 reside in valid anony
 ## Summary
 
 Adding Federated authentication to Sitecore using OWIN is possible. In the end, the solution wasn’t too complex and makes use of standard Sitecore where possible, without intervening in it’s core logic. Using ASP.Net for authentication on _top_ of Sitecore as a kind of passthrough authentication layer, keeps us safe and it can easily be removed.
+````

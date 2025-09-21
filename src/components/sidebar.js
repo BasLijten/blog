@@ -70,7 +70,11 @@ const Sidebar = ({ siteMetadata }) => (
             )}
             {siteMetadata.social.email && (
               <li>
-                <a href={`mailto:${siteMetadata.social.email}`} target="_blank" aria-label="email of Bas Lijten">
+                <a
+                  href={`mailto:${siteMetadata.social.email}`}
+                  target="_blank"
+                  aria-label="email of Bas Lijten"
+                >
                   <i className="fa fa-envelope-o" aria-hidden="true" />
                 </a>
               </li>

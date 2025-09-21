@@ -1,13 +1,13 @@
 ---
-title: "Fast Search for SharePoint problems - simplified architecture diagram"
-date: "2011-08-09"
-categories: 
-  - "fast"
-  - "sharepoint"
-  - "sharepoint-2010"
+title: 'Fast Search for SharePoint problems - simplified architecture diagram'
+date: '2011-08-09'
+categories:
+  - 'fast'
+  - 'sharepoint'
+  - 'sharepoint-2010'
 ---
 
-Recently I had a few colleagues (and myself) who tried to install FAST search for SharePoint on their development workstation. Despite the [well written installation guidelines on MSDN](http://technet.microsoft.com/en-us/library/ff381243.aspx "Fast installation and configuration guide on MSDN"), they had several problems, and sadly enough, they all faced different problems. These problems varied from not able to crawl the content to not being able to query the indexed content. As most of the colleagues weren't too familiar with Fast (and SharePoint search in general), I decided to create a small architecture diagram of the SharePoint 2010 Search Service Applications, Fast Search for SharePoint and (some of) their junction points. These junction points are displayed in the image below. To simplify the diagram, some items have been removed, the search query proxy is one example.
+Recently I had a few colleagues (and myself) who tried to install FAST search for SharePoint on their development workstation. Despite the [well written installation guidelines on MSDN](http://technet.microsoft.com/en-us/library/ff381243.aspx 'Fast installation and configuration guide on MSDN'), they had several problems, and sadly enough, they all faced different problems. These problems varied from not able to crawl the content to not being able to query the indexed content. As most of the colleagues weren't too familiar with Fast (and SharePoint search in general), I decided to create a small architecture diagram of the SharePoint 2010 Search Service Applications, Fast Search for SharePoint and (some of) their junction points. These junction points are displayed in the image below. To simplify the diagram, some items have been removed, the search query proxy is one example.
 
 ![](images/img_52a49b56f2b97.png)
 
@@ -16,11 +16,11 @@ The diagram helped me and my colleagues to pinpoint the problems and I hope it 
 Use the following log/event locations to pinpoint problems:
 
 - c:\\fastsearch\\var\\log
-    - contains a _lot_ of folders with logging. Whenever problems arise, I check the folder "syslog" first
+  - contains a *lot* of folders with logging. Whenever problems arise, I check the folder "syslog" first
 - the Eventlog - increase the loglevels in the sharepoint diagnostic logging to verbose for extensive logging
-    - Application log
-    - Fast Search
-    - Fast Search Farm
+  - Application log
+  - Fast Search
+  - Fast Search Farm
 - SharePoint diagnostic logging - increase the log level to verbose
 - The IIS authentication logging
 - use nctrl status to check the status of your Fast installation
@@ -53,7 +53,7 @@ After installing fast, pushing content into Fast can be a problem too. Several p
 
 **_\- SSL communication between the Fast Content Service and the Content Distributor is not configured correctly._**
 
-Visit [technet](http://technet.microsoft.com/en-us/library/ff381261.aspx#BKMK_Configure_ssl_enabled_communication) on how to configure SSL communication. Please make sure that the account used in "**.\\SecureFASTSearchConnector.ps1 –certPath "path of the certificate\\certificatename.pfx" –ssaName "name of your content SSA" –username “domain\\username”** is the account that runs the osearch14. In the Administration _Services_ window this service is called "_SharePoint Server Search 14_"
+Visit [technet](http://technet.microsoft.com/en-us/library/ff381261.aspx#BKMK_Configure_ssl_enabled_communication) on how to configure SSL communication. Please make sure that the account used in "**.\\SecureFASTSearchConnector.ps1 –certPath "path of the certificate\\certificatename.pfx" –ssaName "name of your content SSA" –username “domain\\username”** is the account that runs the osearch14. In the Administration *Services* window this service is called "_SharePoint Server Search 14_"
 
 _**\- Permissions**_
 
@@ -61,7 +61,7 @@ After checking the Fast Content Service installation with "docpush -csp c:\\test
 
 _sp Reported error with_ [_http://cohowinery.com/c:\\temp\\bob.txt_](http://cohowinery.com/c:/temp/bob.txt)_: processing:N/A:ProcessorDeploymentException: For pipeline 'Office14 (webcluster)', creating processor CompanyExtractorInclusionAny failed: ConfigurationError: CompanyExtractorInclusionAny: Failed to access or parse configuration file 'etc/resources/matching/configuration.companyextractor.inclusion.any.xml'._
 
-This error can have several causes. Most likely is that the user doesn't have isn't member of the FastSearchAdministrators group. Another case I have encountered was that the account was member of that group, but for some reason did not have read access to the directory. Changing permissions fixed this issue for me, _but this not recommended to do on a production server!!_ The message about [http://cohowinery.com/](http://cohowinery.com/) is not misconfigured on your system! It's a fictional company, same like the more known virtual companies contoso and wingtip toys
+This error can have several causes. Most likely is that the user doesn't have isn't member of the FastSearchAdministrators group. Another case I have encountered was that the account was member of that group, but for some reason did not have read access to the directory. Changing permissions fixed this issue for me, *but this not recommended to do on a production server!!* The message about [http://cohowinery.com/](http://cohowinery.com/) is not misconfigured on your system! It's a fictional company, same like the more known virtual companies contoso and wingtip toys
 
 \- **_I see dead crawlers_**
 
@@ -79,7 +79,7 @@ When a query is executed and no results are returned, the most likely issue is a
 
 The application pool of the Search Query and settings service is not running. Check your IIS Manager to make sure that your application pool is up and that your website is running.
 
-_**\- Unexpected error occurred while communicating with Administration Service**_ **_when accessing one of the following site settings menu entries_**
+***\- Unexpected error occurred while communicating with Administration Service*** **_when accessing one of the following site settings menu entries_**
 
 - visual best bets
 - context information
@@ -109,4 +109,4 @@ Whenever the services are back up, this message will disappear and the right out
 
 ### Summary
 
-The majority of problems arise whenever permissions are not set correctly. It's important that the Fast Admin account that is configured in the Fast Query Service, is indeed the _right_ account, is member of the FastSearchAdministrators group and has access the the FastAdmin database. For dev-purposes you can choose the make use of just one main account to run fast, run the app pools and use as the admin account, but this is no recommended approach for production environments. That is why I advise to always use least privilege installations, even on your dev-environments!
+The majority of problems arise whenever permissions are not set correctly. It's important that the Fast Admin account that is configured in the Fast Query Service, is indeed the *right* account, is member of the FastSearchAdministrators group and has access the the FastAdmin database. For dev-purposes you can choose the make use of just one main account to run fast, run the app pools and use as the admin account, but this is no recommended approach for production environments. That is why I advise to always use least privilege installations, even on your dev-environments!

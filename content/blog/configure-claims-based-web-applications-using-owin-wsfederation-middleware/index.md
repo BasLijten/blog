@@ -1,7 +1,7 @@
 ---
-title: "Configure claims based web applications using OWIN WsFederation middleware"
-date: "2015-08-04"
-img: "./images/WsFed-OWIN.png"
+title: 'Configure claims based web applications using OWIN WsFederation middleware'
+date: '2015-08-04'
+img: './images/WsFed-OWIN.png'
 ---
 
 In my previous blogpost about setting up a simple STS for web application development I wrote on how to setup this web application using the classic web.config modifications. But this can be a _lot_ easier, by using the OWIN middleware WsFederation module. This blogpost describes how to setup a secured web application using the OWIN WsFederation modules; This is the second blogpost in a blogpost series of three, where we work towards a simple (local development) solution to build High trust claims based SharePoint provider hosted apps .
@@ -18,7 +18,7 @@ _OWIN defines a standard interface between .NET web servers and web applications
 
 Freely explained: it defines a standard interface between .Net web servers and web applications and should make it possible to run (asp.net) web applications on other servers than, for example, IIS. In this case, the OWIN modules for WsFederation make it very easy to configure authentication, as opposed to the classic web.config configuration. [Daniel Roth](https://social.msdn.microsoft.com/profile/daniel%20roth/) summarized it in one simple image in his [blogpost](http://blogs.msdn.com/b/webdev/archive/2014/02/21/using-claims-in-your-web-app-is-easier-with-the-new-owin-security-components.aspx):
 
-\[caption id="" align="alignnone" width="630"\]![configuration comparison between web.config and OWIN - property of Daniel Roth](https://blogs.msdn.com/cfs-file.ashx/__key/communityserver-blogs-components-weblogfiles/00-00-00-63-56-metablogapi/7002.image_5F00_thumb_5F00_7D44EED8.png ) configuration comparison between web.config and OWIN - property of Daniel Roth\[/caption\]
+\[caption id="" align="alignnone" width="630"\]![configuration comparison between web.config and OWIN - property of Daniel Roth](https://blogs.msdn.com/cfs-file.ashx/__key/communityserver-blogs-components-weblogfiles/00-00-00-63-56-metablogapi/7002.image_5F00_thumb_5F00_7D44EED8.png) configuration comparison between web.config and OWIN - property of Daniel Roth\[/caption\]
 
 ## Why so easy?
 
@@ -101,7 +101,7 @@ After signing in, you are authenticated and redirected to the page that triggere
 
 Setup claims based authentication in a web application using OWIN is very easy, it just consists of pulling in a few packages, define a startup class, and configure the WsFederation Middleware. It’s way easier then doing this manually, due to the fact that the magic is handled by the middleware, using the WsFederation Metadata.
 
-Next blogpost will explain on how to use the Embedded STS, SharePoint 2013 _and_ High trust Claims based provider hosted applications using OWIN. That's a mouth full for a title ;)
+Next blogpost will explain on how to use the Embedded STS, SharePoint 2013 *and* High trust Claims based provider hosted applications using OWIN. That's a mouth full for a title ;)
 
 The Embedded STS sources can be [downloaded here](https://github.com/BasLijten/Thinktecture.IdentityModel/tree/FederationMetadata) (own fork of the [Thinktecture.IdentityModel](https://github.com/IdentityModel/Thinktecture.IdentityModel/pull/134)).
 

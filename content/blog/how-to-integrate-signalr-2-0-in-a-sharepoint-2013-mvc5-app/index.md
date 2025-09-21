@@ -1,25 +1,25 @@
 ---
-title: "How to integrate SignalR 2.0 in a SharePoint 2013 MVC App"
-date: "2013-11-16"
-categories: 
-  - "apps"
-  - "sharepoint"
-  - "sharepoint-2013"
-tags: 
-  - "mvc"
-  - "mvc5"
-  - "sharepoint"
-  - "sharepoint-2013"
-  - "signalr"
-  - "signalr-2-0"
-  - "visual-studio"
-  - "visual-studio-2013"
-img: "./images/signalR.png"
+title: 'How to integrate SignalR 2.0 in a SharePoint 2013 MVC App'
+date: '2013-11-16'
+categories:
+  - 'apps'
+  - 'sharepoint'
+  - 'sharepoint-2013'
+tags:
+  - 'mvc'
+  - 'mvc5'
+  - 'sharepoint'
+  - 'sharepoint-2013'
+  - 'signalr'
+  - 'signalr-2-0'
+  - 'visual-studio'
+  - 'visual-studio-2013'
+img: './images/signalR.png'
 ---
 
-With the introduction of Apps for SharePoint 2013 and the expansion of the SharePoint API, a whole new world opened for us, the SharePoint developers. This blogpost describes on how to integrate SignalR 2.0 into a SharePoint 2013 MVC app, with the possiblity to use [SignalR](http://signalr.net/ "SignalR Website") from your hostweb! We will end up with a nifty SharePoint application that makes use of signalR and a remote  event receiver, which uses the signalR hub to push through new items to every registred client. An example solution is provided at the end of the document, but imagine what you could do with this. I personally always include signalR solutions when building apps, to monitor all events that I am interested in when debugging/fixing apps.
+With the introduction of Apps for SharePoint 2013 and the expansion of the SharePoint API, a whole new world opened for us, the SharePoint developers. This blogpost describes on how to integrate SignalR 2.0 into a SharePoint 2013 MVC app, with the possiblity to use [SignalR](http://signalr.net/ 'SignalR Website') from your hostweb! We will end up with a nifty SharePoint application that makes use of signalR and a remote  event receiver, which uses the signalR hub to push through new items to every registred client. An example solution is provided at the end of the document, but imagine what you could do with this. I personally always include signalR solutions when building apps, to monitor all events that I am interested in when debugging/fixing apps.
 
-edit: all steps required to get signalR to work, are included, however, not _every_ step to create a working solution, is described. [A complete working example with sourcecode can be downloaded here](http://blog.baslijten.com/SharedContent/SignalREventReceiver.zip "SignalR and Remote event receiver for SharePoint 2013 apps source code").
+edit: all steps required to get signalR to work, are included, however, not *every* step to create a working solution, is described. [A complete working example with sourcecode can be downloaded here](http://blog.baslijten.com/SharedContent/SignalREventReceiver.zip 'SignalR and Remote event receiver for SharePoint 2013 apps source code').
 
 ## Integrate SignalR in your webapplication
 
@@ -35,7 +35,7 @@ Make sure to choose "provider hosted application" in the next step, for debuggin
 
 Create a new folder in your solution with the name "Hub", and create a new class in it, called "DocumentUpdateHub". This class should contain the following code:
 
-```csharp
+````csharp
  using Microsoft.AspNet.SignalR;
 
 namespace SignalREventReceiverWeb.Hubs { public class DocumentUpdateHub:Hub { } } ```
@@ -68,7 +68,7 @@ Now signalR has been configured, it's possible to update the UI using SignalR. F
 - Add a module called "Pages", and add a Page called "default.aspx" to that module.
 - Edit your default.aspx with the following actions:
 
-**_1) Right click, insert snippet - or - press ctrl-x, k_** **_2) select SharePoint and select splistview._** 
+**_1) Right click, insert snippet - or - press ctrl-x, k_** **_2) select SharePoint and select splistview._**
 
 It's possible that you'll get a message to update your Webpartzone tag: DON'T do that. Your webpart should look like this (make sure that the listUrl points to your document library!):
 
@@ -172,3 +172,4 @@ I explained in a few steps, how to create a SharePoint app that makes use of the
 - done.
 
 In addition to this configuration, we saw that making use of remote event receivers (using the azure service bus), can provide great functionality. Happy SharePointing!
+````

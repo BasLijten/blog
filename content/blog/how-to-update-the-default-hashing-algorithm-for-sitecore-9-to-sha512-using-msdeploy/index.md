@@ -1,7 +1,7 @@
 ---
-title: "How to update the default hashing algorithm for Sitecore 9 to SHA512 using msdeploy"
-date: "2018-07-23"
-img: "./images/image001-2.png"
+title: 'How to update the default hashing algorithm for Sitecore 9 to SHA512 using msdeploy'
+date: '2018-07-23'
+img: './images/image001-2.png'
 ---
 
 A few years ago I already blogged on [updating the default hashing algorithm](http://blog.baslijten.com/sitecore-security-1-how-to-replace-the-password-hashing-algorithm/) that Sitecore used. It’s ancient, unsafe and it’s for a change! Luckily, with the introduction of msdeploy packages and the Sitecore on Azure templates, this becomes easy, without having to (manually) change the password after the hashing upgrade and manually changing the hashAlgorithm in the web.config. This can be done by using msdeploy the tool to install _and_ create msdeploy packages.In [my previous blogpost](http://blog.baslijten.com/how-to-deploy-sitecore-web-deploy-packages-using-the-vsts-azure-app-service-task/) I already showed how to add parameters to the web deploy packages, in this approach I am going to show how contents can be changed using this technique. The benefit of this approach is that it can be used with the out of the box Sitecore packages, and, when used as a source for the initial deployment, the right algorithm will be used deploy time _and_ everything will be automated. This method might look a little bit cumbersome, because a manual change might work, but with tens to hundreds of environments, you just want to have everything automated as much as possible.
@@ -35,7 +35,7 @@ As explained in the previous blogpost, the declareparam parameter can be used, t
 
 ## Modify the sql script
 
-The first change is quite easy: replace SHA1 by SHA2\_512.
+The first change is quite easy: replace SHA1 by SHA2_512.
 
 ![](images/img_5b5584475d03c.png)
 
@@ -57,7 +57,7 @@ The second change isn’t to hard as well, but requires a little bit of XPath ma
 
 You will probably have taken notice of the “defaultvalue” in these parameters. I specified them for one important reason: your existing ARM or msdeploy scripts will not break. With the defaultvalue being set, this value will be used when the parameter hasn’t been specified. This is definitely the case with the out of the box Sitecore quickstart ARM templates, which means that a change to your existing deployment scripts won’t be needed as well.
 
- 
+
 
 # One big fat “gotcha”
 
@@ -79,7 +79,7 @@ This could easily be solved by adding the following line in the foreach-loop:
 
 It basically checks if there is an exact match (which happens in the TextFile) and uses the original “match” value as the new input value. This will lead to the result where the “match”-value will be replaced by it’s original “match”-value: nothing will change.
 
- 
+
 
 # Summary
 

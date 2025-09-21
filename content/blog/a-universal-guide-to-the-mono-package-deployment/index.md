@@ -1,8 +1,8 @@
 ---
-title: "A universal guide to the mono package deployment"
-date: "2019-11-08"
-categories: 
-  - "sitecore"
+title: 'A universal guide to the mono package deployment'
+date: '2019-11-08'
+categories:
+  - 'sitecore'
 ---
 
 In my Sitecore symposium session “Sitecore in the enterprise: Optimize your time to deliver toward the speed of light, using all the new love in Azure DevOps” (and yes that is a mouth full) I spend quite some time on the “mono-package” approach. This blogpost what a mono-package is and why it is (much) faster in terms of deployments as opposed to using multiple web deployment packages.

@@ -1,11 +1,11 @@
 ---
-title: "Sitecore 8.2 update 1: Azure deployments, ARM, Web Deploy and the Sitecore Azure Toolkit"
-date: "2016-12-06"
-categories: 
-  - "azure"
-  - "deployment"
-  - "sitecore"
-img: "./images/sitecore-azure-logo.png"
+title: 'Sitecore 8.2 update 1: Azure deployments, ARM, Web Deploy and the Sitecore Azure Toolkit'
+date: '2016-12-06'
+categories:
+  - 'azure'
+  - 'deployment'
+  - 'sitecore'
+img: './images/sitecore-azure-logo.png'
 ---
 
 With the release of 8.2 Update 1, Sitecore also introduced support for Azure Web Apps. This release is, in my opinion, a major step for Sitecore as this update makes it very convenient to deploy to Azure using the Azure Marketplace or the provided PowerShell scripts, that’s why I think that this release is even bigger than Sitecore 8.2 initial. This deployment pattern is an interesting pattern to use on premise as well, although not all of the services can or should be used on premise. This blogpost describes how the Sitecore Azure Toolkit works. My next blogpost will describe how to use this toolkit to create your own custom web deployment packages, both for Azure _and_ your on premise installation, with even older versions than Sitecore 8.2
@@ -29,7 +29,7 @@ When deploying this app, just a few parameters are needed which have to be provi
 
 ![](images/img_5847492eb83c3.png)
 
- 
+
 
 This app provides a basic Sitecore 8.2 XM installation: no XDB whatsoever. The cool thing about the technique about this provisioning method is that it uses the same techniques as I describe in this blogpost: ARM templates and Web Deploy packages.
 
@@ -59,7 +59,7 @@ This template needs to be fed with parameters to be able to do its job:
 
 <script src="https://gist.github.com/BasLijten/fcd457c2d5803b7df4741e3269c1cebc.js"></script>
 
- 
+
 
 The template above, which is used for the XP1 provisioning, needs the Sitecore admin password, MongoDB ConnectionStrings, SQL Server credentials, the license file and the packageURL of the web deploy packages, in total 4 of them: for Content Management, Content Delivery, Reporting and Processing. . Interesting to note is These packages can be downloaded on dev.sitecore.net. In a classic (on premise) situation we were always forced to create role packages ourselves. How many people created PowerShell, batch files or other smart solutions to generate those role packages for us? Well, Sitecore created tooling for this job and I am pretty positive about it! And the fun part: this tool can be used to create your own packages, which can be used to deploy to Azure _and_ on premise!
 
@@ -69,7 +69,7 @@ A Web Deploy package 101: this is a package that can be deployed to Azure or IIS
 
 The Sitecore Azure Toolkit contains a cmdlet to create Sitecore Web Deploy packages. One very important note:
 
-_How the Sitecore Azure toolkit creates web deploypackages is NOT a standard way of doing this. Usually, these packages are created using MsBuild during build, but Sitecore had to create this alternative, as it would become way to complex to create web deploy packages and maintain flexible configurations. Cargo payloads, the common and sku config are terms that Sitecore introduced._ 
+_How the Sitecore Azure toolkit creates web deploypackages is NOT a standard way of doing this. Usually, these packages are created using MsBuild during build, but Sitecore had to create this alternative, as it would become way to complex to create web deploy packages and maintain flexible configurations. Cargo payloads, the common and sku config are terms that Sitecore introduced._
 
 ![](images/img_584749810e75e.png)
 
@@ -122,7 +122,7 @@ Below is an example of the IoAction file:
 
 <script src="https://gist.github.com/BasLijten/d012be24b5275e36ced0e41deebd2b0f.js"></script>
 
- 
+
 
 ### Archive and Parameters
 
@@ -132,7 +132,7 @@ The archive and parameter.xml are two files that need to be copied to the root o
 
 It contains a lot of parameters which may be different on every deployment and/or every role, that’s why they need to be parameterized ;).
 
- 
+
 
 # Taking a look into the Web Deploy packages
 
@@ -152,7 +152,7 @@ As described previously: this file describes which parameters are required to de
 
 ### Website and the /data folder
 
-The actual website can be found in the /content folder. When taking a closer look we find that the contents of the old /data folder is located in /app\_data. The reason for this is _probably_ that only website roots can be deployed to Azure, thus a /data folder wasn’t an option anymore. This means that your license.xml will be deployed to the /app\_data as well.
+The actual website can be found in the /content folder. When taking a closer look we find that the contents of the old /data folder is located in /app_data. The reason for this is _probably_ that only website roots can be deployed to Azure, thus a /data folder wasn’t an option anymore. This means that your license.xml will be deployed to the /app_data as well.
 
 # When a plan comes together
 

@@ -1,24 +1,26 @@
 ---
-title: "How to token replacement using the file transform task inside web deployment packages"
-date: "2021-05-05"
-category: 
-- "Azure Devops"
-- "Azure Pipelines"
-description: "Blogpost about how to use the separate file transformation task in conjunction with a web deployment package "
+title: 'How to token replacement using the file transform task inside web deployment packages'
+date: '2021-05-05'
+category:
+  - 'Azure Devops'
+  - 'Azure Pipelines'
+description: 'Blogpost about how to use the separate file transformation task in conjunction with a web deployment package '
 img: ./images/GearsAndConfiguration.jpg
 tags:
-- Azure Devops
-- Azure Pipelines
-- msdeploy
+  - Azure Devops
+  - Azure Pipelines
+  - msdeploy
 ---
+
 In our company, we have build literally hundreds of webapis over the years, which are still being used and under active development. During these years, a practice was developed to automatically build and deploy those webapis using msdeploy. Part of the process is to replace parameters inside the packages, using the [parameters/setparameter.xml](https://docs.microsoft.com/en-us/aspnet/web-forms/overview/deployment/web-deployment-in-the-enterprise/configuring-parameters-for-web-package-deployment) approach. This work is cumbersome, complex, error-prone, but was, for a long time, the only (supported) way of working. It also became part of a solid process which hasn't been evaluated for years. However, configuration is one of the main timesinks, so it was time to re-evaluate to find out if things could be simplified
 
 > this blogpost has been written with the .Net 4.7.1 in mind
 
 ## Downsides
+
 Using msdeploy with parameters and setparameters.xml has two downsides:
 
-1. This method is cumbersome, especially when working with *loads* of variables. For every variable, a location in the package, a parameters.xml entry, a setparameters.xml entry and an XPath query has to be made. 
+1. This method is cumbersome, especially when working with _loads_ of variables. For every variable, a location in the package, a parameters.xml entry, a setparameters.xml entry and an XPath query has to be made.
 2. For local deployments, this process could be used (by altering the publishin profile), but this process is error-prone and requires often a lot of trial and error. Developers tend to choose a shortcut and include default values inside the web.config, with a chance of committing or checking in unwanted configuration their repository.
 
 A web.config could look like the snippet below:
@@ -30,10 +32,12 @@ A web.config could look like the snippet below:
   <add key="property3" value="http://someendpoint" />
 </appSettings>
 ```
+
 Changing the configuration approach _and_ getting rid of default configuration in the web.config, would be a win-win situation.
+
 ## The solution
 
-A specific Azure Devops Task, called the [File Transform task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/file-transform?view=azure-devops) offers a much easier approach to replace variables, by using tokens: within the connectionstrings and appSettings section of an xml file, every token which has been pre- and post-fixed by double underscores __ (example: ```__token__```) can be replaced by an evironment variable which is specified in Azure Devops. However, the use of this tasks is not as trivial as it looks like. Specifying the targetfiles requires extra effort and working with the local settings doesn't work the same way as before anymore, as the defaultvalues should be replaced by the various  ```__tokens__``` which need to be replaced. 
+A specific Azure Devops Task, called the [File Transform task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/file-transform?view=azure-devops) offers a much easier approach to replace variables, by using tokens: within the connectionstrings and appSettings section of an xml file, every token which has been pre- and post-fixed by double underscores ** (example: ```**token**`) can be replaced by an evironment variable which is specified in Azure Devops. However, the use of this tasks is not as trivial as it looks like. Specifying the targetfiles requires extra effort and working with the local settings doesn't work the same way as before anymore, as the defaultvalues should be replaced by the various `**tokens\_\_``` which need to be replaced.
 
 ```xml
 <appSettings>
@@ -42,7 +46,8 @@ A specific Azure Devops Task, called the [File Transform task](https://docs.micr
   <add key="property3" value="__property3__" />
 </appSettings>
 ```
-The configuration needs to be changed as displayed above. The default values have disappeared, another solution needs to be found to solve the local configuration approach. 
+
+The configuration needs to be changed as displayed above. The default values have disappeared, another solution needs to be found to solve the local configuration approach.
 
 > moving away from default values in your web.config isn't a bad thing. Developers often (temporarily) store usernames, passwords or other sensitive information, which may end up in your repository
 
@@ -55,16 +60,16 @@ As seen in task description below, the targetFiles which are used for "variable 
 # Replace tokens with variable values in XML or JSON configuration files
 - task: FileTransform@1
   inputs:
-    #folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip' 
+    #folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
     #enableXmlTransform: # Optional
     #xmlTransformationRules: '-transform **\*.Release.config -xml **\*.config-transform **\*.$(Environment.Name).config -xml **\*.config' # Optional
     #fileType: # Optional. Options: xml, json
     #targetFiles: # Optional
 ```
 
-The challenge lies in the way in the structure of a webdeployment package. When this package is build, the location of the website inside this package varies; this location reflects the working folder of the msbuild/msdeploy command. Thus "simply" configuring the targetFile is not possible. Retrieving this location is easy, by simply search the zip-archive for this web.config. the result is set as the environment variable ```webconfigFilePath``` in the pipeline for further use
+The challenge lies in the way in the structure of a webdeployment package. When this package is build, the location of the website inside this package varies; this location reflects the working folder of the msbuild/msdeploy command. Thus "simply" configuring the targetFile is not possible. Retrieving this location is easy, by simply search the zip-archive for this web.config. the result is set as the environment variable `webconfigFilePath` in the pipeline for further use
 
-> In the example below I explicitly look for the Web.Config in the root of the website. my pipeline artifact "wapi/wapi1.zip" was downloaded to ```$(System.DefaultWorkingDirectory)/artifacts/wapi/wapi1.zip```. The default behaviour of msbuild always uses the PackageTmp location, so it is safe to search for PackageTmp/Web.config pattern. A better approach may exist ;)
+> In the example below I explicitly look for the Web.Config in the root of the website. my pipeline artifact "wapi/wapi1.zip" was downloaded to `$(System.DefaultWorkingDirectory)/artifacts/wapi/wapi1.zip`. The default behaviour of msbuild always uses the PackageTmp location, so it is safe to search for PackageTmp/Web.config pattern. A better approach may exist ;)
 
 ```powershell
 $Path = "$(System.DefaultWorkingDirectory)/artifacts/wapi/wapi1.zip"
@@ -76,15 +81,15 @@ $a = $zip.Entries | where {$_.FullName -match "PackageTmp/Web.config" }
 Write-Host "##vso[task.setvariable variable=webconfigFilePath;]$a"
 ```
 
-The next step is to simply execute the ```Filetransform``` task and specify the ```webconfigFilePath``` environment variable as input for the targetFiles
+The next step is to simply execute the `Filetransform` task and specify the `webconfigFilePath` environment variable as input for the targetFiles
 
 ```yaml
 - task: FileTransform@1
   displayName: 'File Transform: Web.config'
   inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)/artifacts/wapi/wapi1.zip' 
+    folderPath: '$(System.DefaultWorkingDirectory)/artifacts/wapi/wapi1.zip'
     fileType: xml
-    targetFiles: $(webconfigFilePath) 
+    targetFiles: $(webconfigFilePath)
 ```
 
 ### Working with local variables
@@ -106,7 +111,8 @@ Any kind of key-value will work, although it is named "secrets":
     <secret name="secret key name" value="secret value" />
   </secrets>
 </root>
-``` 
+```
+
 The last action is to simply add this Configuration builder as source to your appSettings:
 
 ```xml
@@ -114,4 +120,5 @@ The last action is to simply add this Configuration builder as source to your ap
 ```
 
 ## Summary
+
 Without any code,change, but with some configuration changes, we were able to ditch sensitive information from the codebase, simplify the configuration-process, and keep the "F5" experience.

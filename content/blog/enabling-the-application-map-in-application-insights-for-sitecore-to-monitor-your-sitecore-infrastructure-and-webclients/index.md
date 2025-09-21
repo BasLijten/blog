@@ -1,14 +1,14 @@
 ---
-title: "Enabling the application map in Application Insights for Sitecore to monitor your Sitecore infrastructure and webclients"
-date: "2018-12-11"
-categories: 
-  - "analytics"
-  - "application-insights"
-  - "azure"
-  - "devops"
-  - "logging"
-  - "performance"
-  - "sitecore"
+title: 'Enabling the application map in Application Insights for Sitecore to monitor your Sitecore infrastructure and webclients'
+date: '2018-12-11'
+categories:
+  - 'analytics'
+  - 'application-insights'
+  - 'azure'
+  - 'devops'
+  - 'logging'
+  - 'performance'
+  - 'sitecore'
 ---
 
 In the out of the box configuration for Sitecore on Azure, application insights has been enabled by default. However, this configuration is optimally configured. In normal situations, it's very valuable to have insights in your infrastructure: what connections provide a lot of errors, latency or other issues. This blogpost explains on how to get these insights with for Sitecore.
@@ -32,7 +32,7 @@ but all that is provided, is the following information. A single application, wh
 
 This is due to the following configuration in the applicationInsights.config:
 
-```xml
+````xml
 <TelemetryModules> <!-- Uncomment the following line to enable dependency tracking --> <!-- <Add Type="Microsoft.ApplicationInsights.DependencyCollector.DependencyTrackingTelemetryModule, Microsoft.AI.DependencyCollector"/> --> <Add Type="Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.PerformanceCollectorModule, Microsoft.AI.PerfCounterCollector"> <! -- cut a lot if information --> </TelemetryModules> ```
 
 By removing the comment and restarting the application (this is mandatory), the detailed "web" of dependencies is shown. Every element in this overview, like the application, the different  connections and the actual services can be selected and give a different overview of information. In the case below, the sql connection has been highlighted, indicating that 19.2% of the requests cause errors:
@@ -68,3 +68,4 @@ Another benefit of enabling application insights at the client, is that Microsof
 # Summary
 
 By just slighty changing the Application insights configuration, much more insights can be gained from the application map. A very interesting insight is the failed SQL statements that are triggered from your environment; this is often an indication in problems with your "tasks"  database. Happy monitoring!
+````

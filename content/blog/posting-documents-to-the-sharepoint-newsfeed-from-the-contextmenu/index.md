@@ -1,13 +1,13 @@
 ---
-title: "Posting documents to the SharePoint newsfeed from the contextmenu"
-date: "2013-11-14"
-categories: 
-  - "apps"
-  - "code"
-  - "javascript"
-  - "rest"
-  - "sharepoint-2013"
-img: "./images/newsfeed.png"
+title: 'Posting documents to the SharePoint newsfeed from the contextmenu'
+date: '2013-11-14'
+categories:
+  - 'apps'
+  - 'code'
+  - 'javascript'
+  - 'rest'
+  - 'sharepoint-2013'
+img: './images/newsfeed.png'
 ---
 
 SharePoint 2013 brought great things: great new social features, the API got a major extension and of course, the new introduced app model. A feature that I really missed though, was the ability to post documents to your newsfeed from the context menu. This blogpost describes how to do this.
@@ -26,7 +26,7 @@ The first thing to add to your SharePoint hosted app, is a Menu Item Custom Acti
 
 This custom action needs to be slightly modified:
 
-```xml{9,10,11,17} <?xml version="1.0" encoding="utf-8"?> <Elements xmlns="http://schemas.microsoft.com/sharepoint/"> <CustomAction Id="16718687-e3a7-47dd-9bf6-485810e3d5b2.PostToNewsfeedDialog" RegistrationType="List" RegistrationId="101" Location="EditControlBlock" Sequence="10001" Title="Post To Newsfeed Dialog" HostWebDialog="true" HostWebDialogHeight="420" HostWebDialogWidth="510"> <!-- Update the Url below to the page you want the custom action to use. Start the URL with the token ~remoteAppUrl if the page is in the associated web project, use ~appWebUrl if page is in the app project. --> <UrlAction Url="~appWebUrl/Pages/PostToNewsfeed.aspx?{StandardTokens}&amp;SPListItemId={ItemId}&amp;SPListId={ListId}&amp;SPApp={AppWebUrl}" /> </CustomAction> </Elements> ```
+`xml{9,10,11,17} <?xml version="1.0" encoding="utf-8"?> <Elements xmlns="http://schemas.microsoft.com/sharepoint/"> <CustomAction Id="16718687-e3a7-47dd-9bf6-485810e3d5b2.PostToNewsfeedDialog" RegistrationType="List" RegistrationId="101" Location="EditControlBlock" Sequence="10001" Title="Post To Newsfeed Dialog" HostWebDialog="true" HostWebDialogHeight="420" HostWebDialogWidth="510"> <!-- Update the Url below to the page you want the custom action to use. Start the URL with the token ~remoteAppUrl if the page is in the associated web project, use ~appWebUrl if page is in the app project. --> <UrlAction Url="~appWebUrl/Pages/PostToNewsfeed.aspx?{StandardTokens}&amp;SPListItemId={ItemId}&amp;SPListId={ListId}&amp;SPApp={AppWebUrl}" /> </CustomAction> </Elements> `
 
 add the lines 9-11: these are not recognized by intellisense, but they do work, somehow. All they do is to make sure that the referenced page (on line 17), will open in a popup, this prevents the action from navigating away to the app itself.
 
@@ -36,7 +36,7 @@ On line 17, a querystring parameter is added, "SPApp={AppWebUrl}", as it is need
 
 Now the action itself is ready, it's time to create the message dialog. The default.aspx can be used for this action. It's important to include the control on line 2: it allows the page to be rendered inside a dialog using an iFrame.
 
-```html{2} <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server"> <WebPartPages:AllowFraming runat="server" ID="AllowIFraming1" />
+````html{2} <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server"> <WebPartPages:AllowFraming runat="server" ID="AllowIFraming1" />
 
 <asp:TextBox runat="server" ID="tb\_01" Rows="5"></asp:TextBox> <asp:Button runat="server" OnClientClick="PostToNewsfeed();" Text="Share This!"/> </asp:Content> ```
 
@@ -80,3 +80,4 @@ When looking at line 106, GetDocumentUrl().then(CreateNewPost), a [deferred patt
 In three steps, it's possible to add a menu item to the contextmenu of a document library. Using the new Rest API for social feeds, some javascript and a SharePoint hosted app, it's possible to extend the SharePoint OOTB User Interface with custom actions and provide some extra productivity to your users
 
 \* Download the [sourcecode here](http://blog.baslijten.com/SharedContent/ShareDocument.zip "ShareDocument sourcecode")
+````

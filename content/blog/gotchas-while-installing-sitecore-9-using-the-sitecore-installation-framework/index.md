@@ -64,8 +64,6 @@ For some reason I always forget those. As xConnect will NOT work without those p
 
 <script src="https://gist.github.com/BasLijten/78f8a736e13b652588666ec18d4e9c39.js"></script>
 
-
-
 # Conclusion
 
 Having an automated installation is great and I will definitely use this over SIM, as this guide takes care of a secure installation, setups solr _and_ xConnect. However, there are some inconvenient issues which I just wrote down, I really hope it helps you to get up and running as soon as possible!

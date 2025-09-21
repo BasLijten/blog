@@ -72,8 +72,6 @@ Another part is to increase the password policy, as the out of the box is pretty
 - **minRequiredPasswordLength             12**
 - **minRequiredNonAlphanumericCharacters 2**
 
-
-
 A better approach would be to use the following regular expression (**passwordStrengthRegularExpression**) which forces the passwords to have at least an upper case, lower case, one number and a special sign in your password:
 
 _/^(?=.\*\\d)(?=.\*\[a-z\])(?=.\*\[A-Z\])(?=.\[\\W\]).{8,}$/_

@@ -32,8 +32,6 @@ From this list, one specific annotation type is missing: The deployment annotati
 
 In the "new" Application Insights, these deployment annotations can be found in the failure and performance overview, which means that Microsoft marks them as important events in the application lifecycle:
 
-
-
 ![](images/img_5c180432dd549.png)
 
 All the other events, which can be added manually from the UI, don't show up in this overview, and as far as I know, no filters can be applied to add other markers as well. In our specific situation, we had to need to add markers in this timeline. We are working with the content management system "Sitecore", which has different roles, each being deployed to different application services. Certain events, such as publishing content, *might* have effect on the performance of the content delivery role (the web application that serves content to visitors); that's why these events needed to be marked. As the only visible annotation was the deployment annotation _and_ that one was not useable from the UI we had to create some code to create this annotation.

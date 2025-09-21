@@ -32,8 +32,6 @@ In “normal” situations (custom build web deploy packages), this vsts task do
 
 Some code exists which determines whether or not a web deployment package has been used. This is determined by the following function:
 
-
-
 ![](images/img_5ace18576f7c2.png)
 
 This code checks whether or not the parameters.xml file is available _and (3)_ if there is a file called systemInfo.xml. A few weeks back, when I wrote a custom deployment script because I couldn’t get this deployment script to work, I completely missed the _and_ operator && (phun intended) I missed the fact that there is a third way of writing “systemInfo.xml”.

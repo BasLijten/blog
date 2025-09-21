@@ -76,8 +76,6 @@ As the technique behind the authentication is completely different as opposed to
 
 <script src="https://gist.github.com/BasLijten/36207de35d2a388a80f27892bd10e83c.js"></script>
 
-
-
 ### Register the AuthenticationProvider middleware pipeline
 
 This is basically one line of configuration; the pipeline which registers the middleware needs to be added here.

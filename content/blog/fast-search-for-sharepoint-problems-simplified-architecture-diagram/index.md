@@ -79,7 +79,7 @@ When a query is executed and no results are returned, the most likely issue is a
 
 The application pool of the Search Query and settings service is not running. Check your IIS Manager to make sure that your application pool is up and that your website is running.
 
-***\- Unexpected error occurred while communicating with Administration Service*** **_when accessing one of the following site settings menu entries_**
+**_\- Unexpected error occurred while communicating with Administration Service_** **_when accessing one of the following site settings menu entries_**
 
 - visual best bets
 - context information

@@ -29,7 +29,7 @@ The code consists of three parts:
 
 ### Ensure that the contact exists.
 
-When the "IsNew" property has been set to true, the contact only exists in the Sitecore environment. An explicit save is needed, before the contact can be reloaded. This is _only_ the case when the visitor doesn't send a SC_GLOBAL_ANALYTICS_COOKIE - this is a persistent cookie which is stored over sessions and contains an identifier which can be used to identiy a user in the xDB. When this information is not available, the contact will be marked as "IsNew". _whenever a user leaves information, which can be used to identify this user, a merge of contacts can be executed._
+When the "IsNew" property has been set to true, the contact only exists in the Sitecore environment. An explicit save is needed, before the contact can be reloaded. This is _only_ the case when the visitor doesn't send a SC*GLOBAL_ANALYTICS_COOKIE - this is a persistent cookie which is stored over sessions and contains an identifier which can be used to identiy a user in the xDB. When this information is not available, the contact will be marked as "IsNew". \_whenever a user leaves information, which can be used to identify this user, a merge of contacts can be executed.*
 
 ### Remove the contact from the current session
 

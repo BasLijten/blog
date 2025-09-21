@@ -17,7 +17,7 @@ Lately, I was preparing for a talk on Azure DevOps for the Sitecore community. F
 I wanted to have a representative real-world example with quite some (legacy) frontend code and a lot of backend projects. It isn’t a very different scenario from regular Asp.Net applications with a heavy clientside oriented frontend, apart from the fact that a lot of persons are using a single powershell/cakescript/gulp script to build all the clientside assets _and_ backend code. There are three reasons why I couldn’t use the hosted build agents and had create those agents with the same software them myself:
 
 1. To show the possibilities to scale out agents, the hosted Azure DevOps build agents could have been used, as they are free to use for up to 10 processes, _but only_ for open source projects. The codebase that was used is _not_ public, so parallelism wasn’t possible.
-2. Scaling up hosted Azure DevOps Build Agents is not possible. All agents are based on the DS2_V3 VM, which has 2 vCPU’s and 7Gb op memory. Scaling up _may_ have a positive effect on some workloads
+2. Scaling up hosted Azure DevOps Build Agents is not possible. All agents are based on the DS2*V3 VM, which has 2 vCPU’s and 7Gb op memory. Scaling up \_may* have a positive effect on some workloads
 3. The hosted build agents are sufficient in terms of tooling. Why create our own agents when the blueprints are already available?
 
 # How to create private build agents with the configuration of the Hosted agents

@@ -13,7 +13,7 @@ The scenario I wanted to achieve, was the following:
 
 ## The problems of (visual) upgrading to SharePoint 2010
 
-The problems of visual upgrading consist of several issues: it doesn't work right out of the box (but that is expected), and some steps are needed to deploy and undeploy a masterpage, before the real SP2010 masterpage can be set, because the v4.master seems to be ***required***
+The problems of visual upgrading consist of several issues: it doesn't work right out of the box (but that is expected), and some steps are needed to deploy and undeploy a masterpage, before the real SP2010 masterpage can be set, because the v4.master seems to be **_required_**
 
 ### 1 - Upgrade the site doesn't work immediately
 

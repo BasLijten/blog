@@ -57,8 +57,6 @@ The second change isn’t to hard as well, but requires a little bit of XPath ma
 
 You will probably have taken notice of the “defaultvalue” in these parameters. I specified them for one important reason: your existing ARM or msdeploy scripts will not break. With the defaultvalue being set, this value will be used when the parameter hasn’t been specified. This is definitely the case with the out of the box Sitecore quickstart ARM templates, which means that a change to your existing deployment scripts won’t be needed as well.
 
-
-
 # One big fat “gotcha”
 
 After creating this package, one thing went wrong miserably. At some point in time, the script places temporary values in the new package:
@@ -78,8 +76,6 @@ This could easily be solved by adding the following line in the foreach-loop:
 ![](images/img_5b5584b04f876.png)
 
 It basically checks if there is an exact match (which happens in the TextFile) and uses the original “match” value as the new input value. This will lead to the result where the “match”-value will be replaced by it’s original “match”-value: nothing will change.
-
-
 
 # Summary
 

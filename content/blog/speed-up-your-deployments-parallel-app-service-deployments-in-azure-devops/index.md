@@ -85,8 +85,6 @@ Save the release and queue it. When running this release, Azure DevOps will add 
 
 \[caption id="attachment_21314" align="alignnone" width="1026"\]![Azure DevOps parallel tasks](images/img_5bc98e17200aa.png 'Azure DevOps parallel tasks') Azure DevOps parallel tasks\[/caption\]
 
-
-
 # Summary
 
 Although the convenient way of running jobs in parallel is not yet availalbe for the release pipelines in Azure DevOps, it _is_ possible to get this to work. In case of the sitecore platform, where sometimes more than 18 apps have to be deployed in parallel, this can save a _lot_ of time and will dramatically increase the speed of your acceptance and production deployments

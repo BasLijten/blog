@@ -40,8 +40,6 @@ What was the reason behind the empty cache? THese caches can be flushed manually
 
 ![](images/img_5c1813e2a9007.png)
 
-
-
 ## The implementation
 
 The implementation was fairly simple; First, I created the annotation library (as described in my previous blogpost), the second step was to create a publishing processor which gets executed just before the actual publish action:

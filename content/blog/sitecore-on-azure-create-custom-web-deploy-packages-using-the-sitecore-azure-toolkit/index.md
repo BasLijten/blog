@@ -79,7 +79,7 @@ I want the the remoting service Enabled and requireSecureConnection to be config
 
 ### The XDT
 
-Inside the BasLijten.PowerShellExtensions folder, create a folder called “XDTS”. To apply an XDT to a patch file simply recreate the same folder/file structure to that file. In this case, the patch file resides at the location “App_Config\\Include\\Cognifide.PowerShell.Config”. This means that the _same_ folder structure in the XDTS folder needs to be created. To be able to apply the XDT transformation to “Cognifide.PowerShell.Config”, the file “Cognifide.PowerShell.Config.xdt” has to be created in that folder. The transformation will be applied automatically after creating the WDP. For the sake of completeness, this is the XDT that I used:
+Inside the BasLijten.PowerShellExtensions folder, create a folder called “XDTS”. To apply an XDT to a patch file simply recreate the same folder/file structure to that file. In this case, the patch file resides at the location “App*Config\\Include\\Cognifide.PowerShell.Config”. This means that the \_same* folder structure in the XDTS folder needs to be created. To be able to apply the XDT transformation to “Cognifide.PowerShell.Config”, the file “Cognifide.PowerShell.Config.xdt” has to be created in that folder. The transformation will be applied automatically after creating the WDP. For the sake of completeness, this is the XDT that I used:
 
 <script src="https://gist.github.com/BasLijten/7b4e6085c2c664f14ce4bd446f14c2cf.js"></script>
 

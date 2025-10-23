@@ -39,10 +39,10 @@ This is a Gatsby-based blog focused on Sitecore, Azure, .NET, and security conte
 ## Development Workflows
 
 ```bash
-npm run dev          # Start development server (localhost:8000)
-npm run build        # Production build with experimental page optimization
-npm run lint         # ESLint with React plugin
-npm run format       # Prettier formatting for JS/JSX and Markdown
+yarn dev              # Start development server (localhost:8000)
+yarn build            # Production build with experimental page optimization
+yarn lint             # ESLint with React plugin
+yarn format           # Prettier formatting for JS/JSX and Markdown
 ```
 
 ## Content Features

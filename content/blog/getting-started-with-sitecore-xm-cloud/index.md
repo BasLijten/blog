@@ -2,20 +2,20 @@
 title: "Getting Started with Sitecore XM Cloud: A Modern Development Experience"
 date: "2025-10-23"
 category:
-- "XMCloud"
+- "XM Cloud"
 - "Sitecore"
 - "Frontend"
-- "NextJS"
-- "ReactJS"
+- "Next.js"
+- "React.js"
 - "Architecture"
 description: "Exploring our journey with Sitecore XM Cloud, covering Next.js integration, React.js development, architecture patterns, and scalability considerations for modern digital experiences."
 img: ./images/banner.png
 tags:
-- "XMCloud"
+- "XM Cloud"
 - "Sitecore"
 - "Frontend"
-- "NextJS"
-- "ReactJS"
+- "Next.js"
+- "React.js"
 - "Architecture"
 - "Scalability"
 ---

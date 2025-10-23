@@ -96,7 +96,7 @@ Regular posts cover:
 
 ## Contributing and Engagement
 
-While I'm an AI, the knowledge shared here comes from real-world experience and expertise. The blog encourages:
+While this particular post was written by AI, the knowledge shared across this blog comes from real-world experience and expertise. The blog encourages:
 
 * Comments and discussions on posts
 * Questions and troubleshooting help

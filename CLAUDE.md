@@ -10,12 +10,12 @@ Personal tech blog by Bas Lijten (Sitecore MVP) at https://blog.baslijten.com. B
 
 ```bash
 yarn dev              # Start development server (localhost:8000)
-yarn build            # Production build with GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES
+yarn build            # Production build with experimental page optimization
 yarn lint             # ESLint check on .js/.jsx files
 yarn format           # Prettier format JS/JSX and Markdown
 ```
 
-No test suite is configured (placeholder only).
+No test framework is configured — `yarn test` just prints a reminder.
 
 ## Architecture
 
@@ -27,36 +27,38 @@ No test suite is configured (placeholder only).
 - Generates individual post pages with previous/next navigation
 - Generates tag archive pages using `lodash.kebabCase` on frontmatter categories
 
-**Templates** (`src/templates/`):
-- `blog-post.js` — single post, uses page-level GraphQL query, class component
-- `blog-list.js` — paginated index with prev/next page navigation
-- `tags.js` — archive page for a single tag
+**Key files:**
+- `gatsby-config.js` — plugins and site metadata
+- `gatsby-node.js` — page generation: blog posts, paginated index (10/page), tag pages
+- `src/templates/` — `blog-post.js`, `blog-list.js`, `tags.js` (use GraphQL page queries)
+- `src/components/` — `layout.js` (StaticQuery sidebar + content wrapper), `sidebar.js`, `seo.js`
+- `src/styles/` — SCSS partials imported into `main.scss` (import order: normalize → variables → syntax → components)
+- `netlify.toml` — security headers and CSP policy
 
-**Layout** (`src/components/layout.js`): Uses `StaticQuery` (not hooks) to read site metadata once; wraps all pages with sidebar + main content.
+## Blog Post Content
 
-**Styling**: SCSS partials loaded via `main.scss`. Import order matters: normalize → variables → syntax → component partials.
+Each post lives at `content/blog/[slug]/index.md` with images in `content/blog/[slug]/images/`.
 
-## Blog Post Frontmatter
-
+Required frontmatter:
 ```yaml
-title: "Post Title"
+title: "Post title"
 date: "YYYY-MM-DD"
 categories: ["tag1", "tag2"]
 description: "SEO description"
-img: ./images/header.jpg
+img: ./images/banner.jpg
 ```
 
-- Images must be co-located with their post (`content/blog/[slug]/images/`)
-- Tag pages are auto-generated from `categories` — do not create manually
-- Use `GatsbyImage` component, not `<img>` tags
+- `categories` drives auto-generated tag pages (kebab-cased URLs at `/tags/[tag]/`) — do not create tag pages manually
+- Images must be co-located with the markdown file for `gatsby-remark-images` to process them
+- Use `GatsbyImage` component (not `<img>`) in React components
 
-## Content Features
+## Remark Plugins
 
-- **Code highlighting**: `gatsby-remark-highlight-code` with Dracula theme (DeckDeckGo web component)
-- **Video embeds**: `youtube: https://www.youtube.com/embed/VIDEO_ID` in markdown (privacy mode)
-- **Math**: KaTeX syntax blocks via `gatsby-remark-katex`
-- **RSS feed**: Auto-generated at `/rss.xml`
+- `gatsby-remark-highlight-code` — Dracula theme via DeckDeckGo web component (not PrismJS)
+- `gatsby-remark-embed-video` — YouTube embeds use privacy mode (`youtube-nocookie.com`)
+- `gatsby-remark-katex` — math rendering
+- `gatsby-remark-images` — auto WebP/AVIF conversion
 
-## Security
+## Deployment
 
-`netlify.toml` contains a strict CSP. When adding new third-party scripts or embeds, update the CSP allowlist in `netlify.toml` accordingly. Current allowlist covers: Google Analytics, YouTube (privacy mode), GitHub Gists, Twitter embeds, Report URI.
+Netlify with `netlify-plugin-gatsby-cache`. Node 18, Yarn 1.x. The CSP in `netlify.toml` explicitly allows Google Analytics/GTM, GitHub Gists, Twitter embeds, and YouTube (privacy mode only) — update it when adding new external resources.

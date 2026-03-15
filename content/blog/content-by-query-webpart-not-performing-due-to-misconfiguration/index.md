@@ -1,8 +1,8 @@
 ---
-title: "Content by query webpart not performing due to misconfiguration"
-date: "2013-01-03"
-categories: 
-  - "sharepoint"
+title: 'Content by query webpart not performing due to misconfiguration'
+date: '2013-01-03'
+categories:
+  - 'sharepoint'
 ---
 
 Today we were experiencing some major performance issues on some pages on a new website. The pages that were experiencing these performance issues, all made use of the content by query webpart (we didn't have any performance issues before on these pages). The content by query webpart that we were using on the site, used a [pagefield value](http://blogs.msdn.com/b/ecm/archive/2010/05/14/what-s-new-with-the-content-query-web-part.aspx), which was used to lookup some related pages from another list.

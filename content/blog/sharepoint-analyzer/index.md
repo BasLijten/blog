@@ -1,6 +1,6 @@
 ---
-title: "SharePoint Analyzer"
-date: "2009-01-30"
+title: 'SharePoint Analyzer'
+date: '2009-01-30'
 ---
 
 Some days ago i was browsing the internet for sharepoint analyze tools. On tool has been developed by the well known "Bamboo Solutions", it's called "Bamboo SharePoint Analyzer". It helps discovering the SharePoint administration:

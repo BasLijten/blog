@@ -1,11 +1,11 @@
 ---
-title: "Sitecore 8.2 update 1: Azure deployments, ARM, Web Deploy and the Sitecore Azure Toolkit"
-date: "2016-12-06"
-categories: 
-  - "azure"
-  - "deployment"
-  - "sitecore"
-img: "./images/sitecore-azure-logo.png"
+title: 'Sitecore 8.2 update 1: Azure deployments, ARM, Web Deploy and the Sitecore Azure Toolkit'
+date: '2016-12-06'
+categories:
+  - 'azure'
+  - 'deployment'
+  - 'sitecore'
+img: './images/sitecore-azure-logo.png'
 ---
 
 With the release of 8.2 Update 1, Sitecore also introduced support for Azure Web Apps. This release is, in my opinion, a major step for Sitecore as this update makes it very convenient to deploy to Azure using the Azure Marketplace or the provided PowerShell scripts, that’s why I think that this release is even bigger than Sitecore 8.2 initial. This deployment pattern is an interesting pattern to use on premise as well, although not all of the services can or should be used on premise. This blogpost describes how the Sitecore Azure Toolkit works. My next blogpost will describe how to use this toolkit to create your own custom web deployment packages, both for Azure _and_ your on premise installation, with even older versions than Sitecore 8.2
@@ -69,7 +69,7 @@ A Web Deploy package 101: this is a package that can be deployed to Azure or IIS
 
 The Sitecore Azure Toolkit contains a cmdlet to create Sitecore Web Deploy packages. One very important note:
 
-_How the Sitecore Azure toolkit creates web deploypackages is NOT a standard way of doing this. Usually, these packages are created using MsBuild during build, but Sitecore had to create this alternative, as it would become way to complex to create web deploy packages and maintain flexible configurations. Cargo payloads, the common and sku config are terms that Sitecore introduced._ 
+_How the Sitecore Azure toolkit creates web deploypackages is NOT a standard way of doing this. Usually, these packages are created using MsBuild during build, but Sitecore had to create this alternative, as it would become way to complex to create web deploy packages and maintain flexible configurations. Cargo payloads, the common and sku config are terms that Sitecore introduced._
 
 ![](images/img_584749810e75e.png)
 
@@ -152,7 +152,7 @@ As described previously: this file describes which parameters are required to de
 
 ### Website and the /data folder
 
-The actual website can be found in the /content folder. When taking a closer look we find that the contents of the old /data folder is located in /app\_data. The reason for this is _probably_ that only website roots can be deployed to Azure, thus a /data folder wasn’t an option anymore. This means that your license.xml will be deployed to the /app\_data as well.
+The actual website can be found in the /content folder. When taking a closer look we find that the contents of the old /data folder is located in /app_data. The reason for this is _probably_ that only website roots can be deployed to Azure, thus a /data folder wasn’t an option anymore. This means that your license.xml will be deployed to the /app_data as well.
 
 # When a plan comes together
 

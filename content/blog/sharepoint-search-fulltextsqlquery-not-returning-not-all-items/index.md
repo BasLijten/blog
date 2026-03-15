@@ -1,11 +1,11 @@
 ---
-title: "SharePoint Search FullTextSqlQuery not returning not all items"
-date: "2009-03-31"
-categories: 
-  - "fulltextsqlquery"
-  - "scope"
-  - "search"
-  - "sharepoint"
+title: 'SharePoint Search FullTextSqlQuery not returning not all items'
+date: '2009-03-31'
+categories:
+  - 'fulltextsqlquery'
+  - 'scope'
+  - 'search'
+  - 'sharepoint'
 ---
 
 Today I was breaking my head on some stupid problem within SharePoint Search. We created a site with about 50 dummy pages to test some cross webapp news aggregation webpart that I created. For some reason just 4(!) news items were found, each one existing in another subweb. In the SSP the View Scopes page also showed the magic number of '4' items found.

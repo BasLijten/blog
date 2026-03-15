@@ -1,29 +1,29 @@
 ---
-title: "Getting SharePoint 2013 apps and WebAPI to work"
-date: "2013-12-13"
-categories: 
-  - "apicontroller"
-  - "apps"
-  - "development"
-  - "mvc"
-  - "rest"
-  - "sharepoint-2013"
-  - "webapi"
-tags: 
-  - "development"
+title: 'Getting SharePoint 2013 apps and WebAPI to work'
+date: '2013-12-13'
+categories:
+  - 'apicontroller'
+  - 'apps'
+  - 'development'
+  - 'mvc'
+  - 'rest'
+  - 'sharepoint-2013'
+  - 'webapi'
+tags:
+  - 'development'
 ---
 
-With the release of Visual Studio 2013, Microsoft also added a very nice MVC template for remote SharePoint Apps. This is a slightly modifed version of the default MVC5 template, which doesn't, for example, contain an own authentication provider, but does contain all the stuff like bootstrap and the latest jquery version. Some extra helper files have been added (via a nuget package) to assist in the communication with SharePoint 2013. This does work perfectly with the Actions defined in MVC controllers, but the code doesn't work together with ApiControllers. Yet ;) This blogpost shows us how (roughly) the same functionality can be implemented for use with the WebApi controller! At the end, the full source code is provided, it works in azure, as well as with high trust solutions. A good read on the basics of the SharePointContextProvider can be found [here](http://blogs.msdn.com/b/kaevans/archive/2013/09/24/introducing-sharepointcontext-for-provider-hosted-sharepoint-apps.aspx "Introducing SharePointContext for Provider-Hosted SharePoint Apps!") and [here](http://www.looselytyped.net/2013/06/26/sharepoint-app-tools-in-visual-studio-2013-preview-the-new-sharepointcontext-helper/ "SharePoint app tools in Visual Studio 2013 preview, the new SharePointContext helper!")
+With the release of Visual Studio 2013, Microsoft also added a very nice MVC template for remote SharePoint Apps. This is a slightly modifed version of the default MVC5 template, which doesn't, for example, contain an own authentication provider, but does contain all the stuff like bootstrap and the latest jquery version. Some extra helper files have been added (via a nuget package) to assist in the communication with SharePoint 2013. This does work perfectly with the Actions defined in MVC controllers, but the code doesn't work together with ApiControllers. Yet ;) This blogpost shows us how (roughly) the same functionality can be implemented for use with the WebApi controller! At the end, the full source code is provided, it works in azure, as well as with high trust solutions. A good read on the basics of the SharePointContextProvider can be found [here](http://blogs.msdn.com/b/kaevans/archive/2013/09/24/introducing-sharepointcontext-for-provider-hosted-sharepoint-apps.aspx 'Introducing SharePointContext for Provider-Hosted SharePoint Apps!') and [here](http://www.looselytyped.net/2013/06/26/sharepoint-app-tools-in-visual-studio-2013-preview-the-new-sharepointcontext-helper/ 'SharePoint app tools in Visual Studio 2013 preview, the new SharePointContext helper!')
 
 _Note: the provided code is by no means production ready! I didn't test it thoroughly, but the basic scenario's do work!_
 
 ## Different concepts
 
-At first, the concepts of MVC and WebAPI are different. Basically, MVC is optimized to return views as HTML, whereas the WebAPI is optimized to return structured data. Dave Ward wrote a [good post](http://encosia.com/asp-net-web-api-vs-asp-net-mvc-apis/ "Web API vs MVC api") on this subject. When looking at the technical aspects of MVC and WebAPI, there are some more differences, which causes the code not to work with WebAPI controllers.
+At first, the concepts of MVC and WebAPI are different. Basically, MVC is optimized to return views as HTML, whereas the WebAPI is optimized to return structured data. Dave Ward wrote a [good post](http://encosia.com/asp-net-web-api-vs-asp-net-mvc-apis/ 'Web API vs MVC api') on this subject. When looking at the technical aspects of MVC and WebAPI, there are some more differences, which causes the code not to work with WebAPI controllers.
 
 ### MVC, APIControllers and the SharePointContextProvider
 
-The MVC Controllers inherit from "[System.Web.MVC.Controller](http://msdn.microsoft.com/en-us/library/system.web.mvc.controller(v=vs.118).aspx "System.Web.MVC.Controller")" and provides properties like HTTP Context and the Request property, which is a [HttpRequestBase](http://msdn.microsoft.com/en-us/library/system.web.httprequestbase(v=vs.118).aspx "HttpRequestBase"). Those two properties are heavily used in the SharePoint helper classes that help creating and ensuring the SharePoint contexts. Whenever an action is being executed, the SharePointContextProviderAttribute tries to enforce a SharePoint context, which can return 3 different results:
+The MVC Controllers inherit from "[System.Web.MVC.Controller](<http://msdn.microsoft.com/en-us/library/system.web.mvc.controller(v=vs.118).aspx> 'System.Web.MVC.Controller')" and provides properties like HTTP Context and the Request property, which is a [HttpRequestBase](<http://msdn.microsoft.com/en-us/library/system.web.httprequestbase(v=vs.118).aspx> 'HttpRequestBase'). Those two properties are heavily used in the SharePoint helper classes that help creating and ensuring the SharePoint contexts. Whenever an action is being executed, the SharePointContextProviderAttribute tries to enforce a SharePoint context, which can return 3 different results:
 
 - The context is OK
 - The context cannot be created yet: redirect back to the portal to gather the right information. This is mostly the case when the remoteweb has been bookmarked and the page is requested via that bookmark. The user will be redirected to SharePoint to login, and after the login, the user is redirected back to SharePoint. The check will return "OK" then.
@@ -36,13 +36,13 @@ The MVC Controllers inherit from "[System.Web.MVC.Controller](http://msdn.micros
 
 The function on line 1, "SharePointContextProvider.CheckRedirectionStatus" not only checks wether or not the user should be redirected, but also creates the SharePointContext, whenever this is possible. The first condition for a succesful return status (return OK or ShouldRedirect) is the presence of a SPHostUrl in the querystringparameters. Using a function called GetSPHostUrl, this parameter is retrieved from the RequestUri:
 
-```csharp
+````csharp
  public static Uri GetSPHostUrl(HttpRequestBase httpRequest) public static Uri GetSPHostUrl(HttpRequest httpRequest) ```
 
 Whenever the context can be created, this context is stored in the HttpContext.Session. Below the HighTrustContext is listed, the implementation of the Acs variant of SaveSharePointContext is slightly different, but uses the HttpContext.Session as well.
 
 ```csharp
- protected override void SaveSharePointContext(SharePointContext spContext, HttpContextBase httpContext) { httpContext.Session\[SPContextKey\] = spContext as SharePointHighTrustContext; } ``` 
+ protected override void SaveSharePointContext(SharePointContext spContext, HttpContextBase httpContext) { httpContext.Session\[SPContextKey\] = spContext as SharePointHighTrustContext; } ```
 
 #### ApiController
 
@@ -106,7 +106,7 @@ The Creation of the SharePoint context for full trust solutions was quite easy: 
 ```csharp
  protected override SharePointContext CreateSharePointContext(Uri spHostUrl, Uri spAppWebUrl, string spLanguage, string spClientTag, string spProductNumber, HttpRequestBase httpRequest) { WindowsIdentity logonUserIdentity = httpRequest.LogonUserIdentity; if (logonUserIdentity == null || !logonUserIdentity.IsAuthenticated || logonUserIdentity.IsGuest || logonUserIdentity.User == null) { return null; }
 
-return new SharePointHighTrustContext(spHostUrl, spAppWebUrl, spLanguage, spClientTag, spProductNumber, logonUserIdentity); } ``` 
+return new SharePointHighTrustContext(spHostUrl, spAppWebUrl, spLanguage, spClientTag, spProductNumber, logonUserIdentity); } ```
 
 In this case, it all came down to replace the HttpRequestBase by an available property in the ControllerContext, in which the WindowsIdentity property was available. I ended up using the RequestContext, which was available in the ControllerContext:
 
@@ -115,8 +115,8 @@ In this case, it all came down to replace the HttpRequestBase by an available pr
 
 return new SharePointApiControllerHighTrustContext(spHostUrl, spAppWebUrl, spLanguage, spClientTag, spProductNumber, logonUserIdentity);
 
-} 
-``` 
+}
+````
 
 That was all that was needed for the High Trust apps!
 
@@ -133,18 +133,18 @@ if (string.IsNullOrEmpty(contextTokenString)) { return null; }
 
 //…
 
-return new SharePointAcsContext(spHostUrl, spAppWebUrl, spLanguage, spClientTag, spProductNumber, contextTokenString, contextToken); } 
+return new SharePointAcsContext(spHostUrl, spAppWebUrl, spLanguage, spClientTag, spProductNumber, contextTokenString, contextToken); }
 ```
 
 The problem is in the method GetContextTokenFromRequest in the TokenHelper class:
 
 ```csharp
- public static string GetContextTokenFromRequest(HttpRequestBase request) { string\[\] paramNames = { "AppContext", "AppContextToken", "AccessToken", "SPAppToken" }; foreach (string paramName in paramNames) { if (!string.IsNullOrEmpty(request.Form\[paramName\])) { return request.Form\[paramName\]; } if (!string.IsNullOrEmpty(request.QueryString\[paramName\])) { return request.QueryString\[paramName\]; } } return null; } 
+ public static string GetContextTokenFromRequest(HttpRequestBase request) { string\[\] paramNames = { "AppContext", "AppContextToken", "AccessToken", "SPAppToken" }; foreach (string paramName in paramNames) { if (!string.IsNullOrEmpty(request.Form\[paramName\])) { return request.Form\[paramName\]; } if (!string.IsNullOrEmpty(request.QueryString\[paramName\])) { return request.QueryString\[paramName\]; } } return null; }
 ```
 
-Within this method, the application context token is retrieved, from the request form parameters or from the querystring . After some fiddling around (or however it is called when using fiddler), It came out that after startup of an application, the app context token is send as a form parameter of the request. [According to MSDN](http://msdn.microsoft.com/en-us/library/office/jj163816.aspx "URL strings and tokens in apps for SharePoint"), it's not possible to provide the AppContextToken as a startup parameter in the querystring. As its not possible to get the original post parameters via javascript, I had to find another solution.
+Within this method, the application context token is retrieved, from the request form parameters or from the querystring . After some fiddling around (or however it is called when using fiddler), It came out that after startup of an application, the app context token is send as a form parameter of the request. [According to MSDN](http://msdn.microsoft.com/en-us/library/office/jj163816.aspx 'URL strings and tokens in apps for SharePoint'), it's not possible to provide the AppContextToken as a startup parameter in the querystring. As its not possible to get the original post parameters via javascript, I had to find another solution.
 
-It turned out that using cookies to provide the app context token is allowed, regarding this quote on MSDN, within the "[Tips and FAQ: Oauth and remote apps for SharePoint](http://msdn.microsoft.com/library/office/fp179932.aspx "Tips and FAQ: OAuth and remote apps for SharePoint")" article:
+It turned out that using cookies to provide the app context token is allowed, regarding this quote on MSDN, within the "[Tips and FAQ: Oauth and remote apps for SharePoint](http://msdn.microsoft.com/library/office/fp179932.aspx 'Tips and FAQ: OAuth and remote apps for SharePoint')" article:
 
 **Is it okay to keep AppContext (obtained from a SharePoint POST request) as a hidden input field on the page?** _Putting the AppContext value in a hidden field or in a cookie is fine. If you have a server-side cache, you can also consider extracting the "CacheKey" from the context token, putting that in the cookie or hidden input field, and keeping the refresh token (and even the access token) and other information in a server-side cache (that way you can make this cache durable between sessions)._
 
@@ -175,7 +175,7 @@ Microsoft.SharePoint.Client.User spUser = null; using (var clientContext = spCon
 
 clientContext.Load(spUser, user => user.Title);
 
-clientContext.ExecuteQuery(); } } return "user: " + spUser.Title; } } 
+clientContext.ExecuteQuery(); } } return "user: " + spUser.Title; } }
 ```
 
 Within my MVC view, I added a <div "testapiresult">

@@ -1,9 +1,9 @@
 ---
-title: "Gotchas while installing Sitecore 9 using the Sitecore installation framework"
-date: "2017-10-25"
-categories: 
-  - "deployment"
-  - "sitecore"
+title: 'Gotchas while installing Sitecore 9 using the Sitecore installation framework'
+date: '2017-10-25'
+categories:
+  - 'deployment'
+  - 'sitecore'
 ---
 
 Sitecore released a nice Installation framework to install Sitecore, xConnect and configure Solr. I used this framework already a few times (on a few machines and it turned out that I am very proficient in breaking things. Especially Sitecore 9). During this installation I faced some inconvenient issues (and found out some tips) which I wanted to share with you. This should help you getting up and running even faster!

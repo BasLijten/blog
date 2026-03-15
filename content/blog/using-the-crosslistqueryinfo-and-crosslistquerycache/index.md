@@ -1,6 +1,6 @@
 ---
-title: "Using the CrossListQueryInfo and CrossListQueryCache"
-date: "2009-03-27"
+title: 'Using the CrossListQueryInfo and CrossListQueryCache'
+date: '2009-03-27'
 ---
 
 Lately, I am relatively a lot working with the CrossListQueryInfo. This is a way to query multiple lists at once, crossing multiple SPWebs, if you want to. And, the main reason why I used it, it's possible to use the cached lists of the sitecollection, to improve performance! The first steps with this CrossListQueryInfo can be quite frustrating, as there isnt too much documentation to find on.
@@ -22,13 +22,13 @@ private DataTable ExampleQuery()
 
             clqi = new CrossListQueryInfo();
 
- 
+
 
             // Insert the list types that you want to use. In this case, its the publishing page library (850, see code below)
 
             clqi.Lists = "<Lists ServerTemplate=\\"" + (int)ListServerTemplateCodes.PageLibrary + "\\" />";
 
- 
+
 
             // Insert the fields that you want to see. If there is a field inside that doesnt exist in the list that you query, your result will be nill, nada, nothing.
 
@@ -36,25 +36,25 @@ private DataTable ExampleQuery()
 
             clqi.ViewFields = "<FieldRef Name=\\"Title\\" /><FieldRef Name=\\"FileLeafRef\\" /><FieldRef Name=\\"Nieuws\_x0020\_Type\\" /><FieldRef Name=\\"Nieuws\_x0020\_Leverancier\\" /><FieldRef Name=\\"Uitgelicht\\" /><FieldRef Name=\\"Created\\" /><FieldRef Name=\\"Comments\\" />";
 
- 
+
 
             // scop to use. Another possibility is SiteCollection
 
             clqi.Webs = "<Webs Scope=\\"Recursive\\" />";
 
- 
+
 
             // turn the cache on
 
             clqi.UseCache = true;
 
- 
+
 
             // if row limit == 0, you will get 0 results
 
             clqi.RowLimit = 100;
 
- 
+
 
             // I know a stringbuilder would be better, but i wanted to show the markup of the query
 
@@ -88,13 +88,13 @@ private DataTable ExampleQuery()
 
                         "</Where>";
 
- 
+
 
             // put the CrossListQueryInfo object into the CrossListQueryCache
 
             CrossListQueryCache clqc = new CrossListQueryCache(clqi);
 
- 
+
 
             // and query the data!
 
@@ -102,7 +102,7 @@ private DataTable ExampleQuery()
 
             DataTable tbl = clqc.GetSiteData((SPContext.Current.Site, CrossListQueryCache.ContextUrl());
 
- 
+
 
             // return the datatable
 
@@ -113,7 +113,7 @@ private DataTable ExampleQuery()
 The enum below can be used to make life a little bit easier. I got it from:[http://www.aspenhorizons.com/devblog/?p=29](http://www.aspenhorizons.com/devblog/?p=29)
 
 public enum ListServerTemplateCodes
-    {
+{
 
         GenericList = 100,
 

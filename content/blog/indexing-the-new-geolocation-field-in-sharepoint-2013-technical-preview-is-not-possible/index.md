@@ -1,10 +1,10 @@
 ---
-title: "Indexing the new Geolocation field in SharePoint 2013 Technical preview is not possible"
-date: "2012-07-25"
-categories: 
-  - "geolocation"
-  - "sharepoint"
-  - "sharepoint-2013"
+title: 'Indexing the new Geolocation field in SharePoint 2013 Technical preview is not possible'
+date: '2012-07-25'
+categories:
+  - 'geolocation'
+  - 'sharepoint'
+  - 'sharepoint-2013'
 ---
 
 As I was playing around with the new geolocation column of SharePoint 2013, I wanted to try to migrate my geosearch solution for Fast Search for SharePoint 2010 to SharePoint 2013.  The addition of the geolocation column was opening up some interesting possibilities. Potentially, this solution would add some (near) out of the box geolocation solutions.

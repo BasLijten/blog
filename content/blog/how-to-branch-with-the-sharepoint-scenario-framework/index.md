@@ -1,8 +1,8 @@
 ---
-title: "How to branch with the SharePoint scenario framework"
-date: "2011-08-11"
-categories: 
-  - "sharepoint-2010"
+title: 'How to branch with the SharePoint scenario framework'
+date: '2011-08-11'
+categories:
+  - 'sharepoint-2010'
 ---
 
 Waldek Mastykarz [posted a superb post](http://blog.mastykarz.nl/multipage-forms-sharepoint-scenario-framework/) about one of those hidden SharePoint gems: the SharePoint scenario framework for multi-page forms. As Waldek showed off, this framework enables us to create some flows, but I was wondering if branched flows (for example, an easy yes/no) were possible. And it seems to be that it is!. This post shows off how to create a branched flow based on webparts and the SharePoint scenario framework.

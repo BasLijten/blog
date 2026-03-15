@@ -1,8 +1,8 @@
 ---
 title: "'Microsoft.Office.Server.Internal.UI.SharedServicesAdminDefaultPage' is not allowed for this page"
-date: "2009-02-06"
-categories: 
-  - "sharepoint"
+date: '2009-02-06'
+categories:
+  - 'sharepoint'
 ---
 
 Yesterday,  I wanted to visit my SSP admin page, but for some reason, i got the following error:

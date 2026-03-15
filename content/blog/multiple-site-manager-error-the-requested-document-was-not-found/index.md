@@ -1,9 +1,9 @@
 ---
-title: "Multiple Site Manager error: The requested document was not found"
-date: "2016-01-04"
-categories: 
-  - "sitecore"
-img: "./images/Untitled.png"
+title: 'Multiple Site Manager error: The requested document was not found'
+date: '2016-01-04'
+categories:
+  - 'sitecore'
+img: './images/Untitled.png'
 ---
 
 Recently our admins faced an error in one of our Sitecore environments that we couldn’t explain. Sitecore tried to serve a site that it shouldn't serve, which caused a nasty error. Digging through the logs didn’t help us and due to the fact that the logs didn’t tell us anything, our admins had problems pinpointing the problem.
@@ -43,4 +43,4 @@ Why is this a nasty bug or problem? When working in a company where multiple peo
 From my point of view, there are two key lessons to be learned:
 
 1. Be very careful when making changes at system level: Problems may be revealed at a later point in time.
-2. Modules, especially modules that heavily intercept in the regular Sitecore lifecycle, should be monkey proof. You may exactly know how all the modules work, but don't expect this from _others -> **Assumption is the root of all evil** ;)_
+2. Modules, especially modules that heavily intercept in the regular Sitecore lifecycle, should be monkey proof. You may exactly know how all the modules work, but don't expect this from *others -> **Assumption is the root of all evil** ;)*

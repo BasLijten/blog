@@ -1,14 +1,14 @@
 ---
-title: "SharePoint 2013 and Windows 8 apps - better together Part 2: Platform choice, using the right API and data access"
-date: "2013-03-17"
-categories: 
-  - "code"
-  - "rest"
-  - "sharepoint"
-  - "windows-8"
+title: 'SharePoint 2013 and Windows 8 apps - better together Part 2: Platform choice, using the right API and data access'
+date: '2013-03-17'
+categories:
+  - 'code'
+  - 'rest'
+  - 'sharepoint'
+  - 'windows-8'
 ---
 
-This is the second post as part of a blog series about the integration of using SharePoint 2013 as a datasource for windows 8 apps.Find the index at [SharePoint 2013 and Windows 8 apps - better together Part 1: Introduction, background and considerations](http://blog.baslijten.com/sharepoint-2013-and-windows-8-apps-better-together-part-1-introduction-background-and-considerations/ "Part 1: Introduction, background and considerations")
+This is the second post as part of a blog series about the integration of using SharePoint 2013 as a datasource for windows 8 apps.Find the index at [SharePoint 2013 and Windows 8 apps - better together Part 1: Introduction, background and considerations](http://blog.baslijten.com/sharepoint-2013-and-windows-8-apps-better-together-part-1-introduction-background-and-considerations/ 'Part 1: Introduction, background and considerations')
 
 **NOTE: this blogpost provides information on how to consume rest-services via c-sharp. A lot of plumbing was done by [wictor wilen on authentication](http://www.wictorwilen.se/Post/How-to-do-active-authentication-to-Office-365-and-SharePoint-Online.aspx), [Luc Stakenburg](http://allthatjs.com/2012/03/28/remote-authentication-in-sharepoint-online/) and [jmservera](http://sharepointwinrt.codeplex.com/). In the following blogpost I'll show how we used that information and optimized the code by jmservera (a bit).**
 

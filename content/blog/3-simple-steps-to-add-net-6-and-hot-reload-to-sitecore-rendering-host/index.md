@@ -1,26 +1,31 @@
 ---
-title: "Convert your Sitecore asp.net rendering host to net6 and get hot reload for free"
-date: "2021-11-19"
-category: 
-- "net 6"
-- "Sitecore"
-description: "How to add net6 and the hot reload functionality to your Sitecore asp.net renderinghost"
+title: 'Convert your Sitecore asp.net rendering host to net6 and get hot reload for free'
+date: '2021-11-19'
+category:
+  - 'net 6'
+  - 'Sitecore'
+description: 'How to add net6 and the hot reload functionality to your Sitecore asp.net renderinghost'
 img: ./images/hot.jpg
 tags:
-- "net 6"
-- "Sitecore"
+  - 'net 6'
+  - 'Sitecore'
 ---
-In this blogpost I'll explain how to convert the existing Asp.Net core 3.1 rendering host to .net 6. This is not only faster, but you will get the awesome hot reload functionality for free as well. In addition to this hot reload functionality, I converted the main template to use [top level statements](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements).  While Sitecore's main focus currently is on Nextjs and Static Site generation, there are a lot of use cases where the .Net rendering host has a place. The main theme is all about offloading serverside logic from Sitecore to *another* platform, and with organizations which have heavily invested in their .Net development capacity, the Sitecore Asp.Net rendering host has a place.
 
-## The result 
+In this blogpost I'll explain how to convert the existing Asp.Net core 3.1 rendering host to .net 6. This is not only faster, but you will get the awesome hot reload functionality for free as well. In addition to this hot reload functionality, I converted the main template to use [top level statements](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements). While Sitecore's main focus currently is on Nextjs and Static Site generation, there are a lot of use cases where the .Net rendering host has a place. The main theme is all about offloading serverside logic from Sitecore to _another_ platform, and with organizations which have heavily invested in their .Net development capacity, the Sitecore Asp.Net rendering host has a place.
+
+## The result
+
 The result is not different from [the video](https://www.youtube.com/watch?v=4S3vPzawnoQ&ab_channel=ScottHanselman) published by [scott hanselman](https://www.hanselman.com/), I wrote this blogpost only to show how to convert the existing asp.net core 3.1 rendering host project to .Net 6, to achieve the same result. This can be seen in the video below:
 
 `youtube: https://www.youtube.com/embed/p0zPYYZO8cw`
+
 ## The changes
+
 Just three actions are needed:
 
 ### 1. Update the csproj file
-In order to be able to use the .Net6 framework, the ```.csproj``` file needs to be updated to use the TargetFramework, as seen below. 
+
+In order to be able to use the .Net6 framework, the `.csproj` file needs to be updated to use the TargetFramework, as seen below.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -36,9 +41,10 @@ In order to be able to use the .Net6 framework, the ```.csproj``` file needs to 
 ```
 
 ### 2. Update the program.cs file and remove the Startup.cs
-The second required action, was to *update* the program.cs file.The complete update to the program.cs file is as follows: please note that the namespacing and class definitions are gone. At first, it looked a bit chaotic and messy to me, but after working several hours with this new notation, I started to love it!
 
-The startup.cs file *needs* to be removed when using the approach above, otherwise certain middlewares get injected multiple times, which will give a runtime error.
+The second required action, was to _update_ the program.cs file.The complete update to the program.cs file is as follows: please note that the namespacing and class definitions are gone. At first, it looked a bit chaotic and messy to me, but after working several hours with this new notation, I started to love it!
+
+The startup.cs file _needs_ to be removed when using the approach above, otherwise certain middlewares get injected multiple times, which will give a runtime error.
 
 ```csharp
 using Microsoft.AspNetCore.DataProtection;
@@ -163,7 +169,8 @@ app.Run();
 ```
 
 ### 3. Update the package references
-Of course, with a new framework version, new dependency versions are introduced as well. THe package.props file got an update to point to the .net 6 versions of the packages. 
+
+Of course, with a new framework version, new dependency versions are introduced as well. THe package.props file got an update to point to the .net 6 versions of the packages.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -199,7 +206,9 @@ Of course, with a new framework version, new dependency versions are introduced 
 ```
 
 ### 4. Enjoy
-run your application using ```dotnet watch run``` and you are good to go. Update your code, styling or razorviews, the .net 6 framework automagically detects the changes and forces a reload in the browser.
+
+run your application using `dotnet watch run` and you are good to go. Update your code, styling or razorviews, the .net 6 framework automagically detects the changes and forces a reload in the browser.
 
 ## Summary
-Migrating to .net6 is not hard. In three little steps you will be able to work with a faster framework which adds a little bit of extra developer satisfaction as well. Especially when you compare this to the regular serverside Sitecore MVC approach ;) 
+
+Migrating to .net6 is not hard. In three little steps you will be able to work with a faster framework which adds a little bit of extra developer satisfaction as well. Especially when you compare this to the regular serverside Sitecore MVC approach ;)

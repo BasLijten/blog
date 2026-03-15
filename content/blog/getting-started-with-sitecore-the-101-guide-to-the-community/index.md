@@ -1,16 +1,16 @@
 ---
-title: "Getting started with sitecore: The 101-guide to the community"
-date: "2016-08-15"
-categories: 
-  - "sitecore"
-img: "./images/community.jpg"
+title: 'Getting started with sitecore: The 101-guide to the community'
+date: '2016-08-15'
+categories:
+  - 'sitecore'
+img: './images/community.jpg'
 ---
 
 A few years back, back in the Sitecore 7.x days, I started to work with Sitecore. I originated from the SharePoint community (take note of the capital “**P**”!), where there are SO many active bloggers. I think this was caused by a bit of the history. “Back in the SharePoint 2007 days” all the SharePoint info we got, came from google, or from reflector, as the documentation wasn’t always “that well written”. It appeared that there were a few persons actively blogging about their findings and through the years, the amount of people actively blogging, writing cool code or helping each other out, exploded, but you had (and still have) to find your ways to find all the information.
 
 I see the same pattern happening in Sitecore. A lot of great functionality, a great product, but not every feature is always documented. As everyone tries to get the most out of the platform, people are seeking the boundaries of the product and finding out how stuff works. A lot of people are looking for help, a lot of people are blogging, but it's not always that evident to find the sources that you need. "Where is the community?" you might ask. And that’s exactly why I decided to write this blogpost.
 
-A first free lesson: First lesson: SiteCore is written as **_Sitecore_**. Please take 
+A first free lesson: First lesson: SiteCore is written as **_Sitecore_**. Please take
 care of this, as most Sitecore community members are a bit sensitive to it ;).
 
 # Sitecore and the Community whereabouts

@@ -1,6 +1,6 @@
 ---
-title: "Feature stapling used to execute code onSiteCreation"
-date: "2009-09-12"
+title: 'Feature stapling used to execute code onSiteCreation'
+date: '2009-09-12'
 ---
 
 Some time ago I wanted to enable some features upon a siteCollection creation, but I couldnt find an eventhandler which allowed me to execute those actions. You could, of course, add or alter the ONET.XML for a new Template, but if you need to run code/activate features on Site Creation for multiple definitions, this can be a hell of a job. One of the possiblities that comes in is calles FeatureStapling. This is a technique used to activate features to siteDefinitions and it works as follows:

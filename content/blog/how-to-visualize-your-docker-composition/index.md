@@ -1,12 +1,12 @@
 ---
-title: "How to visualize your docker composition"
-date: "2020-11-06"
-categories: 
-  - "sitecore"
-img: "./images/image-11.png"
+title: 'How to visualize your docker composition'
+date: '2020-11-06'
+categories:
+  - 'sitecore'
+img: './images/image-11.png'
 ---
 
-After my [previous blogpost](https://blog.baslijten.com/sitecore-10-on-docker-help-to-understand-the-composition-of-the-configuration/ "https://blog.baslijten.com/sitecore-10-on-docker-help-to-understand-the-composition-of-the-configuration/"), I received several questions how I visualized that Docker architecture. This (very short) blogpost will explain how to do this.
+After my [previous blogpost](https://blog.baslijten.com/sitecore-10-on-docker-help-to-understand-the-composition-of-the-configuration/ 'https://blog.baslijten.com/sitecore-10-on-docker-help-to-understand-the-composition-of-the-configuration/'), I received several questions how I visualized that Docker architecture. This (very short) blogpost will explain how to do this.
 
 The software that I use is a docker-container that is called “[docker-compose-viz](https://github.com/pmsipilot/docker-compose-viz)”, which is (mainly) maintained by [Julien Bianchi](https://github.com/jubianchi).
 

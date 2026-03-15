@@ -1,12 +1,12 @@
 ---
-title: "SharePoint 2010 signout different behaviours based on the number of selected Authentication Types"
-date: "2012-12-29"
-categories: 
-  - "authentication"
-  - "sharepoint-2010"
+title: 'SharePoint 2010 signout different behaviours based on the number of selected Authentication Types'
+date: '2012-12-29'
+categories:
+  - 'authentication'
+  - 'sharepoint-2010'
 ---
 
-While working on our [custom ADFS login](http://bloggingabout.net/blogs/bas/archive/2012/12/28/customizing-adfs-login-for-sharepoint-2010-how-we-did-it.aspx "Custom ADFS login for SharePoint 2010") component and deployed this version to our DTAP street, we saw different behaviours when signing out of a site, under different circumstances. Wen users tried to logout via the page "/\_layouts/signout.aspx" users sometimes where redirected back to the root of the site and in some cases users got the message "please close the browser to signout". As I was curious why this happened, I decided to check a few things out.
+While working on our [custom ADFS login](http://bloggingabout.net/blogs/bas/archive/2012/12/28/customizing-adfs-login-for-sharepoint-2010-how-we-did-it.aspx 'Custom ADFS login for SharePoint 2010') component and deployed this version to our DTAP street, we saw different behaviours when signing out of a site, under different circumstances. Wen users tried to logout via the page "/\_layouts/signout.aspx" users sometimes where redirected back to the root of the site and in some cases users got the message "please close the browser to signout". As I was curious why this happened, I decided to check a few things out.
 
 ## In wat cases does what behaviour occur?
 
@@ -14,7 +14,7 @@ After comparing our webapplication settings, we found out that the only differen
 
 [![](images/4403.signout-code.png)](http://bloggingabout.net/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/bas/4403.signout-code.png)
 
-As seen in the red section, a few decisions are made. First: ClaimsBasedAuthentication needs to be set. This is always in our case, so that one was easy. The code that is executed afterwards, is more interesting: A decision is made, based on the number of authentication providers **_OR_** WindowsIntegratedAuthentication is not turned on. It's easier to see what happens when a table is used. At the bottom of the table the actual action is included: **S**tay or **R**edirect
+As seen in the red section, a few decisions are made. First: ClaimsBasedAuthentication needs to be set. This is always in our case, so that one was easy. The code that is executed afterwards, is more interesting: A decision is made, based on the number of authentication providers ***OR*** WindowsIntegratedAuthentication is not turned on. It's easier to see what happens when a table is used. At the bottom of the table the actual action is included: **S**tay or **R**edirect
 
 <table><tbody><tr><td>windows authentication</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>Integrated</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>Trusted Identity Provider 1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>Trusted Identity Provider 2</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>num</td><td>1</td><td>1</td><td>2</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><tr><td>use windows integrated</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>num!=1 or !windows integrated</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>expected action</td><td>R</td><td>R</td><td>R</td><td>R</td><td>S</td><td>R</td><td>R</td><td>R</td><td>R</td><td>R</td><td>R</td></tr><tr><td>actual action: S(tay)/R(edirect)</td><td>S</td><td>S</td><td>R</td><td>R</td><td>S</td><td>R</td><td>R</td><td>R</td><td>R</td><td>R</td><td>R</td></tr></tbody></table>
 
@@ -22,7 +22,7 @@ This table learns us the following: based on the selected options, we are expect
 
 ## Why no redirection?
 
-to find out why this didn't happen, I wrote a small bit of code to checkout the value of iisSettings.UseWindowsIntegratedAuthentication when windows authentication is _disabled:_ This value seems always to be true when windows authentication has been disabled! When filling out these values in the table, the behaviour can be explained:
+to find out why this didn't happen, I wrote a small bit of code to checkout the value of iisSettings.UseWindowsIntegratedAuthentication when windows authentication is *disabled:* This value seems always to be true when windows authentication has been disabled! When filling out these values in the table, the behaviour can be explained:
 
 <table><tbody><tr><td>windows authentication</td><td>0</td><td>0</td></tr><tr><td>Integrated</td><td>1</td><td>1</td></tr><tr><td>Trusted Identity Provider 1</td><td>1</td><td>1</td></tr><tr><td>Trusted Identity Provider 2</td><td>0</td><td>1</td></tr><tr><td>num</td><td>1</td><td>2</td></tr><tr><td>use windows integrated</td><td>0</td><td>1</td></tr><tr><td>num!=1 or !windows integrated</td><td>0</td><td>1</td></tr><tr><td>expected action</td><td>S</td><td>R</td></tr><tr><td>actual action: S(tay)/R(edirect)</td><td>S</td><td>R</td></tr></tbody></table>
 

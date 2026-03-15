@@ -1,9 +1,9 @@
 ---
-title: "Modify SPListItem fields with vars from the Session in the itemAdding or itemAdded events"
-date: "2009-01-30"
-categories: 
-  - "code"
-  - "sharepoint"
+title: 'Modify SPListItem fields with vars from the Session in the itemAdding or itemAdded events'
+date: '2009-01-30'
+categories:
+  - 'code'
+  - 'sharepoint'
 ---
 
 Some time ago I tried to alter a field of a SPListItem right after the moment that the item has been created. A var was stored in the Session so it could be used on the newly created SPListItem (itemAdded).
@@ -61,7 +61,7 @@ public override void ItemAdding(SPItemEventProperties properties)
 
 string internalFieldName = null;
 
-string FIELD\_NAME = "Foo";
+string FIELD_NAME = "Foo";
 
 SPFieldLookupValue lookupField = null;
 
@@ -73,7 +73,7 @@ using (SPWeb web = properties.OpenWeb())
 
 {
 
-internalFieldName = web.Lists\[properties.ListId\].Fields\[FIELD\_NAME\].InternalName;
+internalFieldName = web.Lists\[properties.ListId\].Fields\[FIELD_NAME\].InternalName;
 }
 
 // example for adding a value to a SPListItem property

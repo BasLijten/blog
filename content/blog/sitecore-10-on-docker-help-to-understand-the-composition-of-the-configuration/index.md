@@ -1,13 +1,13 @@
 ---
-title: "Sitecore 10 on docker – Help to understand the composition of the configuration"
-date: "2020-11-04"
-categories: 
-  - "architecture"
-  - "container"
-  - "containers"
-  - "docker"
-  - "sitecore"
-img: "./images/image-11.png"
+title: 'Sitecore 10 on docker – Help to understand the composition of the configuration'
+date: '2020-11-04'
+categories:
+  - 'architecture'
+  - 'container'
+  - 'containers'
+  - 'docker'
+  - 'sitecore'
+img: './images/image-11.png'
 ---
 
 After following the [“getting started”  guide by Nick Wesselman](https://www.linkedin.com/pulse/sitecore-100-released-great-day-developers-nick-wesselman/), I had my first Sitecore 10 environment up and running in Sitecore, so there is no need to write about the convenient installation. But being new to Docker and (thus) new to the new approach that Sitecore uses for these development environments, I struggled a little bit in _understanding_ how everything worked together. I wanted to know about the structure, dependencies. As I couldn’t find any blogpost on the new structure/setup and how all the roles correlate to each other and how the dependencies are working, I decided to dive into it and share it. Note: there is a lot of information on the [Sitecore DevEx Containers documentation site](https://containers.doc.sitecore.com/docs/intro) and it explains how things can/should be achieved, I can really recommend this site.
@@ -58,7 +58,7 @@ All exposed ports are the 5 ports which are encircled:
 - 8081 (xConnect)
 - 8984 (Solr)
 
-The Traefik role exposes the 443 and 8079 ports. When navigating to ```https://localhost:443``` nothing is presented, as seen in the following screenshot:
+The Traefik role exposes the 443 and 8079 ports. When navigating to `https://localhost:443` nothing is presented, as seen in the following screenshot:
 
 ![](images/image-4.png)
 
@@ -86,10 +86,10 @@ The following folders are mounted:
 
 - Traefik: ./docker/traefik to c
 - Rendering: ./ to C
-- CM: named: ${LOCAL\_DATA\_PATH}\\cm to C
+- CM: named: ${LOCAL_DATA_PATH}\\cm to C
 - SQL: .\\docker\\data\\sql to c:\\data
 - SOLR: .\\docker\\data\\solr to c:\\data
-- Multiple roles – named: ${HOST\_LICENSE\_FOLDER}
+- Multiple roles – named: ${HOST_LICENSE_FOLDER}
 
 Some folders appear to be mounted to “C”. This is not the case, but probably a problem in my visualization software.
 
@@ -99,7 +99,7 @@ The thin dotted lines between the rectangles mark the dependencies (One of these
 
 ![](images/image-8.png)
 
-These dependencies might have a small note (as seen in the red bounded box). This note indicates the required state of the role it _depends_ on, before it can be started. In this case, Traefik has a dependency on identity, “rendering” and “_Content management_”, where the required status for both cm as well as identity is marked as “service\_healthy”, in other words: if the CM or identity server doesn’t come up healthy, traefik does not start as well. This dependency is not present for the asp.net core rendering host.
+These dependencies might have a small note (as seen in the red bounded box). This note indicates the required state of the role it _depends_ on, before it can be started. In this case, Traefik has a dependency on identity, “rendering” and “_Content management_”, where the required status for both cm as well as identity is marked as “service_healthy”, in other words: if the CM or identity server doesn’t come up healthy, traefik does not start as well. This dependency is not present for the asp.net core rendering host.
 
 _Note: In my humble opinion, this requirement is a small drawback for a development environment: a lot of debugging and analysis happens in these environments. Whenever you made configuration error, implemented a bug or whatsoever, traefik will not start and, thus, you will not be able to access your CM environment and see whatever error happened._
 

@@ -1,29 +1,30 @@
 ---
-title: "Getting started: Develop in WSL2 for XM Cloud"
-date: "2023-10-03"
+title: 'Getting started: Develop in WSL2 for XM Cloud'
+date: '2023-10-03'
 category:
-- "Frontend"
-- "XMCloud"
-- "Sitecore"
-- "NodeJS"
-- "Nextjs"
-- "WSL2"
-description: "Setting up WSL2 in order to develop for XM Cloud"
+  - 'Frontend'
+  - 'XMCloud'
+  - 'Sitecore'
+  - 'NodeJS'
+  - 'Nextjs'
+  - 'WSL2'
+description: 'Setting up WSL2 in order to develop for XM Cloud'
 img: ./images/sitecore-prompt-dev.png
 tags:
-- "Frontend"
-- "XMCloud"
-- "Sitecore"
-- "NodeJS"
-- "Nextjs"
-- "WSL2"
+  - 'Frontend'
+  - 'XMCloud'
+  - 'Sitecore'
+  - 'NodeJS'
+  - 'Nextjs'
+  - 'WSL2'
 ---
-In the Sitecore universe, Sitecore XM cloud is the next best thing. Not having to develop for Sitecore on your local machine, but in the cloud, is a huge step forward. [Sebastian Winter](https://www.linkedin.com/in/sebastian-winter-506962165/?originalSubdomain=de), Developer Advocate for Sitecore, did an excellent job with [this video](https://www.youtube.com/watch?v=Kig3kWZ8FuQ) to get you up and running with headless development for Sitecore XM Cloud on *Windows*. However, frontend developers tend to prefer to work on MacOS, Linux, or WSL2, in order to get some (major) [speed improvements](../getting-started-develop-for-xm-cloud-in-wsl2-benefits/). For WSL2, it does require some setup. In this blogpost, I'll explain how to setup your machine to develop for Sitecore XM Cloud in WSL2. I'll describe how a fresh Ubuntu 22 instance can be setup to get you ready.
+
+In the Sitecore universe, Sitecore XM cloud is the next best thing. Not having to develop for Sitecore on your local machine, but in the cloud, is a huge step forward. [Sebastian Winter](https://www.linkedin.com/in/sebastian-winter-506962165/?originalSubdomain=de), Developer Advocate for Sitecore, did an excellent job with [this video](https://www.youtube.com/watch?v=Kig3kWZ8FuQ) to get you up and running with headless development for Sitecore XM Cloud on _Windows_. However, frontend developers tend to prefer to work on MacOS, Linux, or WSL2, in order to get some (major) [speed improvements](../getting-started-develop-for-xm-cloud-in-wsl2-benefits/). For WSL2, it does require some setup. In this blogpost, I'll explain how to setup your machine to develop for Sitecore XM Cloud in WSL2. I'll describe how a fresh Ubuntu 22 instance can be setup to get you ready.
 
 ## Steps to take
 
 1. (Optional) Install a fresh ubuntu 22 WSL instance.
-2. (Optional) Install Oh-my-posh for an awesome prompt - WITH Sitecore CLI integration! 
+2. (Optional) Install Oh-my-posh for an awesome prompt - WITH Sitecore CLI integration!
 3. Configure the Git Credential Manager (GCM) and clone a repo [skip](#configure-git-and-clone-the-xm-starter-kit)
 4. Install the Sitecore CLI (and see your prompt shine)
 5. Install Frontend tooling natively in order to build your xmcloud installation
@@ -34,7 +35,7 @@ If you don't have a WSL2 instance yet, you can install one by following the step
 
 ### (Optional) Install Oh-my-posh for an awesome prompt - WITH Sitecore CLI integration
 
-I [recently wrote a plugin](https://blog.baslijten.com/oh-my-sitecore-I-powered-up-your-shell/) for [oh-my-posh](https://ohmyposh.dev/) for the [Sitecore CLI integration](https://ohmyposh.dev/docs/segments/sitecore). 
+I [recently wrote a plugin](https://blog.baslijten.com/oh-my-sitecore-I-powered-up-your-shell/) for [oh-my-posh](https://ohmyposh.dev/) for the [Sitecore CLI integration](https://ohmyposh.dev/docs/segments/sitecore).
 
 Follow the installation instructions for Linux and windows terminal [over here](https://ohmyposh.dev/docs/installation/linux).
 
@@ -42,31 +43,31 @@ Below are the steps that I followed:
 
 1. Install Oh-my-posh and install a nerdfont
 
-    ```bash
-    sudo apt install unzip # install unzip 
-    curl -s https://ohmyposh.dev/install.sh | sudo bash -s # Install oh my posh
-    oh-my-posh font install # select Meslo from the list
-    ```
+   ```bash
+   sudo apt install unzip # install unzip
+   curl -s https://ohmyposh.dev/install.sh | sudo bash -s # Install oh my posh
+   oh-my-posh font install # select Meslo from the list
+   ```
 
 2. Configure Windows terminal to use the correct font
 
-    > To ensure correct rendering of the glyphs you will need to enable the option Use the new text renderer ("AtlasEngine") in your terminal settings. For further details, see here. Also, make sure to setup the font that is being used in terminal 
-    ```json
-    {
-      "profiles":
-      {
-          "defaults":
-          {
-              "fontFace": "MesloLGM Nerd Font"
-          }
-      }
-    }
-    ``` 
+   > To ensure correct rendering of the glyphs you will need to enable the option Use the new text renderer ("AtlasEngine") in your terminal settings. For further details, see here. Also, make sure to setup the font that is being used in terminal
 
-3. Download a custom theme. I really like the this one. Make sure to download it to your home directory: 
-    ```bash
-    curl https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json --output custom.json
-    ```
+   ```json
+   {
+     "profiles": {
+       "defaults": {
+         "fontFace": "MesloLGM Nerd Font"
+       }
+     }
+   }
+   ```
+
+3. Download a custom theme. I really like the this one. Make sure to download it to your home directory:
+
+   ```bash
+   curl https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json --output custom.json
+   ```
 
 4. Add this specific Sitecore Segment to the custom theme:
    ```
@@ -80,11 +81,11 @@ Below are the steps that I followed:
           "type": "sitecore"
         },
    ```
-6. Change the prompt. Add ```eval "$(oh-my-posh init bash --config ~/custom.json)"``` to the end of your ~\.profile file
-7. close your session and open it again. Your prompt should look something like this now:
+5. Change the prompt. Add `eval "$(oh-my-posh init bash --config ~/custom.json)"` to the end of your ~\.profile file
+6. close your session and open it again. Your prompt should look something like this now:
 
-    ![custom prompt](./images/custom-prompt.png)
-   
+   ![custom prompt](./images/custom-prompt.png)
+
 ### Configure git and clone the xm-starter-kit
 
 > An important note first. When cloning a repo, this should happen on the WSL filesystem, so DO NOT USER YOUR MOUNTED DRIVE (starting with /mnt/c....). This will have severe performance implications.
@@ -152,7 +153,7 @@ Now, you're good to go to login on your sitecore cloud environment:
 dotnet sitecore cloud login
 ```
 
-The CLI will prompt to login via a browser. Just CTRL+click this link, and you'll be able to authorize  your CLI. Please take note of the prompt - an extra segment has been added which gives contextual information on which environment you are currently using. In this case, it points to "Default" (this is the default behaviour)
+The CLI will prompt to login via a browser. Just CTRL+click this link, and you'll be able to authorize your CLI. Please take note of the prompt - an extra segment has been added which gives contextual information on which environment you are currently using. In this case, it points to "Default" (this is the default behaviour)
 
 ![sitecore-default-prompt](./images/sitecore-prompt-default.png)
 
@@ -163,7 +164,7 @@ dotnet sitecore cloud environment connect --environment-id xxx
 dotnet sitecore env list
 ```
 
-Using the following command, your active environment, can be set. As I added ```dev```, I'll change my default environment to ```dev```. Using the env list command, you can verify that the default environment has been changed to ```dev```
+Using the following command, your active environment, can be set. As I added `dev`, I'll change my default environment to `dev`. Using the env list command, you can verify that the default environment has been changed to `dev`
 
 ```bash
 dotnet sitecore env set-default -n dev
@@ -186,7 +187,7 @@ In orde to use the tooling that has been written (and optimized!) for linux, mak
 appendWindowsPath=false
 ```
 
-You have to close your WSL-session, and run ```Restart-Service LxssManager``` under administrator credentials. Afterwards, open a new WSL2 prompt. When running ```which npm``` and it doesn't give any results, you're good to go. Now, you can install the frontend tooling. Let's start with nvm:
+You have to close your WSL-session, and run `Restart-Service LxssManager` under administrator credentials. Afterwards, open a new WSL2 prompt. When running `which npm` and it doesn't give any results, you're good to go. Now, you can install the frontend tooling. Let's start with nvm:
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
@@ -206,7 +207,6 @@ npm install
 ```
 
 Last, but not least, we'll need to make sure that vscode can be started from WSL2. Because we prevented the WindowsPath to be added to the PATH variable, we'll need to add the vscode path manually. make sure to replace **{USERNAME}** with your username:
-
 
 ```bash
 export PATH=$PATH:"/mnt/c/Users/{USERNAME}/AppData/Local/Programs/Microsoft VS Code/bin"

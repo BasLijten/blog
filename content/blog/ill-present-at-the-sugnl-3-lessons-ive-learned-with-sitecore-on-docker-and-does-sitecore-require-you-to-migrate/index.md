@@ -1,9 +1,9 @@
 ---
 title: "I'll present at the SUGNL: 3 lessons I've learned with Sitecore on Docker (and does Sitecore require you to migrate?)"
-date: "2021-03-30"
-categories: 
-  - "sitecore"
-img: "./images/image-5.png"
+date: '2021-03-30'
+categories:
+  - 'sitecore'
+img: './images/image-5.png'
 ---
 
 On April 8th, the first virtual [Sitecore Usergroup for the Netherlands](https://www.sugnl.net/) will be organized, I am proud that Achmea, my employer, may host this first virtual meetup.

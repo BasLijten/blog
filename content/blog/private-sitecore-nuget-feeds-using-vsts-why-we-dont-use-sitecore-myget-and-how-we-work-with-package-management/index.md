@@ -1,12 +1,12 @@
 ---
-title: "Private Sitecore nuget feeds using VSTS – why we don’t use Sitecore myget and how we work with package management"
-date: "2018-08-15"
-categories: 
-  - "azure"
-  - "development"
-  - "sitecore"
-  - "vsts"
-img: "./images/img_5b748f2ca84e7.png"
+title: 'Private Sitecore nuget feeds using VSTS – why we don’t use Sitecore myget and how we work with package management'
+date: '2018-08-15'
+categories:
+  - 'azure'
+  - 'development'
+  - 'sitecore'
+  - 'vsts'
+img: './images/img_5b748f2ca84e7.png'
 ---
 
 First of all: hands down to Sitecore when they created the nuget feed a while back: it’s really, really convenient to be able to use a nuget feed for all those Sitecore packages, including their dependencies. But we had some issues with the way Sitecore versions it’s packages, the fact that we use multiple versions of Sitecore _and_ the way we wanted to provision our own reusable sitecore-specific nuget packages. Aside from that; our existing nuget-feed was a NAS which had many, many performance issues. In the end we came up with a private nuget feed per Sitecore version which contains all the Sitecore assemblies for that specific version, its dependencies and our own reusable nuget packages for that specific Sitecore version.
@@ -39,7 +39,7 @@ The dependencygraph of Sitecore is enormous, that I decided just to investigate 
 
 First, make sure that the sitecore-feed has been registered:
 
-```powershell
+````powershell
 Register-PackageSource -Name "sitecore-myget" -Location "https://sitecore.myget.org/F/sc-packages/api/" -ProviderName "nuget"```
 
 After registration, the magic (may) happen. First I wrote a recursive script which would get all sitecore packages and its dependencies, all the way down to the very last dependency, but this took _a lot_ of time. So I decided to replace it with only the first level dependencies, which returns “enough” nuget packages.
@@ -108,3 +108,4 @@ This approach makes upgrading to "a" version a blast. By changing your Sitecore 
 # Summary
 
 Sitecore versions may lead to unwanted actions by developers (for example, upgrading to the latest sitecore version where you are still running 8.2) and in a lot of cases it's just unclear what version of a package to use. After analyzing the Sitecore feed, its versions and depedencies, we came up a list of all packages that are "tied" to a certain sitecore version. To make it more convenient for our developers, we decided to create an own sitecore feed, with all Sitecore nuget packages _and_ their dependencies, and made just the small subset of packages which are "tied together" available through different views on this nuget feed.
+````

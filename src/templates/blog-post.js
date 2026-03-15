@@ -7,12 +7,11 @@ import DefaultLayout from '../components/layout'
 import SEO from '../components/seo'
 
 import 'katex/dist/katex.min.css'
-import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
-
+import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader'
 
 class BlogPostTemplate extends React.Component {
   render() {
-    deckDeckGoHighlightElement();
+    deckDeckGoHighlightElement()
     const post = this.props.data.markdownRemark
 
     return (
@@ -86,7 +85,11 @@ export const pageQuery = graphql`
         tags
         img {
           childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH, formats: [AUTO, AVIF, WEBP])
+            gatsbyImageData(
+              placeholder: BLURRED
+              layout: FULL_WIDTH
+              formats: [AUTO, AVIF, WEBP]
+            )
           }
         }
       }

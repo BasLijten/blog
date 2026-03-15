@@ -1,17 +1,17 @@
 ---
-title: "Fast for SharePoint 2010 Enterprise Crawler is Dead"
-date: "2011-05-19"
-categories: 
-  - "fast"
-  - "sharepoint"
-  - "sharepoint-2010"
+title: 'Fast for SharePoint 2010 Enterprise Crawler is Dead'
+date: '2011-05-19'
+categories:
+  - 'fast'
+  - 'sharepoint'
+  - 'sharepoint-2010'
 ---
 
 Lately, I installed Fast locally on my machine for development purposes, and it was working as intended. Crawled a lot of local (and external) content, but suddenly, my Enterprise crawler was not working. nctrl status showed me that the Enterprise crawler was Dead
 
 ![](images/img_52a49f3c8a943.png)
 
-but _WHY_ it was dead? I had no idea at all! Checking the event logs only told me:
+but *WHY* it was dead? I had no idea at all! Checking the event logs only told me:
 
 - M05020-DHEVMU98:13260: Process crawler was not running, restarting it
 - M05020-DHEVMU98:13260: Process crawler ports are already in use, will not start it

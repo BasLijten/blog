@@ -1,17 +1,17 @@
 ---
-title: "How to setup a simple STS for web application development - Part 1 of 3"
-date: "2015-08-03"
-categories: 
-  - "adfs"
-  - "authentication"
-  - "code"
-  - "development"
-  - "mvc"
-  - "security"
-img: "./images/EmbeddedSTS-Sample.png"
+title: 'How to setup a simple STS for web application development - Part 1 of 3'
+date: '2015-08-03'
+categories:
+  - 'adfs'
+  - 'authentication'
+  - 'code'
+  - 'development'
+  - 'mvc'
+  - 'security'
+img: './images/EmbeddedSTS-Sample.png'
 ---
 
-When developing claims based web applications which need to connect to ADFS, Azure or any other STS, it’s not always possible to connect to an existing environment, for example, due to security, the absence of a test environment or an unwilling admin ;). To solve this, a lot of people _try_ to setup a local AD, ADFS, which can cause a lot of trouble, especially in an Enterprise environment. This setup is not very convenient, especially when you _just_ want to create a claims based application. Whenever SharePoint and Claims based hight trust provider hosted apps are thrown into the game, the inconvenient setup turns into a very complex situation.
+When developing claims based web applications which need to connect to ADFS, Azure or any other STS, it’s not always possible to connect to an existing environment, for example, due to security, the absence of a test environment or an unwilling admin ;). To solve this, a lot of people _try_ to setup a local AD, ADFS, which can cause a lot of trouble, especially in an Enterprise environment. This setup is not very convenient, especially when you *just* want to create a claims based application. Whenever SharePoint and Claims based hight trust provider hosted apps are thrown into the game, the inconvenient setup turns into a very complex situation.
 
 Luckily, there is a very easy solution for this! In the next two blogposts I will show to solve this:
 
@@ -140,7 +140,7 @@ And after signing in, your application can use the claims of your selected ident
 
 **Conclusion**
 
-Configuration a separate AD and ADFS instance costs a lot of (precious time), especially when you _don't_ want to set this up (for example, on a regular develoment environment). When creating claims based applications, this takes a lot of configuration. Think what happens when the application will be deployed to a DTAP environment with all those parameters that can go wrong (assuming that the AD and ADFS environments are configured correctly). This post explained what product can be used to get rid of AD and ADFS and how to configure your development environment, to get rid of a bit of the pain. My next blogpost describes on how to get rid of the configuration effort, using OWIN!
+Configuration a separate AD and ADFS instance costs a lot of (precious time), especially when you *don't* want to set this up (for example, on a regular develoment environment). When creating claims based applications, this takes a lot of configuration. Think what happens when the application will be deployed to a DTAP environment with all those parameters that can go wrong (assuming that the AD and ADFS environments are configured correctly). This post explained what product can be used to get rid of AD and ADFS and how to configure your development environment, to get rid of a bit of the pain. My next blogpost describes on how to get rid of the configuration effort, using OWIN!
 
 The Embedded STS sources can be [downloaded here](https://github.com/BasLijten/Thinktecture.IdentityModel/tree/FederationMetadata) (own fork of the [Thinktecture.IdentityModel](https://github.com/IdentityModel/Thinktecture.IdentityModel/pull/134)).
 

@@ -1,6 +1,6 @@
 ---
-title: "SharePoint Logging to the ULS and the eventlogs"
-date: "2009-03-25"
+title: 'SharePoint Logging to the ULS and the eventlogs'
+date: '2009-03-25'
 ---
 
 Tis weekend I came across a function that makes it easy to log to the ULS, Diagnostic Logging. I even didnt know about the namespaces where the classes reside in.

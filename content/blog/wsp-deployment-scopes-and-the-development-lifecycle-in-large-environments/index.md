@@ -1,11 +1,11 @@
 ---
-title: "WSP Deployment scopes and the development lifecycle in large environments"
-date: "2012-07-21"
-categories: 
-  - "sharepoint"
-  - "sharepoint-2010"
-tags: 
-  - "deployment"
+title: 'WSP Deployment scopes and the development lifecycle in large environments'
+date: '2012-07-21'
+categories:
+  - 'sharepoint'
+  - 'sharepoint-2010'
+tags:
+  - 'deployment'
 ---
 
 At our company, we use sharepoint to host all of our websites. As SharePoint is quite scalable, this is of course no problem and the production farm can handle it easily. These websites need to be developed and be tested, before they can be deployed to the production farm. This process is nothing special and doesn't diverge from most popular software development methodologies.
@@ -30,7 +30,7 @@ But our situation is quite different.We host a large amount of portals and websi
 
 ## Deployment cycle
 
-When just developing websites in ASP.Net, this isn't much of a problem, as all sites can easily be copied to it's location. As we all know, the deployment scenario in SharePoint, is different. Developers create WSP's, and those WSPs are deployed to the farm. In our case, code is checked into TFS, TFS builds the WSP's and some tooling, ROSS, gets triggered and deploys the generated WSP's to the development farm. That same tool deploys the solutions to Test, Acceptance and Production environments. This tool has been configured in such a way, that a solution only can be deployed to the production farm_,_ when it has passed the Development, Test and Acceptance stages.
+When just developing websites in ASP.Net, this isn't much of a problem, as all sites can easily be copied to it's location. As we all know, the deployment scenario in SharePoint, is different. Developers create WSP's, and those WSPs are deployed to the farm. In our case, code is checked into TFS, TFS builds the WSP's and some tooling, ROSS, gets triggered and deploys the generated WSP's to the development farm. That same tool deploys the solutions to Test, Acceptance and Production environments. This tool has been configured in such a way, that a solution only can be deployed to the production farm*,* when it has passed the Development, Test and Acceptance stages.
 
  
 
@@ -70,7 +70,7 @@ This is a situation that, in my opinion,  has a lot advantages (aside from the
 
 ## The Solution
 
-The solution to get rid of the blocking deployments, but keep the flexibility of deploying "any time", needs a small hack. The deployment scope of the solution needs to be changed from "Global" to "WebApplication". This is not a setting in the package property window, but is determined "deploy time". In short: whenever there is an artefact or configuration option that needs to be deployed at the webapplication scope, the solution scope is "webapplication". In all other situations, the WSP will be globally deployed. The easiest way to do this, is to manually add a dummy safecontrol to the manifest.xml.  _Note: this doesn't work in all cases. There are a few situations where a solution only can globally be deployed to a farm. Try to bundle these functionalities into a single package, to keep downtime as low as possible._
+The solution to get rid of the blocking deployments, but keep the flexibility of deploying "any time", needs a small hack. The deployment scope of the solution needs to be changed from "Global" to "WebApplication". This is not a setting in the package property window, but is determined "deploy time". In short: whenever there is an artefact or configuration option that needs to be deployed at the webapplication scope, the solution scope is "webapplication". In all other situations, the WSP will be globally deployed. The easiest way to do this, is to manually add a dummy safecontrol to the manifest.xml.  *Note: this doesn't work in all cases. There are a few situations where a solution only can globally be deployed to a farm. Try to bundle these functionalities into a single package, to keep downtime as low as possible.*
 
  
 

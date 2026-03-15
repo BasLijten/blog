@@ -1,12 +1,12 @@
 ---
-title: "Zero downtime deployments with Sitecore on Azure"
-date: "2016-12-19"
-categories: 
-  - "azure"
-  - "deployment"
-  - "development"
-  - "devops"
-  - "sitecore"
+title: 'Zero downtime deployments with Sitecore on Azure'
+date: '2016-12-19'
+categories:
+  - 'azure'
+  - 'deployment'
+  - 'development'
+  - 'devops'
+  - 'sitecore'
 ---
 
 From a business perspective, downtime is not desirable, _ever._ And if possible, you want to deploy as often as possible, even multiple times a day Maybe even 50 times a day for complex multi-instance  environments. And _if_ there would be any downtime, that should be during nights, as most visitors would be asleep at that time. From a technical perspective, deployments should occur during business hours: all the developers and administrators are working during these hours, thus issues (if any) could be resolved as every engineer would be available.
@@ -18,9 +18,9 @@ We all know about this story, but how many organizations _really_ implement this
 As this blogposts is quite technical, here are some links of the basic fundamentals
 
 - My blogposts on the Sitecore Azure toolkit which explain Cargopayloads, configs and how to create own web deploy packages
-    - [Sitecore 8.2 update 1: Azure deployments, ARM, Web deploy and the Sitecore Azure Toolkit](http://blog.baslijten.com/sitecore-8-2-update-1-azure-deployments-arm-web-deploy-and-the-sitecore-azure-toolkit/)
-    - [Sitecore on Azure: Create custom web deploy packages using the Sitecore Azure toolkit](http://blog.baslijten.com/sitecore-on-azure-create-custom-web-deploy-packages-using-the-sitecore-azure-toolkit/)
-    - [Use the Sitecore Azure toolkit to deploy your on premises environment](http://blog.baslijten.com/use-the-sitecore-azure-toolkit-to-deploy-your-on-premises-environment/)
+  - [Sitecore 8.2 update 1: Azure deployments, ARM, Web deploy and the Sitecore Azure Toolkit](http://blog.baslijten.com/sitecore-8-2-update-1-azure-deployments-arm-web-deploy-and-the-sitecore-azure-toolkit/)
+  - [Sitecore on Azure: Create custom web deploy packages using the Sitecore Azure toolkit](http://blog.baslijten.com/sitecore-on-azure-create-custom-web-deploy-packages-using-the-sitecore-azure-toolkit/)
+  - [Use the Sitecore Azure toolkit to deploy your on premises environment](http://blog.baslijten.com/use-the-sitecore-azure-toolkit-to-deploy-your-on-premises-environment/)
 - [Sitecore 8.2-1 on Azure Web Apps](http://sitecore.robhabraken.nl/index.php/2622/sitecore-8-2-1-on-azure-web-apps/)
 - [ARM Deep dive on pluralsight](https://www.pluralsight.com/courses/azure-resource-manager-deep-dive)
 - [Web deploy](https://www.iis.net/downloads/microsoft/web-deploy)
@@ -62,11 +62,11 @@ When this package will be deployed, all parameters need to be provided, otherwis
 
 This is important information to work towards zero downtime deployments. In the current approach, the connectionstrings are stored in the connectionstrings.config, which means that they need to be redeployed for each deployment:
 
-\[caption id="attachment\_19871" align="alignnone" width="605"\]![](images/img_585548e568d76.png) Thanks Rob Habraken for showing off this neat little trick! Navigate to Development tools\\console to see what’s actually installed on your app service!\[/caption\]
+\[caption id="attachment_19871" align="alignnone" width="605"\]![](images/img_585548e568d76.png) Thanks Rob Habraken for showing off this neat little trick! Navigate to Development tools\\console to see what’s actually installed on your app service!\[/caption\]
 
 However, Azure offers an alternative way of storing connection string values as well! Navigate to the Application settings where an app settings and connection settings can be found. When entering connection strings here, these settings will be used _over_ the settings specified in the Connectionstrings.config. They are persistent as well, so after a removal of _all_ the content in your app service, these Connection strings are still valid. This also means that a new deployment of your application, without Connection strings, will still work. This also means that those parameters aren’t needed anymore at deployment time.
 
-\[caption id="attachment\_19881" align="alignnone" width="547"\]![](images/img_58554901d9e8c.png) It’s also possible to enable “slot setting” – Slots will be explained later in this article.\[/caption\]
+\[caption id="attachment_19881" align="alignnone" width="547"\]![](images/img_58554901d9e8c.png) It’s also possible to enable “slot setting” – Slots will be explained later in this article.\[/caption\]
 
 ## Deploy the application – not the database
 
@@ -102,7 +102,7 @@ This will start the web deploy from the command line towards Azure. Let’s see 
 - the web app becomes unresponsive and even may throw some errors.
 - After the deployment, the cache needs to be build up; there is no warmup of the pool
 - There are no connection strings specified in the ConnectionStrings.config:
-- \[caption id="attachment\_19901" align="alignnone" width="605"\]![](images/img_585549b52f018.png) The connectionstring values are default values, as they appear in the default installation files\[/caption\]
+- \[caption id="attachment_19901" align="alignnone" width="605"\]![](images/img_585549b52f018.png) The connectionstring values are default values, as they appear in the default installation files\[/caption\]
 - After warmup, we do see a working website, with the changed content in place:![](images/img_585549f94f980.png)
 
 Objective 1: check – a working website, is accomplished, which still preserving the user generated content. No passwords, usernames or connection strings were provided, while the website still works. A new “vanilla” Sitecore web deploy package was created and deployed. The next step is to deploy a new application. This can be done in various ways
@@ -121,7 +121,7 @@ To “prove” that new applications can be deployed, a new solution has been cr
 
 These changes result in a few files that can be deployed using web deploy: the CSS, the XSLT and the serialized data in yml format. This results in the following, astonishing beautiful look & feel:
 
-\[caption id="attachment\_19921" align="alignnone" width="605"\]![](images/img_58554a19697b0.png) Note: Unicorn was already added in my Sitecore baseline (as a cargo payload, similar to the way I added Sitecore Powershell Extensions to my baseline in [this post](http://blog.baslijten.com/sitecore-on-azure-create-custom-web-deploy-packages-using-the-sitecore-azure-toolkit/)), so only the Unicorn configuration for my application had to be added to my project.\[/caption\]
+\[caption id="attachment_19921" align="alignnone" width="605"\]![](images/img_58554a19697b0.png) Note: Unicorn was already added in my Sitecore baseline (as a cargo payload, similar to the way I added Sitecore Powershell Extensions to my baseline in [this post](http://blog.baslijten.com/sitecore-on-azure-create-custom-web-deploy-packages-using-the-sitecore-azure-toolkit/)), so only the Unicorn configuration for my application had to be added to my project.\[/caption\]
 
 # Deployment without downtime – meet the deployment slots!
 
@@ -164,7 +164,7 @@ It’s not too hard to set up a small environment to deploy without downtime, an
 
 - Sitecore offers ARM templates to provision Sitecore with an initial deployment
 - The web deploy packages that are offered by Sitecore cannot be used for redeployment, as they recreate the Sitecore databases. The parameters provided also require the use of parameters that should be provided once.
-    - This leads to “initial deployment” or “provisioning” web deploy packages and “deployment” web deploy packages. This leads to extra work when altering baselines and: custom archive.xml’s, parameter.xml’s and configuration files.
+  - This leads to “initial deployment” or “provisioning” web deploy packages and “deployment” web deploy packages. This leads to extra work when altering baselines and: custom archive.xml’s, parameter.xml’s and configuration files.
 
 Apart from the drawbacks, I am _very_ enthusiastic on the possibilities for Sitecore on Azure: convenient ALM, scaling, zero downtime. This is definitely going to help towards a continuous deployment scenario. Happy Azureing (is that a word? ;))
 

@@ -1,16 +1,16 @@
 ---
-title: "how to handle errors and prevent exposure of information when using outputbinding in .net isolated azure functions"
-date: "2023-05-03"
-category: 
-- "Azure"
-- "Azure Functions"
-- "dotnet"
-description: "When sending messages to SignalR using dotnet Isolated Azure functions, you might run into the situation that you want to handle errors AND do not want to expose success information. This blogposts describes how to handle this situation"
+title: 'how to handle errors and prevent exposure of information when using outputbinding in .net isolated azure functions'
+date: '2023-05-03'
+category:
+  - 'Azure'
+  - 'Azure Functions'
+  - 'dotnet'
+description: 'When sending messages to SignalR using dotnet Isolated Azure functions, you might run into the situation that you want to handle errors AND do not want to expose success information. This blogposts describes how to handle this situation'
 img: ./images/banner.png
 tags:
-- "Azure"
-- "Azure Functions"
-- "dotnet"
+  - 'Azure'
+  - 'Azure Functions'
+  - 'dotnet'
 ---
 
 The solution in this blogpost serves to goals: handle error situations when using azure functions output bindings and prevent the exposure of to much information. In this specific situation a Azure function was created to send a SignalR message to a [specific user](../an-update-on-setting-the-signalr-userid-without-authentication/)specific user. When posting a message to '/api/SendMessage/<userid>', the Azure function tries to send a specific message via SignalR to that specific user. The [default examples](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-signalr-service-output?pivots=programming-language-csharp&tabs=isolated-process#tabpanel_2_in-process) do not offer a solution to my issues.
@@ -24,7 +24,7 @@ The example below accepts an empty POST to `api/SendMessage/<userid>`. It create
 [SignalROutput(HubName = "chat", ConnectionStringSetting = "SignalRConnection")]
     {
 public static SignalRMessageAction SendMessage([HttpTrigger(AuthorizationLevel.Function, "post", Route = "SendMessage/{userid}" )] HttpRequestData req, string userid)
-{    
+{
     return new SignalRMessageAction("newMessage")
     {
         Arguments = new[] { bodyReader.ReadToEnd() },
@@ -68,7 +68,7 @@ Transfer-Encoding: chunked
 }
 ```
 
-There is an obious malformed userid input. This should always be prevented, from a security perspective, but also from a costs perspective: every signalR request may lead to additional costs, so these should be filtered. Using a very rudimentary validation, for example a regular expression, will enable the userid validation. The ```SignalRMessageAction``` is required for the SignalROutput, and it could be made ```<nullable>``` When the same request will be sent, the output is as follows:
+There is an obious malformed userid input. This should always be prevented, from a security perspective, but also from a costs perspective: every signalR request may lead to additional costs, so these should be filtered. Using a very rudimentary validation, for example a regular expression, will enable the userid validation. The `SignalRMessageAction` is required for the SignalROutput, and it could be made `<nullable>` When the same request will be sent, the output is as follows:
 
 ```http
 HTTP/1.1 204 No Content
@@ -110,14 +110,14 @@ This happens due to the behaviour of the output binding, in combination with the
 
 ## The solution
 
-This can be solved by using a custom ReturnObject and moving the Outputbinding into this object. Take note of the SignalROutput binding attribute above the SignalRMessageAction. This Action has been made ```nullable```, for the case where the userid is invalid and SignalR shouldn't be triggered.
+This can be solved by using a custom ReturnObject and moving the Outputbinding into this object. Take note of the SignalROutput binding attribute above the SignalRMessageAction. This Action has been made `nullable`, for the case where the userid is invalid and SignalR shouldn't be triggered.
 
 ```csharp
-namespace Models 
+namespace Models
 {
     public class ReturnObject {
         public HttpResponseData response {get;set;}
-        
+
         [SignalROutput(HubName = "serverless", ConnectionStringSetting = "AzureSignalRConnectionString")]
         public SignalRMessageAction? message {get;set;}
     }
@@ -128,13 +128,13 @@ This enables us to write 'proper' validation within the actual function and send
 
 ```csharp
 // rudimentary validation on userid
-private static readonly Regex regex = new Regex("^[a-zA-Z0-9-]*$"); 
+private static readonly Regex regex = new Regex("^[a-zA-Z0-9-]*$");
 
-    [Function("SendMessage")]    
+    [Function("SendMessage")]
     public static ReturnObject SendMessage([HttpTrigger(AuthorizationLevel.Function, "post", Route = "SendMessage/{userid}" )] HttpRequestData req, string userid)
-    {        
+    {
         // validate userid
-        var result = regex.IsMatch(userid);         
+        var result = regex.IsMatch(userid);
         var returnObject = new ReturnObject();
         if(!result)
             returnObject.response = req.CreateResponse(HttpStatusCode.BadRequest);
@@ -149,7 +149,7 @@ private static readonly Regex regex = new Regex("^[a-zA-Z0-9-]*$");
             };
         }
 
-        return returnObject;        
+        return returnObject;
     }
 ```
 

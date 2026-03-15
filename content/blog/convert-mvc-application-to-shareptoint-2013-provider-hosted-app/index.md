@@ -1,13 +1,13 @@
 ---
-title: "Convert MVC application to SharePoint 2013 provider hosted app"
-date: "2013-12-11"
-categories: 
-  - "apps"
-  - "mvc"
-  - "sharepoint-2013"
+title: 'Convert MVC application to SharePoint 2013 provider hosted app'
+date: '2013-12-11'
+categories:
+  - 'apps'
+  - 'mvc'
+  - 'sharepoint-2013'
 ---
 
-With the introduction of the SharePoint App model, it becomes more and more interesting to convert existing applications in your organisation from a "plain" MVC application to a SharePoint app. This makes it easy to integrate SharePoint capabilities such as Search, UserProfiles and newsfeeds within your application, to make it even cooler! This blogpost describes the steps that are required to convert a MVC application to a SharePoint 2013 app using [Visual Studio 2013](http://www.visualstudio.com/en-us/downloads/ "Download Visual Studio 2013")
+With the introduction of the SharePoint App model, it becomes more and more interesting to convert existing applications in your organisation from a "plain" MVC application to a SharePoint app. This makes it easy to integrate SharePoint capabilities such as Search, UserProfiles and newsfeeds within your application, to make it even cooler! This blogpost describes the steps that are required to convert a MVC application to a SharePoint 2013 app using [Visual Studio 2013](http://www.visualstudio.com/en-us/downloads/ 'Download Visual Studio 2013')
 
 First, open up your MVC project. In this example, I just use a project based on the standard MVC5 template that was delivered with Visual Studio 2013. Please note that when a new MVC application has been created with the default options, the remote application will break due to authentication settings. In a lot of cases, the application is configured with some kind of authentication. We'll get back to that later.
 
@@ -37,7 +37,7 @@ These files contain logic to easily build up the SharePoint context, both for Sh
 
 ## Step 3: cleaning up and fixing the SharePoint app
 
-At first, an app.config file is introduced into the SharePoint solution, which shouldn't be there. Remove this file, I blogged about it here: [Failed to install app for SharePoint - Exception from hresult:0x81070964](http://blog.baslijten.com/failed-to-install-app-for-sharepoint-exception-from-hresult-0x81070964/ "Failed to install app for SharePoint – Exception from HRESULT: 0×81070964") .
+At first, an app.config file is introduced into the SharePoint solution, which shouldn't be there. Remove this file, I blogged about it here: [Failed to install app for SharePoint - Exception from hresult:0x81070964](http://blog.baslijten.com/failed-to-install-app-for-sharepoint-exception-from-hresult-0x81070964/ 'Failed to install app for SharePoint – Exception from HRESULT: 0×81070964') .
 
 Afterwards, remove all modules, as they aren't needed.
 
@@ -53,34 +53,34 @@ In the system.web section, replace the authorization node with the following sni
 
 ```xml
 
-<authorization> <deny users="?" /> </authorization> 
+<authorization> <deny users="?" /> </authorization>
 ```
 
 The module in system.WebServer should be removed as well:
 
 ```xml
 
-<system.webServer> <modules> <remove name="FormsAuthenticationModule" /> </modules> </system.webServer> 
+<system.webServer> <modules> <remove name="FormsAuthenticationModule" /> </modules> </system.webServer>
 ```
 
 ## Step 5: Remove the Authentication middleware
 
-The authention middleware that gets instantiated when a MVC5 Application with default options is created, also needs to be removed. This code can be found in: App\_Start\\Startup.Auth.cs
+The authention middleware that gets instantiated when a MVC5 Application with default options is created, also needs to be removed. This code can be found in: App_Start\\Startup.Auth.cs
 
 ```csharp
- 
-// Enable the application to use a cookie to store information for the signed in user 
-app.UseCookieAuthentication(new CookieAuthenticationOptions { AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie, LoginPath = new PathString("/Account/Login") }); 
+
+// Enable the application to use a cookie to store information for the signed in user
+app.UseCookieAuthentication(new CookieAuthenticationOptions { AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie, LoginPath = new PathString("/Account/Login") });
 // Use a cookie to temporarily store information about a user logging in with a third party login provider app.
 UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 ```
 
 ## Step 6: Add some logic to interact with SharePoint 2013
 
-The next step, is to add some logic, to interact with SharPoint. The following code has been shamelessly copied from the standard _SharePoint_ MVC template. This code creates a SharePoint context (the code contains logic to create a Azure Access Control Services or High Trust Context, based on the presence of a ClientCertificate (as described in the previous step), Dont forget to update your references to the SharePoint.Client.dll.
+The next step, is to add some logic, to interact with SharPoint. The following code has been shamelessly copied from the standard *SharePoint* MVC template. This code creates a SharePoint context (the code contains logic to create a Azure Access Control Services or High Trust Context, based on the presence of a ClientCertificate (as described in the previous step), Dont forget to update your references to the SharePoint.Client.dll.
 
 ```csharp
- 
+
 public ActionResult Index() { User spUser = null;
 var spContext = SharePointContextProvider.Current.GetSharePointContext(HttpContext);
 using (var clientContext = spContext.CreateUserClientContextForSPHost()) { if (clientContext != null) { spUser = clientContext.Web.CurrentUser;
@@ -91,7 +91,7 @@ clientContext.ExecuteQuery();
 
 ViewBag.UserName = spUser.Title; } }
 
-return View(); } 
+return View(); }
 ```
 
 In some cases, the context that is needed can't be created. This causes the error below

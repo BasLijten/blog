@@ -1,18 +1,18 @@
 ---
-title: "Solr: Error creating SolrCore when using the Sitecore installation Framework"
-date: "2017-10-25"
-categories: 
-  - "deployment"
-  - "feature-2"
-  - "search"
-  - "sitecore"
-  - "solr"
-img: "./images/solrerror-1.png"
+title: 'Solr: Error creating SolrCore when using the Sitecore installation Framework'
+date: '2017-10-25'
+categories:
+  - 'deployment'
+  - 'feature-2'
+  - 'search'
+  - 'sitecore'
+  - 'solr'
+img: './images/solrerror-1.png'
 ---
 
 Today I experienced an error while installing Sitecore 9 using the Sitecore installation framework:
 
-_“Install-SitecoreConfiguration : Error CREATEing SolrCore 'xp0\_xdb': Unable to create core \[xp0\_xdb\] Caused by: null”_
+_“Install-SitecoreConfiguration : Error CREATEing SolrCore 'xp0_xdb': Unable to create core \[xp0_xdb\] Caused by: null”_
 
 Setting the verbose logging option didn’t help and my tries to manually reproduce the issue didn’t work out as well; _Or_ the core was successfully created _or_ I got an error message that the core was already created.
 

@@ -1,42 +1,41 @@
 ---
-title: "Set the SignalR UserID without authentication"
-date: "2023-02-20"
-category: 
-- "javascript"
-- ".Net"
-- "Azure Functions"
-- "SignalR"
-- "Azure"
-- "Personalization"
-description: "How to set the userid in your browser, without having to authenticate your users"
+title: 'Set the SignalR UserID without authentication'
+date: '2023-02-20'
+category:
+  - 'javascript'
+  - '.Net'
+  - 'Azure Functions'
+  - 'SignalR'
+  - 'Azure'
+  - 'Personalization'
+description: 'How to set the userid in your browser, without having to authenticate your users'
 img: ./images/signalR-userid.jpg
 tags:
-- "javascript"
-- ".Net"
-- "Azure Functions"
-- "SignalR"
-- "Azure"
-- "Personalization"
+  - 'javascript'
+  - '.Net'
+  - 'Azure Functions'
+  - 'SignalR'
+  - 'Azure'
+  - 'Personalization'
 ---
+
 SignalR is a great service provided by Microsoft, which enables to send updates to a browser from a server through the websocket protocol. A great usecase is to use this technique to personalize the web experience, [I spoke about this subject](https://www.youtube.com/watch?v=zT2uT1zSGuE) years ago, however, I never blogged about this subject. This blogpost will just be a short blogpost about setting a unqiue userid, which can be used by your personalization/decision engine to notify a connected client with an update whenever there is one available.
 
 > Warning: While the concepts in this blogpost are still relevant, the information regarding custom headers is outdated. A small blogpost with an update can be found at: [An update on setting the SignalR UserID without authentication](../an-update-on-setting-the-signalr-userid-without-authentication)
 
-
 > Disclaimer: In order to use personalization, track users, or whatsoever, you might or might have to obey your national regulations. Please consult your legal department ;)
-
 
 ## Architecture
 
-In this specific example, 5 main actors exist, for the sake of simplicity. 
+In this specific example, 5 main actors exist, for the sake of simplicity.
 
-Actor | description
---- | ---
-Browser |  renders page, connects to signalR, needs to act on signalR updates
-Azure SignalR | serverless signalR service which handles communication from the backend *to* the browser
-Azure Functions | negotiates connection between client/signalR and provides an abstraction to send messages from server to signalR
-CDP / Personalization engine | hands out a unqiue (user)ID to a browser and registers it to the backend, triggers personalization actions
-Backend | required to send updates to the browser (via signalR)
+| Actor                        | description                                                                                                      |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Browser                      | renders page, connects to signalR, needs to act on signalR updates                                               |
+| Azure SignalR                | serverless signalR service which handles communication from the backend _to_ the browser                         |
+| Azure Functions              | negotiates connection between client/signalR and provides an abstraction to send messages from server to signalR |
+| CDP / Personalization engine | hands out a unqiue (user)ID to a browser and registers it to the backend, triggers personalization actions       |
+| Backend                      | required to send updates to the browser (via signalR)                                                            |
 
 ![diagram](./images/diagram.excalidraw.png)
 
@@ -69,10 +68,11 @@ the jwt token contains the following information:
 the JWT token doesn't contain any information about the user, and is just used for authentication towards the signalR service. Once a connection has been setup, broadcast messages or connection specific messages can be send via signalR to the client, but user specific messages aren't possible anymore
 
 ### How a userID can be set, based on most examples
+
 In order to be able to send specific messages towards "users" (well, browsers with users with a specific ID, to be clear ;), the UserID has to be set during the negotiation phase. There are existing examples on the web, but they are all based on authentication methods using github, facebook, microsoft and they expect to have a specific header in order to be able to use it. On [learn.microsoft.com](https://learn.microsoft.com/en-us/azure/azure-signalr/signalr-concept-serverless-development-config#using-app-service-authentication) examples can be found how this exactly should work. A small summary:
 
-* Your application must run on an app , making use of the platform [authentication and authorization features](https://learn.microsoft.com/en-us/azure/app-service/overview-authentication-authorization) which are available. This wil result in two headers becoming available during every http request:
-`x-ms-client-principal-name` and `x-ms-client-principal-id`. These headers are automatically in all traffic between the negotiation function and the browser (as it is default behaviour of the http protocol). The negotiation function can be setup in order to use one of these headers as a userid:
+- Your application must run on an app , making use of the platform [authentication and authorization features](https://learn.microsoft.com/en-us/azure/app-service/overview-authentication-authorization) which are available. This wil result in two headers becoming available during every http request:
+  `x-ms-client-principal-name` and `x-ms-client-principal-id`. These headers are automatically in all traffic between the negotiation function and the browser (as it is default behaviour of the http protocol). The negotiation function can be setup in order to use one of these headers as a userid:
 
 ```csharp
 [FunctionName("negotiate")]
@@ -98,14 +98,14 @@ There are a few situations where the approach above doesn't work, one of them is
 A connection setup in the browser works as follows:
 
 ```javascript
-    const connection = new signalR.HubConnectionBuilder()
-        .withUrl(apiBaseUrl + '/api')
-        .configureLogging(signalR.LogLevel.Information)
-        .build();    
+const connection = new signalR.HubConnectionBuilder()
+  .withUrl(apiBaseUrl + '/api')
+  .configureLogging(signalR.LogLevel.Information)
+  .build()
 ```
 
-
 ## Obtaining an User ID
+
 The first import step is to acquire a userid. A lot of signalR examples do use some kind of authentication in order to acquire a UserID, but, especially on commercial websites, people often don't log in. Most of the SignalR examples, which explain how user specific updates work, do require some kind of authentication. Information from this token is being used by SignalR in order to be able to send specific updates to a user. As we are working with anonymous users, this is not an option. As a lot of websites, however, do track users, the UserID of the CDP could be used, but how could it be Send to SignalR?
 
 Let's assume that a Unqiue ID has been assigned using your CDP as `customUserId`
@@ -113,12 +113,13 @@ Let's assume that a Unqiue ID has been assigned using your CDP as `customUserId`
 the following code could be used in order to transfer the customUserID to the negotiate function:
 
 ```javascript
-const apiBaseUrl = window.location.origin;
+const apiBaseUrl = window.location.origin
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl(apiBaseUrl + '/api?userid=' + customUserId)
-    .configureLogging(signalR.LogLevel.Information)
-    .build(); 
+  .withUrl(apiBaseUrl + '/api?userid=' + customUserId)
+  .configureLogging(signalR.LogLevel.Information)
+  .build()
 ```
+
 However, this would to an exception, as the function still expects the `x-ms-client-principal-id` header to be present. A small change to the binding expression (from `headers.x-ms-client-principal-id` to `query.userid`) solves this issue, and the querystring parameter is taken automatically as UserId
 
 ```csharp

@@ -1,17 +1,17 @@
 ---
-title: "GeoSearch with Fast Search for SharePoint 2010 - Part 1"
-date: "2012-02-24"
-categories: 
-  - "fast"
-  - "geo"
-  - "geolocation"
-  - "sharepoint"
+title: 'GeoSearch with Fast Search for SharePoint 2010 - Part 1'
+date: '2012-02-24'
+categories:
+  - 'fast'
+  - 'geo'
+  - 'geolocation'
+  - 'sharepoint'
 ---
 
-This is the first part of a series of blogposts about GeoSearch with Fast Search for SharePoint. I recently held some presentations about extending the power of Fast (on [DIWUG](http://www.diwug.nl/ "Dutch Information Worker User Group") and the Dutch [TechDays 2012](http://www.techdays.nl/ "Dutch Techdays 2012")) and one of the subjects that I talked about was on how to search for locations, sort on distances etcetera. The recording of my sessions will be made available on [Channel 9](http://channel9.msdn.com/Events/Speakers/bas+lijten "Bas Lijten on Channel 9").
+This is the first part of a series of blogposts about GeoSearch with Fast Search for SharePoint. I recently held some presentations about extending the power of Fast (on [DIWUG](http://www.diwug.nl/ 'Dutch Information Worker User Group') and the Dutch [TechDays 2012](http://www.techdays.nl/ 'Dutch Techdays 2012')) and one of the subjects that I talked about was on how to search for locations, sort on distances etcetera. The recording of my sessions will be made available on [Channel 9](http://channel9.msdn.com/Events/Speakers/bas+lijten 'Bas Lijten on Channel 9').
 
 - Part 1: why and how
-- [Part 2: the custom pipeline extension to enrich the Fast index with spatial data](http://blog.baslijten.com/geosearch-with-fast-search-for-sharepoint-2010-part-2-custom-pipeline-extensions/ "Part 2: the custom pipeline extension to enrich the Fast index with spatial data")
+- [Part 2: the custom pipeline extension to enrich the Fast index with spatial data](http://blog.baslijten.com/geosearch-with-fast-search-for-sharepoint-2010-part-2-custom-pipeline-extensions/ 'Part 2: the custom pipeline extension to enrich the Fast index with spatial data')
 - Part 3: how to use this metadata in your search queries
 
 ## Why using Fast search for SharePoint 2010 for this purpose?

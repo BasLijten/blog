@@ -1,16 +1,16 @@
 ---
-title: "How to: Create a DTU consumption overview using Azure Metrics"
-date: "2019-04-14"
-categories: 
-  - "application-insights"
-  - "azure"
-  - "azure-sql"
-  - "sitecore"
-tags: 
-  - "azure-sql"
-  - "matrics"
-  - "sitecore"
-img: "./images/image-20.png"
+title: 'How to: Create a DTU consumption overview using Azure Metrics'
+date: '2019-04-14'
+categories:
+  - 'application-insights'
+  - 'azure'
+  - 'azure-sql'
+  - 'sitecore'
+tags:
+  - 'azure-sql'
+  - 'matrics'
+  - 'sitecore'
+img: './images/image-20.png'
 ---
 
 In [a previous blogpost](https://blog.baslijten.com/to-elastic-pool-or-not-to-elastic-pool-for-sitecore-on-azure) I showed a small overview of DTU consumptions of all Sitecore databases and how to use that overview to reduce your costs. This blogpost will explain step by step how to create that overview. An example of the file can be found [here](https://blog.baslijten.com/wp-content/uploads/2019/04/DTU-overview.xlsx)
@@ -41,8 +41,7 @@ a graphical overview of the total DTU consumption
 
 ![](images/image-11.png)
 
-Download the data to Excel  
-  
+Download the data to Excel
 
 **Open the Excel workbook and insert three blank rows under the database row -** These rows will be used to roll up all important information
 
@@ -58,8 +57,6 @@ Download the data to Excel
 
 ![](images/image-14.png)
 
-  
-
 **Insert the percentage in the percentage column -** this will give an easy overview over the over/undercommitment for each database. Don't forget to change the data format to percentage
 
 ![](images/image-15.png)
@@ -72,13 +69,9 @@ Download the data to Excel
 
 ![](images/image-17.png)
 
-  
-
 **Get the max value of each SUM(row) -**This will show the maximum resources which were consumed simultaneously
 
 ![](images/image-18.png)
-
-  
 
 **This will lead to the following overview. -** Conditional formatting could optionally be added to give an easier overview:
 

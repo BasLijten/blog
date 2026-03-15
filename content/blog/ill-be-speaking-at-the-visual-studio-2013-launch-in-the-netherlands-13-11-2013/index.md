@@ -1,10 +1,10 @@
 ---
 title: "I'll be speaking at the visual studio 2013 launch in the Netherlands (13-11-2013)"
-date: "2013-11-09"
-img: "./images/visualstudio2013.png"
+date: '2013-11-09'
+img: './images/visualstudio2013.png'
 ---
 
-November 13th is the day that Visual Studio 2013 officially will be launched to the public during a virtual Launch Event. InfoSupport organizes, toghether with the Microsoft communities [a special event around this Launch](http://blogs.infosupport.com/visual-studio-2013-launch/ "Visual Studio 2013 Launch "), with the theme:
+November 13th is the day that Visual Studio 2013 officially will be launched to the public during a virtual Launch Event. InfoSupport organizes, toghether with the Microsoft communities [a special event around this Launch](http://blogs.infosupport.com/visual-studio-2013-launch/ 'Visual Studio 2013 Launch '), with the theme:
 
 ## Step into the world of apps and cloud with Visual Studio 2013
 
@@ -20,8 +20,8 @@ Date13 November 2013 Time: 16:00 Location: Info Support in Veenendaal
 
 **Hieronder zijn de parallel sessies weergegeven:** Parallel Session 1:
 
-1\. Windows Azure & Visual Studio 2013 – Brothers in arms – _Valery Jacobs_ 2. Continuous Deployment with TFS and Inrelease – _Marcel de Vries_ 3. Windows 8.1 app development – _Dennis Vroegop_
+1\. Windows Azure & Visual Studio 2013 – Brothers in arms – *Valery Jacobs* 2. Continuous Deployment with TFS and Inrelease – *Marcel de Vries* 3. Windows 8.1 app development – *Dennis Vroegop*
 
 Parallel Session 2:
 
-1\. SharePoint 2013 and Office365 apps with VS2013 – [_Bas Lijten_](http://blog.baslijten.com "Bas Lijten's blog - SharePoint and other Microsoft technology") 2. TFS Web client features – _Clemens Reijnen; Hassan Fadili_ 3. Visual Studio 2013 & Web development – _Alex Thissen_
+1\. SharePoint 2013 and Office365 apps with VS2013 – [_Bas Lijten_](http://blog.baslijten.com "Bas Lijten's blog - SharePoint and other Microsoft technology") 2. TFS Web client features – *Clemens Reijnen; Hassan Fadili* 3. Visual Studio 2013 & Web development – *Alex Thissen*

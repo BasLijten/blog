@@ -1,12 +1,12 @@
 ---
-title: "Another look at URL redirects in Sitecore"
-date: "2016-02-27"
-categories: 
-  - "sitecore"
-tags: 
-  - "redirects"
-  - "sitecore"
-img: "./images/301-redirect.jpg"
+title: 'Another look at URL redirects in Sitecore'
+date: '2016-02-27'
+categories:
+  - 'sitecore'
+tags:
+  - 'redirects'
+  - 'sitecore'
+img: './images/301-redirect.jpg'
 ---
 
 Redirection of urls, it’s a very common action, it’s important to maintain your SEO-value when URL’s move around and to provide friendly, short URLs. The only thing that you have to do is to create a permanent or temporary redirect, right? There are some solutions which add redirect functionality to Sitecore, for example the great [Url Rewrite](https://github.com/iamandycohen/UrlRewrite) module by Andy Cohen, which is based on the [IIS Url Rewrite 2.0](http://www.iis.net/downloads/microsoft/url-rewrite) module by Microsoft. But there are several scenario’s when you can solve several redirects in other parts of the infrastructure, or with other products. This may, for example, be the case in in larger companies, hosting multiple Sitecore instances with multiple sites, where configuring certain types of redirects in different parts of the infrastructure can prevent a lot of other configuration in those same layers, reduce complexity or prevent issues on the permissions to configure redirects.
@@ -19,7 +19,7 @@ If we look into a typical infrastructure to serve websites, this could be visual
 
 ![](images/img_56d1b91c49a99.png)
 
-_Note: an example of a path that should be blocked over the internet (thus, the Content Delivery servers), are the /Sitecore/ and /App\_config paths. They should be blocked for anonymous users on IIS as well, but defense in depth (multiple layers of security) is always a good practice._
+_Note: an example of a path that should be blocked over the internet (thus, the Content Delivery servers), are the /Sitecore/ and /App_config paths. They should be blocked for anonymous users on IIS as well, but defense in depth (multiple layers of security) is always a good practice._
 
 ## Redirect requirements
 
@@ -45,7 +45,7 @@ _Note: the http/https and www/non-www redirects could be included in one redirec
 
 A complex redirect is a redirect which uses regular expressions or other conditions; those kind of redirects are not configured often, but often happen during migrations, after rebuilding, or after restructuring a site. As those regular expressions should be tested thoroughly (preferably over the DTAP), as they can break the sites, _we_ prefer that content managers are not able to configure them.
 
-An example of redirecting urls using regular expressions is the following. An old asp.net site was presenting articles using the following url: [http://www.domain.com/article.aspx?id=2&title=some-cool-title](http://www.domain.com/article.aspx?id=2&title=some-cool-title). When migrating to Sitecore, a more friendly url would be: [https://www.domain.com/article/2/some-cool-title](https://www.domain.com/article/2/some-cool-title). This can be achieved by using regular expressions. These are the places _where_ these regular expressions can be configured:
+An example of redirecting urls using regular expressions is the following. An old asp.net site was presenting articles using the following url: [http://www.domain.com/article.aspx?id=2&title=some-cool-title](http://www.domain.com/article.aspx?id=2&title=some-cool-title). When migrating to Sitecore, a more friendly url would be: [https://www.domain.com/article/2/some-cool-title](https://www.domain.com/article/2/some-cool-title). This can be achieved by using regular expressions. These are the places *where* these regular expressions can be configured:
 
 - Solve the complex redirects in the Reverse proxy
 - Solve the complex redirects in Sitecore
@@ -77,7 +77,7 @@ Although this option could work in other scenario’s, for other customers, we d
 
 This module is an officially supported module and created by Microsoft. It even fits in a cloud scenario, as the azure web applications can make use of this module as well. However, not all the capabilities of this module are supported: It’s possible to write a custom provider for this module. This means that this module can be pointed to other sources, for example databases, files or even Sitecore, to get it’s configuration. Those providers need to be deployed to the Global Assembly Cache, which isn’t possible on Azure.
 
-An advantage of the redirect module is that it has an complete interface with a lot of options. Complex (very complex) rules can be configured and it’s possible to include conditions, for example to match the HTTP\_HOST server to the hostname of the site. Another advcantage of the URL Rewrite 2.0 module is that it will kick in before the Sitecore pipeline, so no additional processing power is needed and no additional database queries are made when a request meets the rule conditions.
+An advantage of the redirect module is that it has an complete interface with a lot of options. Complex (very complex) rules can be configured and it’s possible to include conditions, for example to match the HTTP_HOST server to the hostname of the site. Another advcantage of the URL Rewrite 2.0 module is that it will kick in before the Sitecore pipeline, so no additional processing power is needed and no additional database queries are made when a request meets the rule conditions.
 
 ![](images/img_56d1b966d0a1d.png)
 

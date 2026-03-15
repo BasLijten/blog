@@ -1,10 +1,10 @@
 ---
-title: "Techdays 2013 - our sessions"
-date: "2013-03-15"
-categories: 
-  - "presentation"
-  - "session"
-  - "techdays"
+title: 'Techdays 2013 - our sessions'
+date: '2013-03-15'
+categories:
+  - 'presentation'
+  - 'session'
+  - 'techdays'
 ---
 
 On 7 and 8 March, the yearly returning  TechDays event was held in the Netherlands. This was already the 4th year in a row that I was visiting the event as a speaker, with a total of 6 sessions. I wasn't the only speaker of[Achmea](http://www.achmea.com/); some colleague's of mine were speaking as well. (Fact: Alex thissen spoke for the eleventh year in a row. He lost track on the amount of sessions ;) We had a great diversity on subjects (Security, SharePoint , ALM, windows 8) and I'll give a quick overview of the content covered in our sessions.

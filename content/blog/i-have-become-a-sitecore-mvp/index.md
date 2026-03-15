@@ -1,13 +1,13 @@
 ---
-title: "I have become a Sitecore MVP!"
-date: "2016-02-20"
-categories: 
-  - "sitecore"
-tags: 
-  - "community"
-  - "mvp"
-  - "sitecore"
-img: "./images/sitecore_mvp_2.png"
+title: 'I have become a Sitecore MVP!'
+date: '2016-02-20'
+categories:
+  - 'sitecore'
+tags:
+  - 'community'
+  - 'mvp'
+  - 'sitecore'
+img: './images/sitecore_mvp_2.png'
 ---
 
 I am very happy and proud to announce that I have become a Sitecore MVP! For seven years, I have tried to become a SharePoint Server MVP, but last year I thought: screw you SharePoint, Hello Sitecore! Of course, I am just kidding ;). I have worked for years on very cool SharePoint projects, together with Microsoft, Avanade, a bunch of SharePoint MVP’s and some other very high skilled people. I had the chance to meet great people on SharePoint Saturdays, DIWUG, the SharePoint Conferences, Ignite, I shared a lot of the things we learned at Achmea on SharePoint, Security and WCM and learned a lot from the community.

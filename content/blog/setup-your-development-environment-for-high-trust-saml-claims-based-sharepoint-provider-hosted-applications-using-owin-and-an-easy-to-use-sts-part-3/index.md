@@ -1,14 +1,14 @@
 ---
-title: "Setup your development environment for High trust Saml Claims based SharePoint provider hosted applications using OWIN and an easy to use STS – part 3"
-date: "2015-08-17"
-categories: 
-  - "adfs"
-  - "development"
-  - "owin"
-  - "sharepoint"
-  - "sharepoint-2013"
-  - "sharepoint-add-in"
-img: "./images/FeaturedImage.png"
+title: 'Setup your development environment for High trust Saml Claims based SharePoint provider hosted applications using OWIN and an easy to use STS – part 3'
+date: '2015-08-17'
+categories:
+  - 'adfs'
+  - 'development'
+  - 'owin'
+  - 'sharepoint'
+  - 'sharepoint-2013'
+  - 'sharepoint-add-in'
+img: './images/FeaturedImage.png'
 ---
 
 Since SharePoint 2013, web applications are created with claims based authentication by default. This works with together with High trust provider hosted apps, based on windows authentication as well. Whenever ADFS with its SAML claims pops in, it gets complicated: SharePoint needs to be configured, High trust provider apps need to configured and the app needs to communicate with SharePoint – using saml claims. Mix in a development environment, where, very likely, no ADFS is available and it gets complicated. Until now ;).
@@ -32,11 +32,11 @@ The following steps need to be taken to setup a simple development environment t
 
 As a development Identity Provider, the Thinkthecture EmbeddedSTS is an excellent choice. As it was meant as an embedded STS for single web applications, it didn’t have functionality in it to serve as a standalone identity provider, so I fixed this and added this [pull request](https://github.com/IdentityModel/Thinktecture.IdentityModel/pull/134). (As long it hasn’t been pulled, it can be found in [this branch](https://github.com/BasLijten/Thinktecture.IdentityModel/tree/FederationMetadata)). Just open it in Visual Studio and run the project. (Of course, it can be run as a standalone web application as well, but that’s not part of this post right now).
 
-_As the EmbeddedStsSample doesn’t have a project reference to the Embedded STS, but a binary reference, and the fact that the binary reference is not up to date, you have to clean your solution and rebuild it before the STS can be started._ 
+_As the EmbeddedStsSample doesn’t have a project reference to the Embedded STS, but a binary reference, and the fact that the binary reference is not up to date, you have to clean your solution and rebuild it before the STS can be started._
 
-_When rebuilding the STS, it might even be possible that you can’t rebuild the solution. That might be possible to the fact that MVC 4.0 hasn’t been installed on your system. Feel free to add the MVC 5 nuget package to your solution, copy and reference the System.Web.Mvc assembly from the samples project or do it in any other way._ 
+_When rebuilding the STS, it might even be possible that you can’t rebuild the solution. That might be possible to the fact that MVC 4.0 hasn’t been installed on your system. Feel free to add the MVC 5 nuget package to your solution, copy and reference the System.Web.Mvc assembly from the samples project or do it in any other way._
 
-The default URL for the STS is: [http://localhost:29702/](http://localhost:29702/). When visiting the sample application for the first time, make sure to “login”: a list with preconfigured identities will be created on application startup, with the following identities: Alice and Bob.  This file can be found in the _“\\Thinktecture.IdentityModel\\samples\\EmbeddedSts\\EmbeddedStsSample\\App\_Data”_ directory and may be modified to your own needs. It _should_ even be done to gain the most benefit from this solution.
+The default URL for the STS is: [http://localhost:29702/](http://localhost:29702/). When visiting the sample application for the first time, make sure to “login”: a list with preconfigured identities will be created on application startup, with the following identities: Alice and Bob.  This file can be found in the _“\\Thinktecture.IdentityModel\\samples\\EmbeddedSts\\EmbeddedStsSample\\App_Data”_ directory and may be modified to your own needs. It _should_ even be done to gain the most benefit from this solution.
 
 ## Configure your sharepoint environment to use the STS
 
@@ -56,9 +56,9 @@ On this [github repository](https://github.com/BasLijten/Configure-Thinktecture-
 
 After registering the STS, it’s time to add the trusted identity provider to our web application. Go to central administration -> Application management -> Manage web applications and select the web application that you want to configure. Click on the “Authentication Provider” button in the ribbon and select the correct zone. Select the Embedded STS and press Save. This can take some time, as some internal configuration take place. No indicator will be shown! ![](images/img_55d1ecea79e02.png)
 
-_Note: The Identity provider will be used by all the sites in the whole web application!_ 
+_Note: The Identity provider will be used by all the sites in the whole web application!_
 
-Next, it’s time to add some identities. I created an example file on gist.github.com, with my identity and the _other_ members of the A-team. Place [this](https://gist.github.com/BasLijten/f1a892304754e3349274) file in the App\_data folder.
+Next, it’s time to add some identities. I created an example file on gist.github.com, with my identity and the _other_ members of the A-team. Place [this](https://gist.github.com/BasLijten/f1a892304754e3349274) file in the App_data folder.
 
 Now it’s time to add one of these identities as a sitecollection administrator to one of our sites. From the central administration, add a new site collection administrator to your site collection. Whatever value you enter: it will always return a “resolved” value. This is due to the fact that the claims resolver always return true for every value in the people picker.
 
@@ -123,7 +123,7 @@ The next, and last step, is to configure the application to use the WsFederation
 
 This is the general, recommended options. It sets the default login type to “Cookies” and uses Federation when there is no Cookie yet. The drawback is that “HttpContext.Current.User.Identity.AuthenticationType” is set to “Cookies” as well and that the code provided by Wictor Wilen, won’t work anymore (more on that later).
 
-```csharp
+````csharp
  public void Configuration(IAppBuilder app) { app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType); app.UseCookieAuthentication(new CookieAuthenticationOptions()); app.UseWsFederationAuthentication( new WsFederationAuthenticationOptions { MetadataAddress = "http://localhost:29702/FederationMetadata", Wtrealm = "urn:MySamlClaimsSharePointApp", Wreply = "http://localhost:16635/" }); } ```
 
 _Note: I configured my SharePoint provider hosted app to run in local IIS instead of IIS Express. When debugging in local IIS, Visual Studio will **not** break on breakpoints in the startupclass, however, it will in IIS Express._
@@ -188,3 +188,4 @@ Whenever these steps have been executed, your SharePoint provider hosted app has
 ## Summary
 
 SharePoint 2013, High trust apps, SAML claims and its infrastructure can be complex, but it doesn’t have to be hard to setup a development environment. Using the Thinktecture EmbeddedSTS, some plumbing by Wictor Wilen and Steve Peschka, and some OWIN magic, it’s quite easy to setup an environment like this! On first sight, it looks really inconvenient, but once you have done it, it doesn’t seem to be too hard anymore
+````

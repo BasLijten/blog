@@ -1,14 +1,15 @@
 ---
-title: "Managing Sitecore XM Cloud Edge Webhooks with REST Client"
-date: "2026-03-15"
-categories: ["Sitecore", "XM Cloud", "REST Client", "Webhooks", "VS Code"]
-description: "A walkthrough of managing Sitecore XM Cloud Experience Edge webhooks using a single .http file with the VS Code REST Client extension — from getting credentials to creating, listing, and deleting webhooks."
+title: 'Managing Sitecore XM Cloud Edge Webhooks with REST Client'
+date: '2026-03-15'
+categories: ['Sitecore', 'XM Cloud', 'REST Client', 'Webhooks', 'VS Code']
+description: 'A walkthrough of managing Sitecore XM Cloud Experience Edge webhooks using a single .http file with the VS Code REST Client extension — from getting credentials to creating, listing, and deleting webhooks.'
 img: ./images/restclient-webhooks.png
 ---
 
 At Achmea we use Sitecore XM Cloud Experience Edge webhooks to trigger ISR revalidation in our Next.js front-ends. Setting up and managing those webhooks is something I've had to do a few times now — and every time I found myself digging through the API docs to remember the exact calls. So I put everything into a single `.http` file using the VS Code REST Client extension. What I really like about REST Client is that it lets you reuse the response of a previous request in subsequent calls — so you authenticate once, and every request after that just picks up the access token automatically. No copy-pasting tokens between calls. In this post I'll walk you through it: from getting your Edge Administration credentials to creating, listing, and deleting webhooks — without ever leaving your editor.
 
 In this post I'll cover:
+
 - Where to get your Edge Administration credentials from XM Cloud Deploy
 - How to store them in an `.env` file
 - How the `get_token` request works and how subsequent calls reuse it automatically
@@ -79,6 +80,7 @@ You can then reference any part of that stored response in other requests using 
 ```
 
 Breaking it down:
+
 - `get_token` — the name you gave the request with `# @name`
 - `.response.body` — targets the response body
 - `.$` — the root of the JSON document (JSONPath syntax)

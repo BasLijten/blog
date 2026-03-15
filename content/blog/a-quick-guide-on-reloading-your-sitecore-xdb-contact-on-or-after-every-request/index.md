@@ -1,16 +1,16 @@
 ---
-title: "A quick guide on reloading your Sitecore xDB contact on (or after) every request"
-date: "2020-10-16"
-categories: 
-  - "development"
-  - "sitecore"
-  - "xconnect"
-tags: 
-  - "personalization"
-  - "sitecore"
-  - "xconnect"
-  - "xdb"
-img: "./images/image.png"
+title: 'A quick guide on reloading your Sitecore xDB contact on (or after) every request'
+date: '2020-10-16'
+categories:
+  - 'development'
+  - 'sitecore'
+  - 'xconnect'
+tags:
+  - 'personalization'
+  - 'sitecore'
+  - 'xconnect'
+  - 'xdb'
+img: './images/image.png'
 ---
 
 In our road towards realtime personalization, we were in need of reloading our xDB contact on every request, as external systems might have updated several facets with information that could or should be used within Sitecore. Out of the box, this does not happen.
@@ -29,7 +29,7 @@ The code consists of three parts:
 
 ### Ensure that the contact exists.
 
-When the "IsNew" property has been set to true, the contact only exists in the Sitecore environment. An explicit save is needed, before the contact can be reloaded. This is _only_ the case when the visitor doesn't send a SC\_GLOBAL\_ANALYTICS\_COOKIE - this is a persistent cookie which is stored over sessions and contains an identifier which can be used to identiy a user in the xDB. When this information is not available, the contact will be marked as "IsNew". _whenever a user leaves information, which can be used to identify this user, a merge of contacts can be executed._
+When the "IsNew" property has been set to true, the contact only exists in the Sitecore environment. An explicit save is needed, before the contact can be reloaded. This is _only_ the case when the visitor doesn't send a SC_GLOBAL_ANALYTICS_COOKIE - this is a persistent cookie which is stored over sessions and contains an identifier which can be used to identiy a user in the xDB. When this information is not available, the contact will be marked as "IsNew". _whenever a user leaves information, which can be used to identify this user, a merge of contacts can be executed._
 
 ### Remove the contact from the current session
 

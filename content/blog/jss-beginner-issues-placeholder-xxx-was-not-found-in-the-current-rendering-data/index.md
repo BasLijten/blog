@@ -1,26 +1,24 @@
 ---
 title: "JSS beginner issues: Placeholder 'xxx' was not found in the current rendering data"
-date: "2019-03-12"
-categories: 
-  - "sitecore"
-tags: 
-  - "jss"
-  - "sitecore"
-img: "./images/2019-03-12_16-57-07.png"
+date: '2019-03-12'
+categories:
+  - 'sitecore'
+tags:
+  - 'jss'
+  - 'sitecore'
+img: './images/2019-03-12_16-57-07.png'
 ---
 
 Currently, I am researching JSS and I must say: it's great. So far, I ran into a few issues and although the documentation is great (I would recommend everyone to checkout the styleguide in the default app!), I am sure that people will run into the same issues as I did. I'll share short blogpost on these issues. Today number 1:
 
 > 'Placeholder 'xxx' was not found in the current rendering data'
-> 
->   
 
 This issue occurs when component is inserted into a non-existent placeholder. This probably occurs under the following conditions:
 
 a) a new component has been created with a new placeholder
 
 ```
-<div class="row">    
+<div class="row">
     <div class="col-sm-8 col-lg-10">
         <sc-placeholder name="jss-main-carfunnel" [rendering]="rendering"></sc-placeholder>
     </div>
@@ -42,7 +40,7 @@ placeholders:
     placeholders:
       jss-main-carfunnel:
       - componentName: CallMeBack
-        fields: 
+        fields:
           heading: Call Me Back. Please! Now!
 ```
 

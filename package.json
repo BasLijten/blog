@@ -46,6 +46,7 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
+    "@netlify/plugin-lighthouse": "^6.0.4",
     "eslint": "^8.20.0",
     "eslint-plugin-react": "^7.28.0",
     "gatsby-omni-font-loader": "^2.0.1",

@@ -1,5 +1,8 @@
 [[plugins]]
-  package = "netlify-plugin-gatsby-cache"
+  package = "@netlify/plugin-gatsby"
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
 [build.environment]
   YARN_VERSION = "1.22.5"
   NODE_VERSION = "20"

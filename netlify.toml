@@ -1,5 +1,5 @@
 [build.environment]
-  YARN_VERSION = "1.22.5"
+  YARN_VERSION = "1.22.22"
   NODE_VERSION = "20"
   YARN_FLAGS = "--no-ignore-optional"
   NETLIFY_USE_YARN = "true"
@@ -13,7 +13,6 @@
   X-XSS-Protection = "1; mode=block"
   X-Content-Type-Options = "nosniff"
   Referrer-Policy = "strict-origin-when-cross-origin"
-  Feature-Policy = "accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'"
   Content-Security-Policy = "default-src 'self' www.google-analytics.com; script-src data: unpkg.com netlify-cdp-loader.netlify.app www.googletagmanager.com www.google-analytics.com gist.github.com platform.twitter.com www.youtube-nocookie.com 'self' 'unsafe-inline' ; style-src fonts.googleapis.com 'self' 'unsafe-inline'; img-src www.google.nl data: www.google-analytics.com stats.g.doubleclick.net 'self'; font-src data: fonts.gstatic.com fonts.googleapis.com 'self' ; prefetch-src www.google-analytics.com 'self' ; form-action 'self'; connect-src 'self' region1.analytics.google.com www.google-analytics.com stats.g.doubleclick.net; frame-src www.youtube.com www.youtube-nocookie.com app.netlify.com ; report-uri https://blogbaslijten.report-uri.com/r/d/csp/reportOnly"
   Permissions-Policy = "interest-cohort=()"
   

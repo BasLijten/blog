@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+<!-- test: verify non-dependabot PRs are not auto-approved -->
+
 ## Project Overview
 
 Personal tech blog by Bas Lijten (Sitecore MVP) at https://blog.baslijten.com. Built with Gatsby v5 + React + SCSS + Markdown, deployed on Netlify.

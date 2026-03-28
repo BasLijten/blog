@@ -25,7 +25,7 @@ jobs:
       - name: Skipped - not a Dependabot PR
         if: steps.prs.outputs.pr_url == ''
         run: |
-          echo "Skipping: PR associated with commit ${{ github.event.check_suite.head_sha }} is not from dependabot[bot]"
+          echo "Skipping: No Dependabot PR found for commit ${{ github.event.check_suite.head_sha }}"
 
       - name: Approve and merge PR
         if: steps.prs.outputs.pr_url != ''

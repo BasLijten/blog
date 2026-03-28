@@ -1,4 +1,7 @@
+const adapter = require("gatsby-adapter-netlify").default
+
 module.exports = {
+  adapter: adapter(),
   siteMetadata: {
     title: `A blog on Sitecore, Azure, .Net and Security`,
     description: `I am a software architect, public speaker, Sitecore MVP, husband and dad. Not in that particular order. Always learning. Always Sharing`,

@@ -101,6 +101,7 @@ module.exports = {
           //     showLineNumbers: true,
           //   }
           // },
+          `gatsby-remark-normalize-code-lang`,
           {
             resolve: `gatsby-remark-highlight-code`,
             options: {

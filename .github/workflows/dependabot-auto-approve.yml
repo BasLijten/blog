@@ -22,9 +22,16 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Dry run - approve and merge PR
+      - name: Skipped - not a Dependabot PR
+        if: steps.prs.outputs.pr_url == ''
+        run: |
+          echo "Skipping: PR associated with commit ${{ github.event.check_suite.head_sha }} is not from dependabot[bot]"
+
+      - name: Approve and merge PR
         if: steps.prs.outputs.pr_url != ''
         run: |
-          echo "Would approve and merge: $PR_URL"
+          gh pr review "$PR_URL" --approve --body "Auto-approved: Dependabot PR with passing Netlify checks."
+          gh pr merge "$PR_URL" --squash
         env:
           PR_URL: ${{ steps.prs.outputs.pr_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

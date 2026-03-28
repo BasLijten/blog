@@ -1,0 +1,30 @@
+name: Auto-approve and merge Dependabot PRs
+
+on: check_suite
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  auto-approve-and-merge:
+    if: >
+      github.event.check_suite.conclusion == 'success' &&
+      github.event.check_suite.app.slug == 'netlify'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get associated pull requests
+        id: prs
+        run: |
+          PR_URL=$(gh api repos/${{ github.repository }}/commits/${{ github.event.check_suite.head_sha }}/pulls \
+            --jq '.[0] | select(.user.login == "dependabot[bot]") | .html_url')
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Dry run - approve and merge PR
+        if: steps.prs.outputs.pr_url != ''
+        run: |
+          echo "Would approve and merge: $PR_URL"
+        env:
+          PR_URL: ${{ steps.prs.outputs.pr_url }}

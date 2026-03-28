@@ -1,0 +1,5 @@
+{
+  "name": "gatsby-remark-normalize-code-lang",
+  "version": "1.0.0",
+  "description": "Maps unsupported code fence languages to a fallback so they still render"
+}

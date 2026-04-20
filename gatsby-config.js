@@ -3,7 +3,7 @@ const adapter = require("gatsby-adapter-netlify").default
 module.exports = {
   adapter: adapter(),
   siteMetadata: {
-    title: `A blog on Sitecore, Azure, .Net and Security`,
+    title: `A blog by Bas Lijten on Sitecore, Azure, .Net and Security`,
     description: `I am a software architect, public speaker, Sitecore MVP, husband and dad. Not in that particular order. Always learning. Always Sharing`,
     author: `Bas Lijten`,
     siteUrl: `https://blog.baslijten.com`,
@@ -15,7 +15,7 @@ module.exports = {
       email: `baslijten@gmail.com`,
     },
   },
-  plugins: [
+  plugins: [    
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -270,7 +270,7 @@ module.exports = {
   }
 }`,
             output: "/rss.xml",
-            title: "Your Site's RSS Feed",
+            title: "A blog by Bas Lijten on Sitecore, Azure, .Net and Security",
           },
         ],
       }

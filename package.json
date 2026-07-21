@@ -33,7 +33,7 @@
     "gatsby-source-filesystem": "^5",
     "gatsby-transformer-remark": "^6",
     "gatsby-transformer-sharp": "^5",
-    "katex": "^0.16.45",
+    "katex": "^0.16.46",
     "lodash": "^4.18.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

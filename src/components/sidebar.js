@@ -18,6 +18,11 @@ const Sidebar = ({ siteMetadata }) => (
         </div>
       </header>
       <footer>
+        <nav className="site-links" aria-label="Site information">
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/privacy">Privacy</Link>
+        </nav>
         <section className="contact">
           <h3 className="contact-title">Contact me</h3>
           <ul>

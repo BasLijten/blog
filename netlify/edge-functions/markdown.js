@@ -3,7 +3,7 @@ import {
   acceptsMarkdown,
   markdownMirrorPath,
   withVaryAccept,
-} from './markdown-utils.mjs'
+} from '../markdown-utils.mjs'
 
 export default function markdown(request, context) {
   const accept = request.headers.get('accept') || ''

@@ -103,7 +103,7 @@ jobs:
           homepage="$(curl --fail --location --silent --show-error --retry 5 --retry-delay 5 --max-time 30 "${PREVIEW_URL}/")"
           [[ "${#homepage}" -gt 200 ]] || { echo "The Deploy Preview homepage is unexpectedly empty." >&2; exit 1; }
 
-          post_path="$(printf '%s' "${homepage}" | grep -oE 'href="/[^"]+"' | sed -E 's/^href="|"$//g' | grep -Ev '^/(tags|page|rss|404|$)' | head -n 1 || true)"
+          post_path="$(printf '%s' "${homepage}" | grep -oE '<a[^>]+href="/[^"]+"' | sed -E 's/.*href="([^"]+)".*/\1/' | grep -Ev '^/(tags|page|rss|404|styles|static|favicon|icons|manifest|sitemap|$)' | head -n 1 || true)"
           [[ -n "${post_path}" ]] || { echo "No blog post link was found on the Deploy Preview homepage." >&2; exit 1; }
 
           post="$(curl --fail --location --silent --show-error --retry 5 --retry-delay 5 --max-time 30 "${PREVIEW_URL}${post_path}")"

@@ -67,6 +67,20 @@
   align-items: stretch;
 }
 
+.site-introduction {
+  width: 100%;
+  margin: 0 0 1.5rem;
+
+  h1 {
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    max-width: 760px;
+    margin: 0;
+  }
+}
+
 .contact {
   .contact-title {
     position: relative;
@@ -126,6 +140,18 @@
 }
 
 footer {
+  .site-links {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 12px;
+    font-size: 12px;
+
+    a {
+      color: $body-color;
+    }
+  }
+
   .copyright {
     font-size: 14px;
     text-align: center;

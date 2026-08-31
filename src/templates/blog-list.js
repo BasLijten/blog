@@ -24,6 +24,14 @@ class BlogIndex extends React.Component {
           keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
         <div className="content-box clearfix">
+          <header className="site-introduction">
+            <h1>{siteTitle}</h1>
+            <p>
+              Practical articles and experience from Bas Lijten on Sitecore,
+              Azure, .NET, SharePoint, reverse proxies, DevOps, and application
+              security.
+            </p>
+          </header>
           {posts.map(({ node }) => {
             return (
               <article className="post" key={node.fields.slug}>

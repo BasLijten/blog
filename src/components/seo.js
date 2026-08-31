@@ -18,12 +18,40 @@ function SEO({ description, lang, meta, title }) {
           title
           description
           author
+          siteUrl
+          social {
+            twitter
+            github
+            linkedin
+          }
         }
       }
     }
   `)
 
   const metaDescription = description || site.siteMetadata.description
+  const { siteMetadata } = site
+  const sameAs = [
+    siteMetadata.social.twitter &&
+      `https://twitter.com/${siteMetadata.social.twitter}`,
+    siteMetadata.social.github &&
+      `https://github.com/${siteMetadata.social.github}`,
+    siteMetadata.social.linkedin &&
+      `https://linkedin.com/in/${siteMetadata.social.linkedin}`,
+  ].filter(Boolean)
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: siteMetadata.title,
+    description: metaDescription,
+    url: siteMetadata.siteUrl,
+    author: {
+      '@type': 'Person',
+      name: siteMetadata.author,
+      sameAs,
+    },
+  }
 
   return (
     <Helmet
@@ -66,7 +94,12 @@ function SEO({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    />
+    >
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+      <link rel="describedby" href={`${siteMetadata.siteUrl}/llms.txt`} />
+    </Helmet>
   )
 }
 

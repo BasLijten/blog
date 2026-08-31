@@ -1,0 +1,45 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Amsterdam
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 3
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 3
+    versioning-strategy: increase
+    labels:
+      - dependencies
+    commit-message:
+      prefix: deps
+      prefix-development: deps-dev
+      include: scope
+    groups:
+      production-non-major:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      development-non-major:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      security-production:
+        applies-to: security-updates
+        dependency-type: production
+      security-development:
+        applies-to: security-updates
+        dependency-type: development
+      major:
+        patterns:
+          - "*"
+        update-types:
+          - major

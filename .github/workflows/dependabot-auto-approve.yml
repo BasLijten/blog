@@ -1,37 +1,97 @@
-name: Auto-approve and merge Dependabot PRs
+name: Auto-merge Dependabot PRs
 
-on: check_suite
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 permissions:
-  pull-requests: write
+  checks: read
   contents: write
+  pull-requests: write
+
+concurrency:
+  group: dependabot-auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
-  auto-approve-and-merge:
-    if: >
-      github.event.check_suite.conclusion == 'success' &&
-      github.event.check_suite.app.slug == 'netlify'
+  auto-merge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPOSITORY: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
     steps:
-      - name: Get associated pull requests
-        id: prs
-        run: |
-          PR_URL=$(gh api repos/${{ github.repository }}/commits/${{ github.event.check_suite.head_sha }}/pulls \
-            --jq '.[0] | select(.user.login == "dependabot[bot]") | .html_url')
-          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Read Dependabot update metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ github.token }}
 
-      - name: Skipped - not a Dependabot PR
-        if: steps.prs.outputs.pr_url == ''
+      - name: Wait for Netlify validation of the latest SHA
+        shell: bash
         run: |
-          echo "Skipping: No Dependabot PR found for commit ${{ github.event.check_suite.head_sha }}"
+          set -euo pipefail
 
-      - name: Approve and merge PR
-        if: steps.prs.outputs.pr_url != ''
+          deadline=$((SECONDS + 900))
+          passed_sha=""
+
+          while (( SECONDS < deadline )); do
+            current_sha="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
+            validation="$(gh api "repos/${REPOSITORY}/commits/${current_sha}/check-runs?per_page=100" | jq '[.check_runs[] | select(.name == "Netlify PR validation")] | first // empty')"
+
+            if [[ -n "${validation}" ]]; then
+              status="$(jq -r '.status' <<<"${validation}")"
+              conclusion="$(jq -r '.conclusion // empty' <<<"${validation}")"
+
+              if [[ "${status}" == completed && "${conclusion}" == success ]]; then
+                passed_sha="${current_sha}"
+                break
+              fi
+
+              if [[ "${status}" == completed ]]; then
+                echo "Netlify validation did not pass for ${current_sha}: ${conclusion}" >&2
+                exit 1
+              fi
+            fi
+
+            sleep 15
+          done
+
+          [[ -n "${passed_sha}" ]] || { echo "Timed out waiting for Netlify validation." >&2; exit 1; }
+
+          latest_sha="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
+          [[ "${latest_sha}" == "${passed_sha}" ]] || {
+            echo "The PR changed after validation; refusing to merge a stale SHA." >&2
+            exit 1
+          }
+
+      - name: Approve eligible update
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        run: gh pr review "${PR_NUMBER}" --repo "${REPOSITORY}" --approve --body "Dependabot update passed Netlify validation for the latest commit."
+
+      - name: Reconfirm the latest SHA before merge
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        shell: bash
         run: |
-          gh pr review "$PR_URL" --approve --body "Auto-approved: Dependabot PR with passing Netlify checks."
-          gh pr merge "$PR_URL" --squash
-        env:
-          PR_URL: ${{ steps.prs.outputs.pr_url }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          set -euo pipefail
+
+          latest_sha="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
+          validation="$(gh api "repos/${REPOSITORY}/commits/${latest_sha}/check-runs?per_page=100" | jq '[.check_runs[] | select(.name == "Netlify PR validation") | select(.status == "completed" and .conclusion == "success")] | first // empty')"
+
+          [[ -n "${validation}" ]] || {
+            echo "The latest PR SHA no longer has a successful Netlify validation; refusing to merge." >&2
+            exit 1
+          }
+
+      - name: Enable auto-merge for eligible update
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        run: gh pr merge "${PR_NUMBER}" --repo "${REPOSITORY}" --auto --squash
+
+      - name: Leave major update for manual review
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: echo "Major Dependabot update requires manual review."

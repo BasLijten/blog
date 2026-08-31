@@ -61,4 +61,4 @@ img: ./images/banner.jpg
 
 ## Deployment
 
-Netlify with `netlify-plugin-gatsby-cache`. Node 18, Yarn 1.x. The CSP in `netlify.toml` explicitly allows Google Analytics/GTM, GitHub Gists, Twitter embeds, and YouTube (privacy mode only) — update it when adding new external resources.
+Netlify with `netlify-plugin-gatsby-cache`. Node 22.12.0, Yarn 1.22.22. The CSP in `netlify.toml` explicitly allows Google Analytics/GTM, GitHub Gists, Twitter embeds, and YouTube (privacy mode only) — update it when adding new external resources.

@@ -64,7 +64,7 @@ jobs:
                 break
               fi
             elif (( status_count > 0 )); then
-              failed="$(jq '[.[] | select(.state != "success")] | length' <<<"${netlify_statuses}")"
+              failed="$(jq '[.[] | select(.state == "failure" or .state == "error")] | length' <<<"${netlify_statuses}")"
               pending="$(jq '[.[] | select(.state == "pending")] | length' <<<"${netlify_statuses}")"
 
               if (( failed > 0 )); then

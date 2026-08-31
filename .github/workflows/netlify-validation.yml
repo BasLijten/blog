@@ -26,6 +26,7 @@ jobs:
       REPOSITORY: ${{ github.repository }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
       PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      NETLIFY_SITE_NAME: thirsty-bardeen-c512c8
     steps:
       - name: Wait for the matching Netlify check
         id: netlify
@@ -34,7 +35,7 @@ jobs:
           set -euo pipefail
 
           deadline=$((SECONDS + 900))
-          preview_url="https://deploy-preview-${PR_NUMBER}--flexible-gatsby.netlify.app"
+          preview_url="https://deploy-preview-${PR_NUMBER}--${NETLIFY_SITE_NAME}.netlify.app"
 
           while (( SECONDS < deadline )); do
             checks_json="$(gh api "repos/${REPOSITORY}/commits/${PR_HEAD_SHA}/check-runs?per_page=100")"

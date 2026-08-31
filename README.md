@@ -8,6 +8,16 @@ A simple minimalist Gatsby starter for your blog. [Demo](https://flexible-gatsby
 
 Inspired by [flexible-jekyll](https://github.com/artemsheludko/flexible-jekyll).
 
+## Local development
+
+The supported toolchain is Node.js 22.12.0 with Yarn 1.22.22. Install from the
+canonical `yarn.lock` before starting the site:
+
+```sh
+yarn install --frozen-lockfile
+yarn dev
+```
+
 ![home-page-screenshot](./static/promo-img.jpg)
 
 ![home-page-screenshot](./static/home-page.jpg)

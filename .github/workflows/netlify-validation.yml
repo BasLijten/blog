@@ -1,0 +1,111 @@
+name: Netlify PR validation
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  checks: read
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: netlify-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  netlify-validation:
+    name: Netlify PR validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPOSITORY: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      NETLIFY_SITE_NAME: thirsty-bardeen-c512c8
+    steps:
+      - name: Wait for the matching Netlify check
+        id: netlify
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          deadline=$((SECONDS + 900))
+          preview_url="https://deploy-preview-${PR_NUMBER}--${NETLIFY_SITE_NAME}.netlify.app"
+
+          while (( SECONDS < deadline )); do
+            checks_json="$(gh api "repos/${REPOSITORY}/commits/${PR_HEAD_SHA}/check-runs?per_page=100")"
+            statuses_json="$(gh api "repos/${REPOSITORY}/commits/${PR_HEAD_SHA}/status")"
+
+            netlify_checks="$(jq '[.check_runs[] | select((.app.slug // "") == "netlify") | select((.name | ascii_downcase | contains("deploy-preview")))]' <<<"${checks_json}")"
+            netlify_statuses="$(jq '[.statuses[] | select((.context | ascii_downcase | endswith("/deploy-preview")))]' <<<"${statuses_json}")"
+            check_count="$(jq 'length' <<<"${netlify_checks}")"
+            status_count="$(jq 'length' <<<"${netlify_statuses}")"
+
+            if (( check_count > 0 )); then
+              failed="$(jq '[.[] | select(.status == "completed" and .conclusion != "success")] | length' <<<"${netlify_checks}")"
+              pending="$(jq '[.[] | select(.status != "completed")] | length' <<<"${netlify_checks}")"
+
+              if (( failed > 0 )); then
+                echo "A Netlify check failed for ${PR_HEAD_SHA}." >&2
+                jq -r '.[] | [.name, .status, .conclusion, .details_url] | @tsv' <<<"${netlify_checks}" >&2
+                exit 1
+              fi
+
+              if (( pending == 0 )); then
+                target_url="$(jq -r '[.[] | .details_url // empty] | first // empty' <<<"${netlify_checks}")"
+                if [[ "${target_url}" == https://*.netlify.app/* ]]; then
+                  preview_url="${target_url}"
+                fi
+                break
+              fi
+            elif (( status_count > 0 )); then
+              failed="$(jq '[.[] | select(.state == "failure" or .state == "error")] | length' <<<"${netlify_statuses}")"
+              pending="$(jq '[.[] | select(.state == "pending")] | length' <<<"${netlify_statuses}")"
+
+              if (( failed > 0 )); then
+                echo "A Netlify status failed for ${PR_HEAD_SHA}." >&2
+                jq -r '.[] | [.context, .state, .target_url] | @tsv' <<<"${netlify_statuses}" >&2
+                exit 1
+              fi
+
+              if (( pending == 0 )); then
+                target_url="$(jq -r '[.[] | .target_url // empty] | first // empty' <<<"${netlify_statuses}")"
+                if [[ "${target_url}" == https://*.netlify.app/* ]]; then
+                  preview_url="${target_url}"
+                fi
+                break
+              fi
+            fi
+
+            sleep 15
+          done
+
+          if (( SECONDS >= deadline )); then
+            echo "Timed out waiting for a Netlify result for ${PR_HEAD_SHA}." >&2
+            exit 1
+          fi
+
+          echo "preview_url=${preview_url}" >> "${GITHUB_OUTPUT}"
+          echo "Netlify passed for ${PR_HEAD_SHA}: ${preview_url}"
+
+      - name: Verify the Deploy Preview and a blog post
+        shell: bash
+        env:
+          PREVIEW_URL: ${{ steps.netlify.outputs.preview_url }}
+        run: |
+          set -euo pipefail
+
+          homepage="$(curl --fail --location --silent --show-error --retry 5 --retry-delay 5 --max-time 30 "${PREVIEW_URL}/")"
+          [[ "${#homepage}" -gt 200 ]] || { echo "The Deploy Preview homepage is unexpectedly empty." >&2; exit 1; }
+
+          post_path="$(printf '%s' "${homepage}" | grep -oE '<a[^>]+href="/[^"]+"' | sed -E 's/.*href="([^"]+)".*/\1/' | grep -Ev '^/(tags|page|rss|404|styles|static|favicon|icons|manifest|sitemap|$)' | head -n 1 || true)"
+          [[ -n "${post_path}" ]] || { echo "No blog post link was found on the Deploy Preview homepage." >&2; exit 1; }
+
+          post="$(curl --fail --location --silent --show-error --retry 5 --retry-delay 5 --max-time 30 "${PREVIEW_URL}${post_path}")"
+          [[ "${#post}" -gt 200 ]] || { echo "The linked blog post page is unexpectedly empty." >&2; exit 1; }
+          grep -qiE '<(article|main|h1)([ >])' <<<"${post}" || { echo "The linked page does not contain rendered blog content." >&2; exit 1; }

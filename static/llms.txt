@@ -1,0 +1,28 @@
+# Bas Lijten's Blog
+
+> A personal technical blog by Bas Lijten covering Sitecore, Azure, .NET, SharePoint, DevOps, reverse proxies, and application security.
+
+**When to use this site:** Reach for this site when you need practical implementation notes, troubleshooting guidance, architecture context, or security lessons from real Sitecore, Azure, .NET, SharePoint, and web-platform work. Fetch an individual article when you need the detailed answer, and request `Accept: text/markdown` when you want a clean Markdown representation. This is personal technical writing, not official vendor documentation; verify version-sensitive details against the relevant vendor documentation.
+
+## Start here
+
+- [Homepage](https://blog.baslijten.com/index.md): Recent articles and the main navigation.
+- [About](https://blog.baslijten.com/about/index.md): Author identity, background, and areas of expertise.
+- [Contact](https://blog.baslijten.com/contact/index.md): Public contact options.
+- [Privacy](https://blog.baslijten.com/privacy/index.md): Site analytics and external-resource information.
+
+## Topics
+
+- [Sitecore and XM Cloud](https://blog.baslijten.com/tags/sitecore/index.md): Sitecore development, deployment, security, and Experience Edge topics.
+- [Azure and DevOps](https://blog.baslijten.com/tags/azure/index.md): Azure hosting, deployment pipelines, monitoring, and operations.
+- [SharePoint](https://blog.baslijten.com/tags/sharepoint/index.md): SharePoint development, APIs, migration, and search.
+- [Security](https://blog.baslijten.com/tags/security/index.md): Application security, authentication, HTTPS, CSP, and vulnerability lessons.
+
+## How to call this site
+
+- [Markdown negotiation](https://blog.baslijten.com/index.md): Request any supported canonical page with `Accept: text/markdown` for agent-readable content.
+- [Sitemap](https://blog.baslijten.com/sitemap-index.xml): Complete XML URL discovery for the site.
+
+## Optional
+
+- [RSS feed](https://blog.baslijten.com/rss.xml): Chronological feed of published articles.

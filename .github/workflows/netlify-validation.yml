@@ -41,8 +41,8 @@ jobs:
             checks_json="$(gh api "repos/${REPOSITORY}/commits/${PR_HEAD_SHA}/check-runs?per_page=100")"
             statuses_json="$(gh api "repos/${REPOSITORY}/commits/${PR_HEAD_SHA}/status")"
 
-            netlify_checks="$(jq '[.check_runs[] | select((.app.slug // "") == "netlify")]' <<<"${checks_json}")"
-            netlify_statuses="$(jq '[.statuses[] | select((.context | ascii_downcase | contains("netlify")))]' <<<"${statuses_json}")"
+            netlify_checks="$(jq '[.check_runs[] | select((.app.slug // "") == "netlify") | select((.name | ascii_downcase | contains("deploy-preview")))]' <<<"${checks_json}")"
+            netlify_statuses="$(jq '[.statuses[] | select((.context | ascii_downcase | endswith("/deploy-preview")))]' <<<"${statuses_json}")"
             check_count="$(jq 'length' <<<"${netlify_checks}")"
             status_count="$(jq 'length' <<<"${netlify_statuses}")"
 

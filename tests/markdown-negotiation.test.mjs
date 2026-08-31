@@ -5,7 +5,7 @@ import {
   acceptsMarkdown,
   markdownMirrorPath,
   withVaryAccept,
-} from '../netlify/edge-functions/markdown-utils.mjs'
+} from '../netlify/markdown-utils.mjs'
 
 test('Markdown negotiation parses media types and quality values', () => {
   assert.equal(acceptsMarkdown('text/markdown'), true)

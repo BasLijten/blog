@@ -44,7 +44,7 @@
   "devDependencies": {
     "eslint": "^8",
     "eslint-plugin-react": "^7.28.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.9.9",
     "sass": "^1"
   },
   "homepage": "https://github.com/wangonya/flexible-gatsby",

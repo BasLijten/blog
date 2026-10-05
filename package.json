@@ -37,12 +37,12 @@
     "katex": "^0.18.9",
     "lodash": "^4.18.1",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
-    "eslint": "^8",
+    "eslint": "^10",
     "eslint-plugin-react": "^7.28.0",
     "prettier": "^3.9.9",
     "sass": "^1"

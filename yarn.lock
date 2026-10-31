@@ -7640,10 +7640,10 @@ katex@0.17.0, katex@^0.12.0:
   dependencies:
     commander "^8.3.0"
 
-katex@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/katex/-/katex-0.19.0.tgz#b69c8cbcfc8c331be3f4f6e606b02b7146501ec7"
-  integrity sha512-v6Tznz3zJ7u3niRCoDTsumM2+HA2XXcCu+WAacCeHD2z3p9A9Ks987o5FzfTGBN0e8A0vjEgIDvLbICrXpdw/Q==
+katex@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.19.1.tgz#ba2685811cdbffc54dfb7d55bd440c6cc6bb8795"
+  integrity sha512-jG8uKntjSEcm2EpQOh0XturpPuuC9r3Sq5HLHdsFdWZT27E672SF19QEi+of0/YeOy15lDgRhKvr5614uRrEfA==
   dependencies:
     commander "^15.0.0"
 
@@ -8419,9 +8419,9 @@ msgpackr@^1.5.4:
     msgpackr-extract "^3.0.2"
 
 multer@^2.0.1:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/multer/-/multer-2.4.0.tgz#969ab025c207829967c923172c51a75cbf171be1"
-  integrity sha512-7dqa0ZcFfzbefdTuIkzOSMvZWC0J7FLqBOjJUZvDCXShIURWKxAyTT1wHhnE5q19c7jOJf43IYYKjBmZVZmvhg==
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/multer/-/multer-2.5.0.tgz#92e08d5015b53fb554d5d623398d67b8b146ded2"
+  integrity sha512-BsqOzYGVq49JcW2IzoSAxeKYRevb+dGGPPWleOR8Lrlk4igwxu1/9pwSXlByhCb7MVZDrNJFC0IBP5/O5nLYRw==
   dependencies:
     append-field "^1.0.0"
     busboy "^1.6.0"
